@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="学习笔记," />
 
 
 
@@ -53,19 +53,37 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="以下知识都是学习《Android开发艺术探索》后的总结
+##IPC的简介
+
+IPC是英文：Inter Process Communication的首字母缩写，也就是进程间通信。
+####多进程的使用场景一般的来说，当业务需求需要多进程处理（如推送）、分担app内存、或者同个公司的几个app间需要相互通信（如某全家桶）
+####使用的方式和技巧进程名以”:”开头的进程前面自动加上包名，是属于当前应用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2015/11/16/hello-world/index.html">
+<meta property="og:title" content="Android 学习IPC之个人总结">
+<meta property="og:url" content="http://yoursite.com/2015/11/17/Android-学习IPC之个人总结/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-11-16T06:51:19.000Z">
+<meta property="og:description" content="以下知识都是学习《Android开发艺术探索》后的总结
+##IPC的简介
+
+IPC是英文：Inter Process Communication的首字母缩写，也就是进程间通信。
+####多进程的使用场景一般的来说，当业务需求需要多进程处理（如推送）、分担app内存、或者同个公司的几个app间需要相互通信（如某全家桶）
+####使用的方式和技巧进程名以”:”开头的进程前面自动加上包名，是属于当前应用">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-b68d3192ca7aaf71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-3210cbe0c0c415d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-8784178b7e4bf3b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-032fd7f549d4d933.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-a7b0fab16fb7d128.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-88b33b878342f44a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2015-11-17T08:17:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="Android 学习IPC之个人总结">
+<meta name="twitter:description" content="以下知识都是学习《Android开发艺术探索》后的总结
+##IPC的简介
+
+IPC是英文：Inter Process Communication的首字母缩写，也就是进程间通信。
+####多进程的使用场景一般的来说，当业务需求需要多进程处理（如推送）、分担app内存、或者同个公司的几个app间需要相互通信（如某全家桶）
+####使用的方式和技巧进程名以”:”开头的进程前面自动加上包名，是属于当前应用">
 
 
 
@@ -77,7 +95,7 @@ Quick">
   };
 </script>
 
-  <title> Hello World | Hexo </title>
+  <title> Android 学习IPC之个人总结 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -197,7 +215,7 @@ Quick">
             
             
               
-                Hello World
+                Android 学习IPC之个人总结
               
             
           </h1>
@@ -206,8 +224,8 @@ Quick">
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-11-16T14:59:09+08:00" content="2015-11-16">
-              2015-11-16
+            <time itemprop="dateCreated" datetime="2015-11-17T16:15:29+08:00" content="2015-11-17">
+              2015-11-17
             </time>
           </span>
 
@@ -230,20 +248,83 @@ Quick">
       
 
       
-        <span itemprop="articleBody"><p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <span itemprop="articleBody"><p>以下知识都是学习《Android开发艺术探索》后的总结</p>
+<p>##IPC的简介</p>
+<hr>
+<p>IPC是英文：Inter Process Communication的首字母缩写，也就是进程间通信。</p>
+<p>####多进程的使用场景<br>一般的来说，当业务需求需要多进程处理（如推送）<br>、分担app内存、或者同个公司的几个app间需要相互通信（如某全家桶）</p>
+<p>####使用的方式和技巧<br>进程名以”:”开头的进程前面自动加上包名，是属于当前应用的私有进程，其他应用的组件不可以和它跑在同一个进程中。不以”:”开头的进程名属于全局进程，以”包名.进程名”方式命名，可以通过shareUserID方式跑在同一个进程中（需要签名相同）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1181435-b68d3192ca7aaf71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="进程使用方式"></p>
+<p>####在使用多进程时可能造成的问题</p>
+<ol>
+<li><p>静态成员和单例模式多进程间会失效（独立的进程中会分配不同的虚拟机，内存分配会有不同的地址，从而导致静态类其实是多个不同的类）</p>
+</li>
+<li><p>线程同步会失效（锁对象或者锁全局都会因为1的理由而导致在多进程中失效）</p>
+</li>
+<li><p>sharedPreferences可靠性下降（sp是底层对xml进行读写，对文件并发读写是会出问题的（处理线程同步问题））</p>
+</li>
+<li><p>Application会被创建多次</p>
+</li>
+</ol>
+<p>##IPC方式</p>
+<hr>
+<ol>
+<li><p>Bundle</p>
+</li>
+<li><p>共享文件的方式共享数据</p>
+</li>
+<li><p>ContentProvider</p>
+</li>
+<li><p>Messenger</p>
+</li>
+</ol>
+<p>5.AIDL</p>
+<ol>
+<li>Socket</li>
+</ol>
+<p>###简单的说一下使用AIDL的总结<br>因为Messenger的底层也是AIDL实现(从IMessenger.Stub.asInterface 就能很明显地看出AIDL的痕迹)，所以了解一下AIDL的机制，那么Messenger理解起来也不会太难了。</p>
+<p>新建一个AIDL文件：<br><img src="http://upload-images.jianshu.io/upload_images/1181435-3210cbe0c0c415d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建AIDL文件.png"></p>
+<p>在Android Studio新建了AIDL文件后，会自动分配AIDL包（包名和androidManifest中的package 名是一样的）。</p>
+<p>在AIDL需要创建自定义类，必须实现可序列化的接口，有Serializable和Parcelable，Parcelable虽然实现起来比较复杂，在AndroidStudio 中可以安装Parcelable的插件，自动生成代码。因为Parcelable是Android专门序列化的接口，性能上可以提升很多。</p>
+<p>按照上面的方法创建一个Book类，并实现Parcelable接口<br><img src="http://upload-images.jianshu.io/upload_images/1181435-8784178b7e4bf3b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建Book类.png"></p>
+<p>因为需要在aidl中调用Book类，必须创建Book.aidl类，并且声明<br>  <code>parcelable Book;</code><br><img src="http://upload-images.jianshu.io/upload_images/1181435-032fd7f549d4d933.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建Book.aidl.png"><br>创建IBookManager后 basicTypes是自动生成的方法，要添加以下方法。<br><code>List&lt;Book&gt; getBookList();
+void addBook(in Book book);</code><br>这时候还必须手动导入上面的Book类，as下没有代码提示，也不会自动导入<br><code>import com.demo.abner.aidldemo.Book;</code></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1181435-a7b0fab16fb7d128.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建IBookManager接口.png"></p>
+<p>点击Build -&gt; Make Project</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1181435-88b33b878342f44a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IBookManager.java文件.png"></p>
+<p>在这个路径下会发现生成了IBookManager.java文件。</p>
+<p>在这个类里有onTransact方法，以及调用了Binder接口中的transact方法</p>
+<ul>
+<li><p>onTransact<br>这个方法主要是运行在服务端的Binder池中，如果返回false，客户端会显示请求失败。</p>
+</li>
+<li><p>transact()<br>这个方法主要是客户端调用，是为了RPC时的数据传递用。</p>
+</li>
+</ul>
+<p>这里提到的服务端可客户端，并不代表一定是service，只要是被请求的都是服务端，请求方都是客户端。<br>RPC在android中是一种跨进程调用方式， RPC可以用自己定义的方法方式去（比如aidl的interface 方法 执行进程通信 ，而messenger 只能用send、reply 这些类似键值对的。<br><a href="http://www.zhihu.com/question/25536695" target="_blank" rel="external">关于介绍RPC</a></p>
+<p>#####ContentProvider底层也是Binder，主要以表格的形式组织数据</p>
+<hr>
+<p>###一些注意</p>
+<ol>
+<li>使用binder通信注意读写列表用CopyOnWriteArrayList,这个是支持并发的，需要用线程安全的集合。</li>
+<li>监听使用RemoteCallbackList,在遍历时注意beginBroadcast 和 finishBroadcast需要配对出现。<br>3.Binder死亡可以用DeathRecipient监听，或者在onServiceDisconnected中重连。前者在非UI线程被回调，后者在UI线程被回调。<br>4.为了安全，使用Binder通信最好使用permission验证</li>
+</ol>
+<p><strong>以上皆为个人初步学习时得出的结论与理解，若有错误或者不对之处请指出</strong></p>
+<hr>
+<p><strong>平时比较少写技术文章，第一次写的还比较烂，如果有转载请注明原作者。</strong></p>
+<blockquote>
+<p><a href="http://github.com/nimengbo" target="_blank" rel="external">我的Github</a><br><a href="http://weibo.com/nimengbo" target="_blank" rel="external">我的微博</a></p>
+</blockquote>
 </span>
       
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag">#学习笔记</a>
+          
+        </div>
       
 
       
@@ -324,7 +405,7 @@ Quick">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">1</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
@@ -356,7 +437,7 @@ Quick">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick_Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create_a_new_post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run_server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate_static_files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy_to_remote_sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目錄</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
