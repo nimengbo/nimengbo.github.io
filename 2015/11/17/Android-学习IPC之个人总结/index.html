@@ -69,13 +69,13 @@ IPC是英文：Inter Process Communication的首字母缩写，也就是进程�
 IPC是英文：Inter Process Communication的首字母缩写，也就是进程间通信。
 ####多进程的使用场景一般的来说，当业务需求需要多进程处理（如推送）、分担app内存、或者同个公司的几个app间需要相互通信（如某全家桶）
 ####使用的方式和技巧进程名以”:”开头的进程前面自动加上包名，是属于当前应用">
-<meta property="og:image" content="http://cl.ly/image/3Z2L0Q102I47?_ga=1.171853669.494281310.1447751645">
+<meta property="og:image" content="https://github.com/nimengbo/nimengbo.github.io/blob/master/src_images/IPC/%E8%BF%9B%E7%A8%8B%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.jpg">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-3210cbe0c0c415d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-8784178b7e4bf3b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-032fd7f549d4d933.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-a7b0fab16fb7d128.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1181435-88b33b878342f44a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2015-11-17T14:59:26.000Z">
+<meta property="og:updated_time" content="2015-11-17T15:04:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 学习IPC之个人总结">
 <meta name="twitter:description" content="以下知识都是学习《Android开发艺术探索》后的总结
@@ -264,7 +264,7 @@ IPC是英文：Inter Process Communication的首字母缩写，也就是进程�
 <p>IPC是英文：Inter Process Communication的首字母缩写，也就是进程间通信。</p>
 <p>####多进程的使用场景<br>一般的来说，当业务需求需要多进程处理（如推送）<br>、分担app内存、或者同个公司的几个app间需要相互通信（如某全家桶）</p>
 <p>####使用的方式和技巧<br>进程名以”:”开头的进程前面自动加上包名，是属于当前应用的私有进程，其他应用的组件不可以和它跑在同一个进程中。不以”:”开头的进程名属于全局进程，以”包名.进程名”方式命名，可以通过shareUserID方式跑在同一个进程中（需要签名相同）</p>
-<p><img src="http://cl.ly/image/3Z2L0Q102I47?_ga=1.171853669.494281310.1447751645" alt="进程使用方式"></p>
+<p><img src="https://github.com/nimengbo/nimengbo.github.io/blob/master/src_images/IPC/%E8%BF%9B%E7%A8%8B%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.jpg" alt="进程使用方式"></p>
 <p>####在使用多进程时可能造成的问题</p>
 <ol>
 <li><p>静态成员和单例模式多进程间会失效（独立的进程中会分配不同的虚拟机，内存分配会有不同的地址，从而导致静态类其实是多个不同的类）</p>
