@@ -305,6 +305,162 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/17/Android-学习IPC之个人总结/" itemprop="url">
+                  Android 学习IPC之个人总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-17T16:15:29+08:00" content="2015-11-17">
+              2015-11-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>以下知识都是学习《Android开发艺术探索》后的总结</p>
+<h2 id="IPC的简介">IPC的简介</h2><hr>
+<p>IPC是英文：Inter Process Communication的首字母缩写，也就是进程间通信。</p>
+<h4 id="多进程的使用场景">多进程的使用场景</h4><p>一般的来说，当业务需求需要多进程处理（如推送）<br>、分担app内存、或者同个公司的几个app间需要相互通信（如某全家桶）</p>
+<h4 id="使用的方式和技巧">使用的方式和技巧</h4><p>进程名以”:”开头的进程前面自动加上包名，是属于当前应用的私有进程，其他应用的组件不可以和它跑在同一个进程中。不以”:”开头的进程名属于全局进程，以”包名.进程名”方式命名，可以通过shareUserID方式跑在同一个进程中（需要签名相同）</p>
+<p><img src="http://cl.ly/image/1c0U1Z423U1T/%E8%BF%9B%E7%A8%8B%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.png" alt="进程使用方式"></p>
+<h4 id="在使用多进程时可能造成的问题">在使用多进程时可能造成的问题</h4><ol>
+<li><p>静态成员和单例模式多进程间会失效（独立的进程中会分配不同的虚拟机，内存分配会有不同的地址，从而导致静态类其实是多个不同的类）</p>
+</li>
+<li><p>线程同步会失效（锁对象或者锁全局都会因为1的理由而导致在多进程中失效）</p>
+</li>
+<li><p>sharedPreferences可靠性下降（sp是底层对xml进行读写，对文件并发读写是会出问题的（处理线程同步问题））</p>
+</li>
+<li><p>Application会被创建多次</p>
+</li>
+</ol>
+<h2 id="IPC方式">IPC方式</h2><hr>
+<ol>
+<li><p>Bundle</p>
+</li>
+<li><p>共享文件的方式共享数据</p>
+</li>
+<li><p>ContentProvider</p>
+</li>
+<li><p>Messenger</p>
+</li>
+</ol>
+<p>5.AIDL</p>
+<ol>
+<li>Socket</li>
+</ol>
+<h3 id="简单的说一下使用AIDL的总结">简单的说一下使用AIDL的总结</h3><p>因为Messenger的底层也是AIDL实现(从IMessenger.Stub.asInterface 就能很明显地看出AIDL的痕迹)，所以了解一下AIDL的机制，那么Messenger理解起来也不会太难了。</p>
+<p>新建一个AIDL文件：<br><img src="https://s3.amazonaws.com/f.cl.ly/items/2z3N401O1S2N342q2447/新建AIDL文件.png" alt="新建AIDL文件.png"></p>
+<p>在Android Studio新建了AIDL文件后，会自动分配AIDL包（包名和androidManifest中的package 名是一样的）。</p>
+<p>在AIDL需要创建自定义类，必须实现可序列化的接口，有Serializable和Parcelable，Parcelable虽然实现起来比较复杂，在AndroidStudio 中可以安装Parcelable的插件，自动生成代码。因为Parcelable是Android专门序列化的接口，性能上可以提升很多。</p>
+<p>按照上面的方法创建一个Book类，并实现Parcelable接口<br><img src="http://cl.ly/image/0X1n2x2E3b2s/%E5%88%9B%E5%BB%BABook%E7%B1%BB.png" alt="创建Book类.png"></p>
+<p>因为需要在aidl中调用Book类，必须创建Book.aidl类，并且声明<br>  <code>parcelable Book;</code><br><img src="http://cl.ly/image/3M2S362x2z1u/%E5%88%9B%E5%BB%BABook.aidl.png" alt="创建Book.aidl.png"><br>创建IBookManager后 basicTypes是自动生成的方法，要添加以下方法。<br><code>List&lt;Book&gt; getBookList();
+void addBook(in Book book);</code><br>这时候还必须手动导入上面的Book类，as下没有代码提示，也不会自动导入<br><code>import com.demo.abner.aidldemo.Book;</code></p>
+<p><img src="http://cl.ly/image/3u3q202j213a/%E5%88%9B%E5%BB%BAIBookManager%E6%8E%A5%E5%8F%A3.png" alt="创建IBookManager接口.png"></p>
+<p>点击Build -&gt; Make Project</p>
+<p><img src="http://cl.ly/image/3f3Z1c0q3F3y/IBookManager.java%E6%96%87%E4%BB%B6.png" alt="IBookManager.java文件.png"></p>
+<p>在这个路径下会发现生成了IBookManager.java文件。</p>
+<p>在这个类里有onTransact方法，以及调用了Binder接口中的transact方法</p>
+<ul>
+<li><p>onTransact<br>这个方法主要是运行在服务端的Binder池中，如果返回false，客户端会显示请求失败。</p>
+</li>
+<li><p>transact()<br>这个方法主要是客户端调用，是为了RPC时的数据传递用。</p>
+</li>
+</ul>
+<p>这里提到的服务端可客户端，并不代表一定是service，只要是被请求的都是服务端，请求方都是客户端。<br>RPC在android中是一种跨进程调用方式， RPC可以用自己定义的方法方式去（比如aidl的interface 方法 执行进程通信 ，而messenger 只能用send、reply 这些类似键值对的。<br><a href="http://www.zhihu.com/question/25536695" target="_blank" rel="external">关于介绍RPC</a></p>
+<h5 id="ContentProvider底层也是Binder，主要以表格的形式组织数据">ContentProvider底层也是Binder，主要以表格的形式组织数据</h5><hr>
+<h3 id="一些注意">一些注意</h3><ol>
+<li>使用binder通信注意读写列表用CopyOnWriteArrayList,这个是支持并发的，需要用线程安全的集合。</li>
+<li>监听使用RemoteCallbackList,在遍历时注意beginBroadcast 和 finishBroadcast需要配对出现。<br>3.Binder死亡可以用DeathRecipient监听，或者在onServiceDisconnected中重连。前者在非UI线程被回调，后者在UI线程被回调。<br>4.为了安全，使用Binder通信最好使用permission验证</li>
+</ol>
+<p><strong>以上皆为个人初步学习时得出的结论与理解，若有错误或者不对之处请指出</strong></p>
+<hr>
+<p><strong>平时比较少写技术文章，第一次写的还比较烂，如果有转载请注明原作者。</strong></p>
+<blockquote>
+<p><a href="http://github.com/nimengbo" target="_blank" rel="external">我的Github</a><br><a href="http://weibo.com/nimengbo" target="_blank" rel="external">我的微博</a></p>
+</blockquote>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
 
   </section>
 
