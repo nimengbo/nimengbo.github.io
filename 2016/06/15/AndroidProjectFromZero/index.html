@@ -53,16 +53,16 @@
 
 
 
-<meta name="description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践。
+<meta name="description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。
 关于本实践的说明本实践是为了方便，调用github的api，抓取了我们moduth组的repo
-热身运动整体结构参考：从零开始的Android新项目1 -">
+热身运动先要补充一点知识的细">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从零创建项目实践">
 <meta property="og:url" content="http://yoursite.com/2016/06/15/AndroidProjectFromZero/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践。
+<meta property="og:description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。
 关于本实践的说明本实践是为了方便，调用github的api，抓取了我们moduth组的repo
-热身运动整体结构参考：从零开始的Android新项目1 -">
+热身运动先要补充一点知识的细">
 <meta property="og:image" content="http://cl.ly/3J3N1f2q223j/QQ20160615-0.png">
 <meta property="og:image" content="http://cl.ly/1w0M25321b1O/QQ20160617-0.png">
 <meta property="og:image" content="http://cl.ly/1S0o0v390K2l/QQ20160617-1.png">
@@ -71,12 +71,14 @@
 <meta property="og:image" content="http://cl.ly/0J0D0S0u2i2Y/Image%202016-06-17%20at%2019.10.49.png">
 <meta property="og:image" content="http://cl.ly/0z3b2a47132f/Image%202016-06-17%20at%2019.12.56.png">
 <meta property="og:image" content="http://cl.ly/3f391X3u0u16/Image%202016-06-17%20at%2019.59.45.png">
-<meta property="og:updated_time" content="2016-06-17T12:04:09.000Z">
+<meta property="og:image" content="http://cl.ly/1n25201L0d3Y/Image%202016-06-19%20at%2016.01.51.png">
+<meta property="og:image" content="http://cl.ly/0x0O251l3U2b/Image%202016-06-19%20at%2016.06.01.png">
+<meta property="og:updated_time" content="2016-06-19T08:15:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从零创建项目实践">
-<meta name="twitter:description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践。
+<meta name="twitter:description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。
 关于本实践的说明本实践是为了方便，调用github的api，抓取了我们moduth组的repo
-热身运动整体结构参考：从零开始的Android新项目1 -">
+热身运动先要补充一点知识的细">
 
 
 
@@ -283,9 +285,10 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="背景">背景</h1><p><a href="http://blog.zhaiyifan.cn" target="_blank" rel="external">大帅MarkZhai</a>的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践。</p>
+        <span itemprop="articleBody"><h1 id="背景">背景</h1><p><a href="http://blog.zhaiyifan.cn" target="_blank" rel="external">大帅MarkZhai</a>的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。</p>
 <h1 id="关于本实践的说明">关于本实践的说明</h1><p>本实践是为了方便，调用github的api，抓取了我们moduth组的repo</p>
-<h1 id="热身运动">热身运动</h1><h2 id="整体结构">整体结构</h2><p>参考：<a href="http://blog.zhaiyifan.cn/2016/03/14/android-new-project-from-0-p1/" target="_blank" rel="external">从零开始的Android新项目1 - 架构搭建篇</a></p>
+<h1 id="热身运动">热身运动</h1><p>先要补充一点知识的细节才能更加好跟上司机的车</p>
+<h2 id="整体结构">整体结构</h2><p>参考：<a href="http://blog.zhaiyifan.cn/2016/03/14/android-new-project-from-0-p1/" target="_blank" rel="external">从零开始的Android新项目1 - 架构搭建篇</a></p>
 <p>还是直接看IDEA比较直接吧，SDK中就是放一些library的地方。在实际项目中，我们确实做到了“避免为了模式而模式所导致的开发压力”，用了MVPVM，也不是所有的地方都有些P，只在复杂的地方用P层去做解耦。</p>
 <p><img src="http://cl.ly/3J3N1f2q223j/QQ20160615-0.png" alt="项目结构"></p>
 <h2 id="Gradle篇">Gradle篇</h2><p>参考：<a href="http://blog.zhaiyifan.cn/2016/03/14/android-new-project-from-0-p2/" target="_blank" rel="external">从零开始的Android新项目2 - Gradle篇</a><br>因为Gradle依赖在这篇已经写的很详细，大家可以在demo中细看。</p>
@@ -301,7 +304,10 @@
 <h2 id="Interactor">Interactor</h2><p>咦，这是啥？是不是之前看大帅的文章中没提到，哈哈哈哈，他太忙了，就漏掉了。在这里多了一层interactor，主要是Rxjava的subscriber订阅，subscribeOn以及observerOn需要分配线程，都在这一层统一封装了。<br><img src="http://cl.ly/0J0D0S0u2i2Y/Image%202016-06-17%20at%2019.10.49.png" alt="UseCase"><br>这里泛型传入的就是解析需要返回的类型，子类可以设置参数调用<br><img src="http://cl.ly/0z3b2a47132f/Image%202016-06-17%20at%2019.12.56.png" alt="GetRepo"><br>这个interactor是由Presenter去调用的不需要关心repository的具体实现，只需要调用这个就可以了，达到了解耦的目的。</p>
 <h2 id="Presenter">Presenter</h2><p>控制和View交互，处理一些监听，具体的实现要看业务需求了。<br><img src="http://cl.ly/3f391X3u0u16/Image%202016-06-17%20at%2019.59.45.png" alt="Presenter"></p>
 <p>initialize方法是被Activity、Fragment调用，用于获取数据。<br>这里的detachView当Activity或Fragment调用onDestory的时候 而被调用。getView.userList，则是在View层复写，用来通知view我拿到数据了，之类的操作。</p>
-<h2 id="ViewDataBinding">ViewDataBinding</h2><p>关于这个章节，我就先放一下，因为准备放在下一篇文章中细讲。</p>
+<h2 id="ViewDataBinding">ViewDataBinding</h2><p>关于这个章节，我就先放一下，因为准备放在下一篇文章中细讲。<br>因为Databinding会有很多部分替代了Presenter。</p>
+<h2 id="Component">Component</h2><p>Component是Dagger中的组件，全局会有一个ApplicationComponent，在这里提供了全局的一些设置，以及所有Repository，至于这些是如何提供的，则写在了Module中。在这里举例一下ApplicationComponent<br><img src="http://cl.ly/1n25201L0d3Y/Image%202016-06-19%20at%2016.01.51.png" alt="ApplicationComponent"><br><img src="http://cl.ly/0x0O251l3U2b/Image%202016-06-19%20at%2016.06.01.png" alt="ApplicationModule"></p>
+<p>然后会有一些业务的Component，全局都dependencies ApplicationComponent，在业务Component下，会声明哪些Activity或者Fragment去Inject，并在Module里写一些需要用到的东西，比如UseCase等。</p>
+<p>讲了这么多东西，肯定会有些同学一脸懵逼的，这不怪你们，是我写的不太好=。=！所以附上Demo地址：<a href="https://github.com/moduth/PetLoverAndroid" target="_blank" rel="external">Demo</a></p>
 </span>
       
     </div>
@@ -514,7 +520,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于本实践的说明"><span class="nav-number">2.</span> <span class="nav-text">关于本实践的说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#热身运动"><span class="nav-number">3.</span> <span class="nav-text">热身运动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体结构"><span class="nav-number">3.1.</span> <span class="nav-text">整体结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle篇"><span class="nav-number">3.2.</span> <span class="nav-text">Gradle篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVPVM"><span class="nav-number">3.3.</span> <span class="nav-text">MVPVM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目实践"><span class="nav-number">4.</span> <span class="nav-text">项目实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dagger"><span class="nav-number">4.1.</span> <span class="nav-text">Dagger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repository层"><span class="nav-number">4.2.</span> <span class="nav-text">Repository层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interactor"><span class="nav-number">4.3.</span> <span class="nav-text">Interactor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Presenter"><span class="nav-number">4.4.</span> <span class="nav-text">Presenter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewDataBinding"><span class="nav-number">4.5.</span> <span class="nav-text">ViewDataBinding</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于本实践的说明"><span class="nav-number">2.</span> <span class="nav-text">关于本实践的说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#热身运动"><span class="nav-number">3.</span> <span class="nav-text">热身运动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体结构"><span class="nav-number">3.1.</span> <span class="nav-text">整体结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle篇"><span class="nav-number">3.2.</span> <span class="nav-text">Gradle篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVPVM"><span class="nav-number">3.3.</span> <span class="nav-text">MVPVM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目实践"><span class="nav-number">4.</span> <span class="nav-text">项目实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dagger"><span class="nav-number">4.1.</span> <span class="nav-text">Dagger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repository层"><span class="nav-number">4.2.</span> <span class="nav-text">Repository层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interactor"><span class="nav-number">4.3.</span> <span class="nav-text">Interactor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Presenter"><span class="nav-number">4.4.</span> <span class="nav-text">Presenter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewDataBinding"><span class="nav-number">4.5.</span> <span class="nav-text">ViewDataBinding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Component"><span class="nav-number">4.6.</span> <span class="nav-text">Component</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
