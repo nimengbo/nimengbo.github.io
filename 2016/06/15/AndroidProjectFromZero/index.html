@@ -71,9 +71,9 @@
 <meta property="og:image" content="http://cl.ly/0J0D0S0u2i2Y/Image%202016-06-17%20at%2019.10.49.png">
 <meta property="og:image" content="http://cl.ly/0z3b2a47132f/Image%202016-06-17%20at%2019.12.56.png">
 <meta property="og:image" content="http://cl.ly/3f391X3u0u16/Image%202016-06-17%20at%2019.59.45.png">
-<meta property="og:image" content="http://cl.ly/1n25201L0d3Y/Image%202016-06-19%20at%2016.01.51.png">
+<meta property="og:image" content="http://cl.ly/2M1e1L0B4022/Image%202016-06-19%20at%2016.21.05.png">
 <meta property="og:image" content="http://cl.ly/0x0O251l3U2b/Image%202016-06-19%20at%2016.06.01.png">
-<meta property="og:updated_time" content="2016-06-19T08:18:20.000Z">
+<meta property="og:updated_time" content="2016-06-19T08:21:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从零创建项目实践">
 <meta name="twitter:description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。
@@ -305,7 +305,7 @@
 <h2 id="Presenter">Presenter</h2><p>控制和View交互，处理一些监听，具体的实现要看业务需求了。<br><img src="http://cl.ly/3f391X3u0u16/Image%202016-06-17%20at%2019.59.45.png" alt="Presenter"></p>
 <p>initialize方法是被Activity、Fragment调用，用于获取数据。<br>这里的detachView当Activity或Fragment调用onDestory的时候 而被调用。getView.userList，则是在View层复写，用来通知view我拿到数据了，之类的操作。</p>
 <h2 id="ViewDataBinding">ViewDataBinding</h2><p>关于这个章节，我就先放一下，因为准备放在下一篇文章中细讲。<br>因为Databinding会有很多部分替代了Presenter。</p>
-<h2 id="Component">Component</h2><p>Component是Dagger中的组件，全局会有一个ApplicationComponent，在这里提供了全局的一些设置，以及所有Repository，至于这些是如何提供的，则写在了Module中。在这里举例一下ApplicationComponent<br><img src="http://cl.ly/1n25201L0d3Y/Image%202016-06-19%20at%2016.01.51.png" alt="ApplicationComponent"><br><img src="http://cl.ly/0x0O251l3U2b/Image%202016-06-19%20at%2016.06.01.png" alt="ApplicationModule"></p>
+<h2 id="Component">Component</h2><p>Component是Dagger中的组件，全局会有一个ApplicationComponent，在这里提供了全局的一些设置，以及所有Repository，至于这些是如何提供的，则写在了Module中。在这里举例一下ApplicationComponent<br><img src="http://cl.ly/2M1e1L0B4022/Image%202016-06-19%20at%2016.21.05.png" alt="ApplicationComponent"><br><img src="http://cl.ly/0x0O251l3U2b/Image%202016-06-19%20at%2016.06.01.png" alt="ApplicationModule"></p>
 <p>然后会有一些业务的Component，全局都dependencies ApplicationComponent，在业务Component下，会声明哪些Activity或者Fragment去Inject，并在Module里写一些需要用到的东西，比如UseCase等。</p>
 <h1 id="结语">结语</h1><p>其实概念性的东西太多，所以可能不是很好理解，需要同学们动手去试一试，用过了才知道好不好，而且每个人的理念和观点也不同，总会有争议，所以还是得理解思想，而不是照搬，希望大家能通过本文可以更好的理解这个结构。</p>
 <p>讲了这么多东西，肯定会有些同学一脸懵逼的，这不怪你们，是我写的不太好=。=！所以附上Demo地址：<a href="https://github.com/moduth/PetLoverAndroid" target="_blank" rel="external">Demo</a></p>
