@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,实践," />
+  <meta name="keywords" content="Git,版本控制," />
 
 
 
@@ -53,32 +53,19 @@
 
 
 
-<meta name="description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。
-关于本实践的说明本实践是为了方便，调用github的api，抓取了我们moduth组的repo
-热身运动先要补充一点知识的细">
+<meta name="description" content="前言背景用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。一些运用git很熟练的大牛们可以点击返回或关闭啦~
+简介在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从零创建项目实践">
-<meta property="og:url" content="http://yoursite.com/2016/06/15/AndroidProjectFromZero/index.html">
+<meta property="og:title" content="从什么都不懂开始(一)——什么是Git">
+<meta property="og:url" content="http://yoursite.com/2016/07/09/WhatIsTheGit/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。
-关于本实践的说明本实践是为了方便，调用github的api，抓取了我们moduth组的repo
-热身运动先要补充一点知识的细">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160615-0.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160617-0.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160617-1.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2018.49.47.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2018.54.22.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.10.49.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.12.56.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.59.45.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/application_component.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/application_module.png">
-<meta property="og:updated_time" content="2016-07-04T03:33:13.000Z">
+<meta property="og:description" content="前言背景用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。一些运用git很熟练的大牛们可以点击返回或关闭啦~
+简介在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次">
+<meta property="og:updated_time" content="2016-07-10T07:10:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从零创建项目实践">
-<meta name="twitter:description" content="背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。
-关于本实践的说明本实践是为了方便，调用github的api，抓取了我们moduth组的repo
-热身运动先要补充一点知识的细">
+<meta name="twitter:title" content="从什么都不懂开始(一)——什么是Git">
+<meta name="twitter:description" content="前言背景用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。一些运用git很熟练的大牛们可以点击返回或关闭啦~
+简介在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次">
 
 
 
@@ -90,7 +77,7 @@
   };
 </script>
 
-  <title> 从零创建项目实践 | Abner_泥阿布 </title>
+  <title> 从什么都不懂开始(一)——什么是Git | Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -230,7 +217,7 @@
             
             
               
-                从零创建项目实践
+                从什么都不懂开始(一)——什么是Git
               
             
           </h1>
@@ -239,8 +226,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-06-15T14:26:04+08:00" content="2016-06-15">
-              2016-06-15
+            <time itemprop="dateCreated" datetime="2016-07-09T14:23:57+08:00" content="2016-07-09">
+              2016-07-09
             </time>
           </span>
 
@@ -249,8 +236,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工作经验/" itemprop="url" rel="index">
-                    <span itemprop="name">工作经验</span>
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
                   </a>
                 </span>
 
@@ -265,8 +252,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/15/AndroidProjectFromZero/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/15/AndroidProjectFromZero/" itemprop="commentsCount"></span>
+                <a href="/2016/07/09/WhatIsTheGit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/09/WhatIsTheGit/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -285,31 +272,23 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="背景">背景</h1><p><a href="http://blog.zhaiyifan.cn" target="_blank" rel="external">大帅MarkZhai</a>的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。</p>
-<h1 id="关于本实践的说明">关于本实践的说明</h1><p>本实践是为了方便，调用github的api，抓取了我们moduth组的repo</p>
-<h1 id="热身运动">热身运动</h1><p>先要补充一点知识的细节才能更加好跟上司机的车</p>
-<h2 id="整体结构">整体结构</h2><p>参考：<a href="http://blog.zhaiyifan.cn/2016/03/14/android-new-project-from-0-p1/" target="_blank" rel="external">从零开始的Android新项目1 - 架构搭建篇</a></p>
-<p>还是直接看IDEA比较直接吧，SDK中就是放一些library的地方。在实际项目中，我们确实做到了“避免为了模式而模式所导致的开发压力”，用了MVPVM，也不是所有的地方都有些P，只在复杂的地方用P层去做解耦。</p>
-<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160615-0.png" alt="项目结构"></p>
-<h2 id="Gradle篇">Gradle篇</h2><p>参考：<a href="http://blog.zhaiyifan.cn/2016/03/14/android-new-project-from-0-p2/" target="_blank" rel="external">从零开始的Android新项目2 - Gradle篇</a><br>因为Gradle依赖在这篇已经写的很详细，大家可以在demo中细看。</p>
-<h2 id="MVPVM">MVPVM</h2><p>Model：<br>在domain-&gt;model-&gt;repos-&gt;ReposEntity<br>这就是接口返回格式的Entity，用GsonFormat直接生成。</p>
-<p>View：<br>因为获取的是个列表，所以这里的view就是Activity、RecyclerView，通过Presenter和ViewModel通信。</p>
-<p>Presenter：<br>在app-&gt;presenter-&gt;ReposListPresenter<br>项目中的Presenter使用了泛型，关于这个可以看一下<br><a href="http://hannesdorfmann.com/android/mosby" target="_blank" rel="external">http://hannesdorfmann.com/android/mosby</a></p>
-<p>ViewModel：<br>在app-&gt;model&gt;ReposModel，用于view需要显示的一些properties,至于从Entity -&gt; ViewModel ，这里单独创建了一个类，用于映射：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160617-0.png" alt="Mapper"><br>这里用到了Dagger的一些东西，后面会介绍到。<br>ViewModel和View的显示数据交给了DataBinding，有条件的同学可以看看<a href="https://www.youtube.com/watch?v=DAmMN7m3wLU" target="_blank" rel="external">官方Databinding视频</a>，</p>
-<p>有些比较简单的业务不需要都创建Presenter，反而把简单的东西写复杂了。</p>
-<h1 id="项目实践">项目实践</h1><h2 id="Dagger">Dagger</h2><p>为什么要在项目实践的一开始讲Dagger呢，因为贯穿整个项目的就是Dagger了，如果Dagger不懂的话，那么你会发现接下来看起来就很难受，当然Dagger的门槛是有的，但是程序员就应该迎刃而上。</p>
-<p>简单的说一下：你可以把Dagger理解成，你不需要手动去调用构造函数，如果你在别的地方生成过一些构造函数需要的参数，那么你就直接使用@Inject就可以了。当然实际上依赖注入这个概念就是比较抽象的，如果大家实在是搞不懂Dagger，可以把项目中的Dagger去掉。这并不影响项目结构。</p>
-<h2 id="Repository层">Repository层</h2><p>大部分App都需要去服务器获取数据，关于网络这块，我们用的是Retrofit+Rxjava，至于如何使用网上文章很多，就不在这里一一赘述了，而Repository层就是为了隐藏数据是从网络取还是数据库取，只要你伸手要，那我就给你便是了，你不需要关心数据哪里来。在demo中只做了对网络的获取，domain中的Repository实际上是一个interface。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160617-1.png" alt="ReposRepository"><br>真正的实现在data层的repository，是一个单例：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2018.49.47.png" alt="ReposDataRepository"><br>因为是Github接口原因，没有在return的时候再加一层，其实是应该再加一层统一解析的处理：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Observable&lt;YourResponse&gt; <span class="title">getReposList</span><span class="params">(String user)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> RepositoryUtils.</span><br><span class="line">    extractData(mReposApi.login(user),</span><br><span class="line">    YourResponse.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>至于RepositoryUtils的代码：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2018.54.22.png" alt="RepositoryUtils"><br>为了能在解析的时候处理是否成功的字段，或者需要抛出自己的Exception。</p>
-<h2 id="Interactor">Interactor</h2><p>咦，这是啥？是不是之前看大帅的文章中没提到，哈哈哈哈，他太忙了，就漏掉了。在这里多了一层interactor，主要是Rxjava的subscriber订阅，subscribeOn以及observerOn需要分配线程，都在这一层统一封装了。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.10.49.png" alt="UseCase"><br>这里泛型传入的就是解析需要返回的类型，子类可以设置参数调用<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.12.56.png" alt="GetRepo"><br>这个interactor是由Presenter去调用的不需要关心repository的具体实现，只需要调用这个就可以了，达到了解耦的目的。</p>
-<h2 id="Presenter">Presenter</h2><p>控制和View交互，处理一些监听，具体的实现要看业务需求了。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.59.45.png" alt="Presenter"></p>
-<p>initialize方法是被Activity、Fragment调用，用于获取数据。<br>这里的detachView当Activity或Fragment调用onDestory的时候 而被调用。getView.userList，则是在View层复写，用来通知view我拿到数据了，之类的操作。</p>
-<h2 id="ViewDataBinding">ViewDataBinding</h2><p>关于这个章节，我就先放一下，因为准备放在下一篇文章中细讲。<br>因为Databinding会有很多部分替代了Presenter。</p>
-<h2 id="Component">Component</h2><p>Component是Dagger中的组件，全局会有一个ApplicationComponent，在这里提供了全局的一些设置，以及所有Repository，至于这些是如何提供的，则写在了Module中。在这里举例一下ApplicationComponent<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/application_component.png" alt="ApplicationComponent"></p>
-<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/application_module.png" alt="ApplicationModule"></p>
-<p>然后会有一些业务的Component，全局都dependencies ApplicationComponent，在业务Component下，会声明哪些Activity或者Fragment去Inject，并在Module里写一些需要用到的东西，比如UseCase等。</p>
-<h1 id="结语">结语</h1><p>其实概念性的东西太多，所以可能不是很好理解，需要同学们动手去试一试，用过了才知道好不好，而且每个人的理念和观点也不同，总会有争议，所以还是得理解思想，而不是照搬，希望大家能通过本文可以更好的理解这个结构。</p>
-<p>讲了这么多东西，肯定会有些同学一脸懵逼的，这不怪你们，是我写的不太好=。=！所以附上Demo地址：<a href="https://github.com/moduth/PetLoverAndroid" target="_blank" rel="external">Demo</a></p>
+        <span itemprop="articleBody"><h1 id="前言">前言</h1><h2 id="背景">背景</h2><p>用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。<br>一些运用git很熟练的大牛们可以点击返回或关闭啦~</p>
+<h2 id="简介">简介</h2><p>在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次修改，避免一些灾难性事件发生(比如电脑坏了、硬盘烧了)”。</p>
+<h2 id="什么是Git">什么是Git</h2><p>如果你之前使用过SVN，那么Git和SVN是类似的，都是一种版本控制工具，Git拥有”本地仓库“，即使不联网，也能在本地做版本管理。可能Git的命令会很多，但是没关系，我们先慢慢学，掌握几种常用的，再深入学习一些高级技巧。</p>
+<h1 id="朝Git迈出第一步">朝Git迈出第一步</h1><h2 id="安装Git">安装Git</h2><h3 id="Linux">Linux</h3><p>基于 Fedora 的发行版 :</p>
+<p><code>$ sudo yum install git</code></p>
+<p>基于 Debian 的发行版 :</p>
+<p><code>$ sudo apt-get install git</code></p>
+<p>如果还有一些其他版本的Linux请具体参考 :</p>
+<p> <a href="http://git-scm.com/download/linu" target="_blank" rel="external">http://git-scm.com/download/linux</a></p>
+<h3 id="Mac">Mac</h3><p>在Mac上安装有两种方案：</p>
+<p>1、直接安装Xcode，装完打开Terminal如果没安装过<code>Command Line Tools</code> 会有相应的提示。</p>
+<p>2、在     <a href="http://git-scm.com/download/mac" target="_blank" rel="external">http://git-scm.com/download/mac</a> 下载最新版本即可</p>
+<h3 id="Windows">Windows</h3><p>在Windows上也有几种方法：</p>
+<p>1、打开       <a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a> 会直接下载。</p>
+<p>2、下载Github for Windows 地址为：<a href="http://windows.github.com" target="_blank" rel="external">http://windows.github.com</a></p>
+<h3 id="其他安装方法">其他安装方法</h3><p>从源码安装，源码地址在<a href="https://github.com/git/git/releases" target="_blank" rel="external"> https://github.com/git/git/releases</a>有兴趣的同学可以去了解一下</p>
+<h1 id="下节预告">下节预告</h1><p>安装完环境后，就要去尝试一下使用了，那么我们接下来会准备在Github平台去实践，如果没有注册Github的同学们赶紧注册一个，<br>因为我们是Android开发者，所以接下来的内容会使用Android平台做示范。</p>
 </span>
       
     </div>
@@ -318,9 +297,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/Git/" rel="tag">#Git</a>
           
-            <a href="/tags/实践/" rel="tag">#实践</a>
+            <a href="/tags/版本控制/" rel="tag">#版本控制</a>
           
         </div>
       
@@ -329,17 +308,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/10/AndroidLearningSummarize/" rel="next" title="Android开发两年半修炼之路">
-                <i class="fa fa-chevron-left"></i> Android开发两年半修炼之路
+              <a href="/2016/06/15/AndroidProjectFromZero/" rel="next" title="从零创建项目实践">
+                <i class="fa fa-chevron-left"></i> 从零创建项目实践
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/09/WhatIsTheGit/" rel="prev" title="从什么都不懂开始(一)——什么是Git">
-                从什么都不懂开始(一)——什么是Git <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -359,10 +334,10 @@
     <a href="http://weibo.com/nimengbo/">我的新浪微博</p>
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/06/15/AndroidProjectFromZero/"
-     data-title="从零创建项目实践"
+        <div class="ds-share flat" data-thread-key="2016/07/09/WhatIsTheGit/"
+     data-title="从什么都不懂开始(一)——什么是Git"
      data-content=""
-     data-url="http://yoursite.com/2016/06/15/AndroidProjectFromZero/">
+     data-url="http://yoursite.com/2016/07/09/WhatIsTheGit/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -390,8 +365,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/15/AndroidProjectFromZero/"
-           data-title="从零创建项目实践" data-url="http://yoursite.com/2016/06/15/AndroidProjectFromZero/">
+      <div class="ds-thread" data-thread-key="2016/07/09/WhatIsTheGit/"
+           data-title="从什么都不懂开始(一)——什么是Git" data-url="http://yoursite.com/2016/07/09/WhatIsTheGit/">
       </div>
     
   </div>
@@ -526,7 +501,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于本实践的说明"><span class="nav-number">2.</span> <span class="nav-text">关于本实践的说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#热身运动"><span class="nav-number">3.</span> <span class="nav-text">热身运动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体结构"><span class="nav-number">3.1.</span> <span class="nav-text">整体结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle篇"><span class="nav-number">3.2.</span> <span class="nav-text">Gradle篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVPVM"><span class="nav-number">3.3.</span> <span class="nav-text">MVPVM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目实践"><span class="nav-number">4.</span> <span class="nav-text">项目实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dagger"><span class="nav-number">4.1.</span> <span class="nav-text">Dagger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repository层"><span class="nav-number">4.2.</span> <span class="nav-text">Repository层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interactor"><span class="nav-number">4.3.</span> <span class="nav-text">Interactor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Presenter"><span class="nav-number">4.4.</span> <span class="nav-text">Presenter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewDataBinding"><span class="nav-number">4.5.</span> <span class="nav-text">ViewDataBinding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Component"><span class="nav-number">4.6.</span> <span class="nav-text">Component</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Git"><span class="nav-number">1.3.</span> <span class="nav-text">什么是Git</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#朝Git迈出第一步"><span class="nav-number">2.</span> <span class="nav-text">朝Git迈出第一步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Git"><span class="nav-number">2.1.</span> <span class="nav-text">安装Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">2.1.1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac"><span class="nav-number">2.1.2.</span> <span class="nav-text">Mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">2.1.3.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他安装方法"><span class="nav-number">2.1.4.</span> <span class="nav-text">其他安装方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下节预告"><span class="nav-number">3.</span> <span class="nav-text">下节预告</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
