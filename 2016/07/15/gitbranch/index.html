@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,总结," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -53,19 +53,28 @@
 
 
 
-<meta name="description" content="背景博主毕业于一所三流本科院校计算机专业，在一份实习工作中，因公司需要，从Java后端投身于Android开发中去。可能会有很多人和博主一样，甚至有更好的条件，所以把自己的经历分享出来，既能看看自己的过去，也可以给一些茫然的同学带来点灵感。
-怎么踏出第一步所谓初生牛犊不怕虎，当时在零基础的情况下，被leader(iOS)指派要写一个相机模块，并且能带一些图片处理之类的(博主一年后又写了这种类似功能">
+<meta name="description" content="本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。若是Git大牛就可以点击返回或者关闭啦~
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。
+对于我们来说，在Repository中，我们看的见的显示信息就是代码，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android开发两年半修炼之路">
-<meta property="og:url" content="http://yoursite.com/2016/05/10/AndroidLearningSummarize/index.html">
+<meta property="og:title" content="从什么都不懂开始(二)—Branch">
+<meta property="og:url" content="http://yoursite.com/2016/07/15/gitbranch/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:description" content="背景博主毕业于一所三流本科院校计算机专业，在一份实习工作中，因公司需要，从Java后端投身于Android开发中去。可能会有很多人和博主一样，甚至有更好的条件，所以把自己的经历分享出来，既能看看自己的过去，也可以给一些茫然的同学带来点灵感。
-怎么踏出第一步所谓初生牛犊不怕虎，当时在零基础的情况下，被leader(iOS)指派要写一个相机模块，并且能带一些图片处理之类的(博主一年后又写了这种类似功能">
-<meta property="og:updated_time" content="2016-05-10T09:54:45.000Z">
+<meta property="og:description" content="本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。若是Git大牛就可以点击返回或者关闭啦~
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。
+对于我们来说，在Repository中，我们看的见的显示信息就是代码，">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head_master.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head_branch.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/branch.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/merge.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase.png">
+<meta property="og:updated_time" content="2016-07-17T15:10:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android开发两年半修炼之路">
-<meta name="twitter:description" content="背景博主毕业于一所三流本科院校计算机专业，在一份实习工作中，因公司需要，从Java后端投身于Android开发中去。可能会有很多人和博主一样，甚至有更好的条件，所以把自己的经历分享出来，既能看看自己的过去，也可以给一些茫然的同学带来点灵感。
-怎么踏出第一步所谓初生牛犊不怕虎，当时在零基础的情况下，被leader(iOS)指派要写一个相机模块，并且能带一些图片处理之类的(博主一年后又写了这种类似功能">
+<meta name="twitter:title" content="从什么都不懂开始(二)—Branch">
+<meta name="twitter:description" content="本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。若是Git大牛就可以点击返回或者关闭啦~
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。
+对于我们来说，在Repository中，我们看的见的显示信息就是代码，">
 
 
 
@@ -77,7 +86,7 @@
   };
 </script>
 
-  <title> Android开发两年半修炼之路 | Abner_泥阿布 </title>
+  <title> 从什么都不懂开始(二)—Branch | Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -217,7 +226,7 @@
             
             
               
-                Android开发两年半修炼之路
+                从什么都不懂开始(二)—Branch
               
             
           </h1>
@@ -226,34 +235,19 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-05-10T09:57:18+08:00" content="2016-05-10">
-              2016-05-10
+            <time itemprop="dateCreated" datetime="2016-07-15T00:02:42+08:00" content="2016-07-15">
+              2016-07-15
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习经验/" itemprop="url" rel="index">
-                    <span itemprop="name">学习经验</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/10/AndroidLearningSummarize/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/10/AndroidLearningSummarize/" itemprop="commentsCount"></span>
+                <a href="/2016/07/15/gitbranch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/gitbranch/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -272,56 +266,51 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="背景">背景</h1><p>博主毕业于一所三流本科院校计算机专业，在一份实习工作中，因公司需要，从Java后端投身于Android开发中去。可能会有很多人和博主一样，甚至有更好的条件，所以把自己的经历分享出来，既能看看自己的过去，也可以给一些茫然的同学带来点灵感。</p>
-<h1 id="怎么踏出第一步">怎么踏出第一步</h1><p>所谓初生牛犊不怕虎，当时在零基础的情况下，被leader(iOS)指派要写一个相机模块，并且能带一些图片处理之类的(博主一年后又写了这种类似功能，都没能写的很好)，对未知的东西完全不懂，所以也没有畏惧之心，一边查资料，一边写代码(最后做出来的结果就不说了，想想就羞耻感爆棚)。</p>
-<p>也是从那个时候，养成了独立思考，学习的习惯，在14年前期，Github上还没有那么多关于Android的东西，国内资料对于相机模块的介绍也很少，所以博主大部分资料查阅都来自于Google，至于怎么翻墙就不在这里叙述了。<br>总结出来的就是实践出真知，干了再说！</p>
-<h1 id="寻找解决办法的途径">寻找解决办法的途径</h1><p>在我刚进入Android界的时候，感觉啥都不会，然后手头又有任务，已经让我独立开发一个App了，让我先调研一下需要用到的技术，这个时候只能寻找一些资源和途径，其实官方文档是最好的学习方法，奈何英语不太行，在没有任何基础的情况下直接阅读文档会经常理解错误。所以在那个时候寻找一些国内的论坛，比如apkbus，eoeandroid社区，对于初学者的我，这些论坛对我起到了不小的帮助，至少教会了我怎么写好一个Listview，在当时也流传着一句话”会ListView，Android就入门了”。现在想想挺扯淡的。</p>
-<p>以下是一些比较有用的途径：</p>
-<ol>
-<li><a href="http://developer.android.com/" target="_blank" rel="external">Android Developers官方文档</a></li>
-<li>Google</li>
-<li>StackoverFlow</li>
-<li>Youtube</li>
-<li>Github开源项目</li>
-</ol>
-<h1 id="动力从何而来">动力从何而来</h1><p>我一直觉得，只有对这行业有兴趣，才能有热情去钻研，才会坚持下来，在这个行业千万不能熬，因为技术日新月异，每天都会有一些新的东西在冲击着老东西，所以要有钻研的精神，跟上时代的脚步，而这一切的驱动力就是兴趣。这也会影响到你会不会去独立学习，利用业余时间去学习更多的东西，在我们那儿叫做暗推(不懂的同学可以百度一下哈)，渐渐地你会发现和别人的差距就体现在你比他们付出的更多汗水。</p>
-<p><code>就怕比你厉害的人比你还要努力</code></p>
-<h1 id="关于怎么学习">关于怎么学习</h1><p>关于如何学习，可以参照大帅阿翟的<a href="http://blog.zhaiyifan.cn/2016/04/28/about-learning/" target="_blank" rel="external">计算机从业者的技术成长学习之路</a>某些同学可能会一开始买很多的书，博主还是劝告一些同学，读万卷书，不如行万里路。最好的读书方式就是边看边coding。基础很重要！基础很重要！基础很重要！重要的事情说三次！数据结构+算法=编程。虽然算法在Android上用的不多，基本的一些还是要知道的，数据结构是相当重要的！对城宝具:《Java编程思想》、《Android开发艺术与探索》。</p>
-<h1 id="瓶颈或茫然时">瓶颈或茫然时</h1><p>一个人总是很容易遇到瓶颈，或者会有一段时间处于茫然状态，知心哥哥(弟弟)告诉你们，这个时候应该多出去面基！参与一下当地的开发者社区，听听别人的感受或者分享，认识一些基友，扩展自己的社交圈。不要总想跳槽！不要总想跳槽！不要总想跳槽！因为今年行情不是很好，好坑也不多，且行且珍惜！</p>
-<h1 id="程序员最缺乏却又最重要的一点:情商">程序员最缺乏却又最重要的一点:情商</h1><p>咱做开发的，总是被产品、设计、PM、QA指手画脚，久而久之总会有一些怨气，会和别人吵架之类的。一辈子做技术，薪资瓶颈太容易遇到，这个时候能升职加薪的资本就是情商了，说的难听点就是心机手段了，不要总是把情绪表现出来，关于这些在知乎上也有很多讨论，在这里也不细说了，总之就是，做人留一线，日后好相见！这点我也做的不是很好。</p>
-<h1 id="关于在技能上的发展">关于在技能上的发展</h1><p>很多人学习Android总是执着于酷炫的动画，或者一些绚丽的自定义View，个人觉得不如进入深度学习，总是浮在写控件或者动画，目的只是为了炫技，并不是真正的刚需，理解原理才能更好的解决问题，编程的初衷不就是为了解决各种各样的问题不是吗？广的接触一些比如hybrid、后端开发等，会带来一些灵感和解决方案，深入学习也是比较重要的比如read the fucking source code，不然你说的大家都懂还怎么吹比！！！！！一定一定要戒骄戒躁，还是脚踏实地的好。</p>
-<h1 id="结语">结语</h1><p>送给大家也是自己的一句话：<code>先是确定目标，然后坚持到底，这是成功的唯一方法。</code></p>
-<p>原文发布于：<a href="http://abner-nimengbo.cn/2016/05/10/AndroidLearningSummarize/" target="_blank" rel="external">http://abner-nimengbo.cn/2016/05/10/AndroidLearningSummarize/</a></p>
+        <span itemprop="articleBody"><p>本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。<br>若是Git大牛就可以点击返回或者关闭啦~</p>
+<h1 id="Repository介绍">Repository介绍</h1><p>在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。</p>
+<p>对于我们来说，在Repository中，我们看的见的显示信息就是代码，而其他的比如分支信息、Commit信息、Status这些状态则通过命令行去查看。</p>
+<h1 id="Branch介绍">Branch介绍</h1><p>当我们多个人合作开发的时候，为了方便管理代码，会每个组开一个Branch，而Master称为主分支——主干，这些Branch则称为分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png" alt="BranchAndMaster"></p>
+<h2 id="切换分支">切换分支</h2><p>初始化Git后，当前默认在master分支，这个时候如果你想新建一个分支，可以执行 <code>git branch [branchName]</code> 后面的[branchName]是指你的分支名。这样就能把master当前的commit信息’拎’出来，成为了一个新的分支。</p>
+<p>执行完branch命令后，你会发现你还是在原来的分支上，这个时候执行以下  <code>git checkout [branchName]</code>。其实呢，你可以执行<br><code>git checkout -b [branchName] [fromBranchName]</code> 生成新的Branch，后面这个[fromBranchName] 就是你想要从哪个分支生成新的分支，不写则是当前分支。</p>
+<h2 id="HEAD信息">HEAD信息</h2><p>为什么要在这里讲HEAD呢，那HEAD又是什么呢，其实HEAD可以理解成一个指针，每次都是指向当前Branch的最后一次信息(可以是Commit或者Pull之类的)，通过移动HEAD来达到切换分支的作用。<br>如果当前分支在master，那么HEAD信息如下：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head_master.png" alt="HEAD_MASTER"></p>
+<p>在checkout到BranchC的时候变成了如下图所示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head_branch.png" alt="HEAD_BRANCH"></p>
+<h2 id="合并分支">合并分支</h2><p>当你的项目上线后，发现有个bug，这个时候需要在master分支上<code>checkout -b</code> 一个新的分支用来修bug，那么这个bug分支上的代码，最后怎么给’整’到master上去呢。很简单先切回master分支，然后<code>git merge bugBranch</code> 就好了。</p>
+<h3 id="冲突">冲突</h3><p>当你merge的时候出现了</p>
+<p><code>$ git merge myBranch
+Auto-merging AndroidManifest.xml
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.</code></p>
+<p>这个时候会提示你有代码冲突，那么你需要执行<code>git status</code>，查看当前文件哪些需要解决冲突。解决完再提交就好了。笔者很喜欢用AndroidStudio自带的git进行合并等操作，可以直接在Compare视图上解决冲突，非常方便。</p>
+<h3 id="rebase">rebase</h3><p>rebase和merge的功能其实是一样的，都是合并代码，只是对于修改信息的节点会发生变化，rebase和merge最大的区别就是在最后的代码树上，有兴趣的同学可以用SourceTree看看，或者直接在命令行输入gitk。</p>
+<p>当前工作状态，箭头表示上一次信息：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/branch.png" alt="当前状态"></p>
+<p>执行merge后：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/merge.png" alt="merge"></p>
+<p>执行rebase后<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase.png" alt="rebase"></p>
+<p>之所以会有5-1，6-1就是和原来的commit是不同的，算是一次新的commit了。</p>
+<p>简而言之就是rebase的代码叔会比merge的干净许多。rebse会保留你合并的顺序，而merge则会按照你的修改时间排序。笔者有点强迫症，会使用rebase(搞基)，另外一些图方便的人喜欢merge(合体)。</p>
+<p>另外值得注意的是，在rebase前，千万别push，不然等rebase完毕后，因为tree发生了变化，会提示push reject，意味着你需要  <code>git push --f</code>才能提交了，这是有风险的！！！注意安全！！！</p>
+<h2 id="stash">stash</h2><p>当你想切换分支时，又不想提交当前代码，那就需要stash啦，简单的意思就是讲你当前的修改信息全部暂存起来，放进一个stack栈中，这个时候你就可以checkout到别的分支啦。下次再回来的时候<br><code>git stash pop</code>就好了。</p>
+<h2 id="拓展">拓展</h2><p>如果对Git原理有兴趣的同学，不妨去研究一下Git提交的原理，会发现，每次Commit，其实就是一个Branch，你也可以把某个Commit给Checkout出来。</p>
+<h1 id="总结">总结</h1><p>一边写博客，一边翻阅资料，自己也又温习一遍，接下来打算继续深入下去，下一篇将会讲几个指令的原理，以及git对象之类的。最近比较忙，需要用点心去学习，努力把这个系列写的更干货一些！</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-            <a href="/tags/总结/" rel="tag">#总结</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/01/事件分发之现学现用/" rel="next" title="事件分发之现学现用">
-                <i class="fa fa-chevron-left"></i> 事件分发之现学现用
+              <a href="/2016/07/11/createYourRepository/" rel="next" title="从什么都不懂开始(二)——创建Project提交到Github需要做什么">
+                <i class="fa fa-chevron-left"></i> 从什么都不懂开始(二)——创建Project提交到Github需要做什么
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/15/AndroidProjectFromZero/" rel="prev" title="从零创建项目实践">
-                从零创建项目实践 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -341,10 +330,10 @@
     <a href="http://weibo.com/nimengbo/">我的新浪微博</p>
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/10/AndroidLearningSummarize/"
-     data-title="Android开发两年半修炼之路"
+        <div class="ds-share flat" data-thread-key="2016/07/15/gitbranch/"
+     data-title="从什么都不懂开始(二)—Branch"
      data-content=""
-     data-url="http://yoursite.com/2016/05/10/AndroidLearningSummarize/">
+     data-url="http://yoursite.com/2016/07/15/gitbranch/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -372,8 +361,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/10/AndroidLearningSummarize/"
-           data-title="Android开发两年半修炼之路" data-url="http://yoursite.com/2016/05/10/AndroidLearningSummarize/">
+      <div class="ds-thread" data-thread-key="2016/07/15/gitbranch/"
+           data-title="从什么都不懂开始(二)—Branch" data-url="http://yoursite.com/2016/07/15/gitbranch/">
       </div>
     
   </div>
@@ -508,7 +497,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么踏出第一步"><span class="nav-number">2.</span> <span class="nav-text">怎么踏出第一步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寻找解决办法的途径"><span class="nav-number">3.</span> <span class="nav-text">寻找解决办法的途径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动力从何而来"><span class="nav-number">4.</span> <span class="nav-text">动力从何而来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于怎么学习"><span class="nav-number">5.</span> <span class="nav-text">关于怎么学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#瓶颈或茫然时"><span class="nav-number">6.</span> <span class="nav-text">瓶颈或茫然时</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序员最缺乏却又最重要的一点:情商"><span class="nav-number">7.</span> <span class="nav-text">程序员最缺乏却又最重要的一点:情商</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于在技能上的发展"><span class="nav-number">8.</span> <span class="nav-text">关于在技能上的发展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">9.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository介绍"><span class="nav-number">1.</span> <span class="nav-text">Repository介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch介绍"><span class="nav-number">2.</span> <span class="nav-text">Branch介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#切换分支"><span class="nav-number">2.1.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HEAD信息"><span class="nav-number">2.2.</span> <span class="nav-text">HEAD信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并分支"><span class="nav-number">2.3.</span> <span class="nav-text">合并分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突"><span class="nav-number">2.3.1.</span> <span class="nav-text">冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase"><span class="nav-number">2.3.2.</span> <span class="nav-text">rebase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stash"><span class="nav-number">2.4.</span> <span class="nav-text">stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">2.5.</span> <span class="nav-text">拓展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
