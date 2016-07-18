@@ -64,12 +64,30 @@ Repository介绍在版本管理中，Repository翻译成中文就是仓库的意
 Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。
 对于我们来说，在Repository中，我们看的见的显示信息就是代码，">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%92%8C%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E5%88%B0testBranch.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8E%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E6%A3%80%E5%87%BA%E6%96%B0%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8Emaster%E5%88%86%E6%94%AF%E4%B8%8A%E6%A3%80%E5%87%BA%E5%88%86%E6%94%AF.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head_master.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%9C%A8master.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head_branch.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%88%87%E6%8D%A2%E5%88%B0branchC.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2bug%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%8F%91%E7%8E%B0%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9merge.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AFmerge.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/merge%E5%BC%B9%E5%87%BA%E6%A1%86.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/branch.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/merge.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase.png">
-<meta property="og:updated_time" content="2016-07-17T15:29:13.000Z">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E9%80%89%E6%8B%A9.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9rebase.png">
+<meta property="og:updated_time" content="2016-07-18T11:15:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从什么都不懂开始(二)—Git分支">
 <meta name="twitter:description" content="本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。若是Git大牛就可以点击返回或者关闭啦~
@@ -269,27 +287,48 @@ Repository介绍在版本管理中，Repository翻译成中文就是仓库的意
         <span itemprop="articleBody"><p>本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。<br>若是Git大牛就可以点击返回或者关闭啦~</p>
 <h1 id="Repository介绍">Repository介绍</h1><p>在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。</p>
 <p>对于我们来说，在Repository中，我们看的见的显示信息就是代码，而其他的比如分支信息、Commit信息、Status这些状态则通过命令行去查看。</p>
-<h1 id="Branch介绍">Branch介绍</h1><p>当我们多个人合作开发的时候，为了方便管理代码，会每个组开一个Branch，而Master称为主分支——主干，这些Branch则称为分支。</p>
+<h1 id="Branch介绍">Branch介绍</h1><p>当我们多个人合作开发的时候，为了方便管理代码，会每个组开一个Branch，而master称为主分支——主干，这些Branch则称为分支。</p>
 <p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png" alt="BranchAndMaster"></p>
+<h2 id="查看当前分支">查看当前分支</h2><p>在命令行输入<code>git branch</code>就可以看到当前分支为master :<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF.png" alt="查看当前分支"></p>
+<p>输入<code>git branch -a</code> 可以查看本地和远程所有分支<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%92%8C%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF.png" alt="查看本地和远程所有分支"></p>
 <h2 id="切换分支">切换分支</h2><p>初始化Git后，当前默认在master分支，这个时候如果你想新建一个分支，可以执行 <code>git branch [branchName]</code> 后面的[branchName]是指你的分支名。这样就能把master当前的commit信息’拎’出来，成为了一个新的分支。</p>
-<p>执行完branch命令后，你会发现你还是在原来的分支上，这个时候执行以下  <code>git checkout [branchName]</code>。其实呢，你可以执行<br><code>git checkout -b [branchName] [fromBranchName]</code> 生成新的Branch，后面这个[fromBranchName] 就是你想要从哪个分支生成新的分支，不写则是当前分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF.png" alt="新建分支"></p>
+<p>执行完branch命令后，你会发现你还是在原来的分支上，在master前有一个*号表示当前分支是master，这个时候执行以下  <code>git checkout [branchName]</code>。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E5%88%B0testBranch.png" alt="切换当前分支到testBranch"><br>其实呢，你可以执行<br><code>git checkout -b [branchName] [fromBranchName]</code> 生成新的Branch，后面这个[fromBranchName] 就是你想要从哪个分支生成新的分支，不写则是当前分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8E%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E6%A3%80%E5%87%BA%E6%96%B0%E5%88%86%E6%94%AF.png" alt="从当前分支检出新分支"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8Emaster%E5%88%86%E6%94%AF%E4%B8%8A%E6%A3%80%E5%87%BA%E5%88%86%E6%94%AF.png" alt="从master分支检出新分支"></p>
 <h2 id="HEAD信息">HEAD信息</h2><p>为什么要在这里讲HEAD呢，那HEAD又是什么呢，其实HEAD可以理解成一个指针，每次都是指向当前Branch的最后一次信息(可以是Commit或者Pull之类的)，通过移动HEAD来达到切换分支的作用。<br>如果当前分支在master，那么HEAD信息如下：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head_master.png" alt="HEAD_MASTER"></p>
-<p>在checkout到BranchC的时候变成了如下图所示：</p>
+<p>真实测试效果：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%9C%A8master.png" alt="HEAD_IN_MASTER"><br>在checkout到BranchC的时候变成了如下图所示：</p>
 <p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head_branch.png" alt="HEAD_BRANCH"></p>
+<p>真实测试效果：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%88%87%E6%8D%A2%E5%88%B0branchC.png" alt="HEAD_IN_BRANCH"></p>
 <h2 id="合并分支">合并分支</h2><p>当你的项目上线后，发现有个bug，这个时候需要在master分支上<code>checkout -b</code> 一个新的分支用来修bug，那么这个bug分支上的代码，最后怎么给’整’到master上去呢。很简单先切回master分支，然后<code>git merge bugBranch</code> 就好了。</p>
 <h3 id="冲突">冲突</h3><p>当你merge的时候出现了</p>
 <p><code>$ git merge myBranch
 Auto-merging AndroidManifest.xml
 CONFLICT (content): Merge conflict in index.html
-Automatic merge failed; fix conflicts and then commit the result.</code></p>
-<p>这个时候会提示你有代码冲突，那么你需要执行<code>git status</code>，查看当前文件哪些需要解决冲突。解决完再提交就好了。笔者很喜欢用AndroidStudio自带的git进行合并等操作，可以直接在Compare视图上解决冲突，非常方便。</p>
+Automatic merge failed; fix conflicts and then commit the result.</code><br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2bug%E5%88%86%E6%94%AF.png" alt="切换到bug分支"><br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81.png" alt="merge"></p>
+<p>这个时候会提示你有代码冲突，那么你需要执行<code>git status</code>，查看当前文件哪些需要解决冲突。解决完再提交就好了。笔者很喜欢用AndroidStudio自带的git进行合并等操作，可以直接在Compare视图上解决冲突，非常方便。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%8F%91%E7%8E%B0%E5%86%B2%E7%AA%81.png" alt="发现冲突"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81%E6%96%87%E4%BB%B6.png" alt="冲突文件"></p>
+<p>这个时候回发现 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> 到 <code>========</code> 是当前所在分支的内容，下面从 <code>=======</code> 到 <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; fixBug</code> 是合并过来的分支，解决完，再执行<code>git add .</code> 然后就可以提交啦。</p>
+<p>接下来为大家看一下编译器的merge：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9merge.png" alt="选择merge"></p>
+<p>选择分支：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AFmerge.png" alt="选择分支"></p>
+<p>冲突提示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/merge%E5%BC%B9%E5%87%BA%E6%A1%86.png" alt="冲突提示"></p>
+<p>冲突比较 ：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C.png" alt="合并操作"></p>
 <h3 id="rebase">rebase</h3><p>rebase和merge的功能其实是一样的，都是合并代码，只是对于修改信息的节点会发生变化，rebase和merge最大的区别就是在最后的代码树上，有兴趣的同学可以用SourceTree看看，或者直接在命令行输入gitk。</p>
 <p>当前工作状态，箭头表示上一次信息：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/branch.png" alt="当前状态"></p>
 <p>执行merge后：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/merge.png" alt="merge"></p>
 <p>执行rebase后<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase.png" alt="rebase"></p>
 <p>之所以会有5-1，6-1就是和原来的commit是不同的，算是一次新的commit了。</p>
-<p>简而言之就是rebase的代码叔会比merge的干净许多。rebase会保留你合并的顺序，而merge则会按照你的修改时间排序。笔者有点强迫症，会使用rebase(搞基)，另外一些图方便的人喜欢merge(合体)。</p>
+<p>简而言之就是rebase的代码会比merge的干净许多。rebase会保留你合并的顺序，而merge则会按照你的修改时间排序。笔者有点强迫症，会使用rebase(搞基)，另外一些图方便的人喜欢merge(合体)。</p>
 <p>另外值得注意的是，在rebase前，千万别push，不然等rebase完毕后，因为tree发生了变化，会提示push reject，意味着你需要  <code>git push --f</code>才能提交了，这是有风险的！！！注意安全！！！</p>
+<p>下面是AndroidStudio上的rebase操作：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E9%80%89%E6%8B%A9.png" alt="rebase选择"></p>
+<p>想要从哪个分支rebase到当前分支，就选择哪个<code>Rebase on</code> ：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9rebase.png" alt="选择分支"></p>
 <h2 id="stash">stash</h2><p>当你想切换分支时，又不想提交当前代码，那就需要stash啦，简单的意思就是讲你当前的修改信息全部暂存起来，放进一个stack栈中，这个时候你就可以checkout到别的分支啦。下次再回来的时候<br><code>git stash pop</code>就好了。</p>
 <h2 id="拓展">拓展</h2><p>如果对Git原理有兴趣的同学，不妨去研究一下Git提交的原理，会发现，每次Commit，其实就是一个Branch，你也可以把某个Commit给Checkout出来。</p>
 <h1 id="总结">总结</h1><p>一边写博客，一边翻阅资料，自己也又温习一遍，接下来打算继续深入下去，下一篇将会讲几个指令的原理，以及git对象之类的。最近比较忙，需要用点心去学习，努力把这个系列写的更干货一些！</p>
@@ -497,7 +536,7 @@ Automatic merge failed; fix conflicts and then commit the result.</code></p>
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository介绍"><span class="nav-number">1.</span> <span class="nav-text">Repository介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch介绍"><span class="nav-number">2.</span> <span class="nav-text">Branch介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#切换分支"><span class="nav-number">2.1.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HEAD信息"><span class="nav-number">2.2.</span> <span class="nav-text">HEAD信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并分支"><span class="nav-number">2.3.</span> <span class="nav-text">合并分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突"><span class="nav-number">2.3.1.</span> <span class="nav-text">冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase"><span class="nav-number">2.3.2.</span> <span class="nav-text">rebase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stash"><span class="nav-number">2.4.</span> <span class="nav-text">stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">2.5.</span> <span class="nav-text">拓展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository介绍"><span class="nav-number">1.</span> <span class="nav-text">Repository介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch介绍"><span class="nav-number">2.</span> <span class="nav-text">Branch介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看当前分支"><span class="nav-number">2.1.</span> <span class="nav-text">查看当前分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换分支"><span class="nav-number">2.2.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HEAD信息"><span class="nav-number">2.3.</span> <span class="nav-text">HEAD信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并分支"><span class="nav-number">2.4.</span> <span class="nav-text">合并分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突"><span class="nav-number">2.4.1.</span> <span class="nav-text">冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase"><span class="nav-number">2.4.2.</span> <span class="nav-text">rebase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stash"><span class="nav-number">2.5.</span> <span class="nav-text">stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">2.6.</span> <span class="nav-text">拓展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
