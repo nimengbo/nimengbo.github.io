@@ -97,7 +97,7 @@ Repository介绍在版本管理中，Repository翻译成中文就是仓库的意
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/popStash.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/pop%E5%AE%8C%E5%90%8E.png">
-<meta property="og:updated_time" content="2016-07-19T14:42:13.000Z">
+<meta property="og:updated_time" content="2016-07-19T14:45:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从什么都不懂开始(二)—实践带你懂">
 <meta name="twitter:description" content="本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~此文多图预警~用流量的童鞋注意哦。
@@ -368,7 +368,7 @@ Automatic merge failed; fix conflicts and then commit the result.</code><br><img
 <p>点击pull就能拉下代码啦，如果有冲突也能借助编译器的compare进行合并啦。</p>
 <p>pull完代码后，要reabse啦：</p>
 <p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebaseInAs.png" alt="rebase"></p>
-<p>发现出现了一个冲突：</p>
+<p>按照步骤来，1、点击当前分支，选择要rebase的目标分支，点击后选择<code>Rebase onto</code>就可以执行rebase啦，rebase过程中发现出现了一个冲突：</p>
 <p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E5%86%B2%E7%AA%81.png" alt="冲突"></p>
 <p>和前面的merge一样，选择在这里解决冲突：</p>
 <p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81.png" alt="解决冲突"><br>这个时候master的代码就过来啦，然后再把之前修改的代码拿出来继续工作：</p>
