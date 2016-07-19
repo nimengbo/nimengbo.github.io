@@ -37,7 +37,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Git,版本控制," />
 
 
 
@@ -53,16 +53,14 @@
 
 
 
-<meta name="description" content="本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。若是Git大牛就可以点击返回或者关闭啦~
-Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。
-对于我们来说，在Repository中，我们看的见的显示信息就是代码，">
+<meta name="description" content="本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~此文多图预警~用流量的童鞋注意哦。
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从什么都不懂开始(二)—Git分支">
+<meta property="og:title" content="从什么都不懂开始(二)—实践带你懂">
 <meta property="og:url" content="http://yoursite.com/2016/07/15/gitbranch/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:description" content="本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。若是Git大牛就可以点击返回或者关闭啦~
-Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。
-对于我们来说，在Repository中，我们看的见的显示信息就是代码，">
+<meta property="og:description" content="本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~此文多图预警~用流量的童鞋注意哦。
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%92%8C%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF.png">
@@ -87,12 +85,23 @@ Repository介绍在版本管理中，Repository翻译成中文就是仓库的意
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E9%80%89%E6%8B%A9.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9rebase.png">
-<meta property="og:updated_time" content="2016-07-18T11:15:37.000Z">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E8%93%9D%E8%89%B2%E7%9A%84.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/stash.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/stash%E5%BC%B9%E5%87%BA%E6%A1%86.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8BstashInAs.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8Bstash.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/stashlist%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/pull%E4%BB%A3%E7%A0%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebaseInAs.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/popStash.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/pop%E5%AE%8C%E5%90%8E.png">
+<meta property="og:updated_time" content="2016-07-19T14:42:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从什么都不懂开始(二)—Git分支">
-<meta name="twitter:description" content="本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。若是Git大牛就可以点击返回或者关闭啦~
-Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。
-对于我们来说，在Repository中，我们看的见的显示信息就是代码，">
+<meta name="twitter:title" content="从什么都不懂开始(二)—实践带你懂">
+<meta name="twitter:description" content="本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~此文多图预警~用流量的童鞋注意哦。
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project">
 
 
 
@@ -104,7 +113,7 @@ Repository介绍在版本管理中，Repository翻译成中文就是仓库的意
   };
 </script>
 
-  <title> 从什么都不懂开始(二)—Git分支 | Abner_泥阿布 </title>
+  <title> 从什么都不懂开始(二)—实践带你懂 | Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -244,7 +253,7 @@ Repository介绍在版本管理中，Repository翻译成中文就是仓库的意
             
             
               
-                从什么都不懂开始(二)—Git分支
+                从什么都不懂开始(二)—实践带你懂
               
             
           </h1>
@@ -258,6 +267,21 @@ Repository介绍在版本管理中，Repository翻译成中文就是仓库的意
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/实践/" itemprop="url" rel="index">
+                    <span itemprop="name">实践</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -284,7 +308,7 @@ Repository介绍在版本管理中，Repository翻译成中文就是仓库的意
       
 
       
-        <span itemprop="articleBody"><p>本篇将介绍一下Git中经常需要操作到的东西，那就是Branch。<br>若是Git大牛就可以点击返回或者关闭啦~</p>
+        <span itemprop="articleBody"><p>本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~<br>此文多图预警~用流量的童鞋注意哦。</p>
 <h1 id="Repository介绍">Repository介绍</h1><p>在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。</p>
 <p>对于我们来说，在Repository中，我们看的见的显示信息就是代码，而其他的比如分支信息、Commit信息、Status这些状态则通过命令行去查看。</p>
 <h1 id="Branch介绍">Branch介绍</h1><p>当我们多个人合作开发的时候，为了方便管理代码，会每个组开一个Branch，而master称为主分支——主干，这些Branch则称为分支。</p>
@@ -330,13 +354,44 @@ Automatic merge failed; fix conflicts and then commit the result.</code><br><img
 <p>想要从哪个分支rebase到当前分支，就选择哪个<code>Rebase on</code> ：</p>
 <p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9rebase.png" alt="选择分支"></p>
 <h2 id="stash">stash</h2><p>当你想切换分支时，又不想提交当前代码，那就需要stash啦，简单的意思就是讲你当前的修改信息全部暂存起来，放进一个stack栈中，这个时候你就可以checkout到别的分支啦。下次再回来的时候<br><code>git stash pop</code>就好了。</p>
-<h2 id="拓展">拓展</h2><p>如果对Git原理有兴趣的同学，不妨去研究一下Git提交的原理，会发现，每次Commit，其实就是一个Branch，你也可以把某个Commit给Checkout出来。</p>
-<h1 id="总结">总结</h1><p>一边写博客，一边翻阅资料，自己也又温习一遍，接下来打算继续深入下去，下一篇将会讲几个指令的原理，以及git对象之类的。最近比较忙，需要用点心去学习，努力把这个系列写的更干货一些！</p>
+<p>这个时候Leader转头对我说：XXX模块代码我提交了，你拉一下代码，我改了你可能要用到的东西。<br>这个时候我对着一屏幕的蓝色提示，心想：不能commit把，都没测试过。这个时候就用到<code>stash</code>这个神器了。</p>
+<p>没有提交文件，本地修改过的文件会显示蓝色：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E8%93%9D%E8%89%B2%E7%9A%84.png" alt="蓝色"></p>
+<p>项目里有几个文件都没有提交，只能选择项目根目录，右击，选择stash：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stash.png" alt="stash"></p>
+<p>会弹出一个stash的弹出框，会显示当前分支，填入message:<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stash%E5%BC%B9%E5%87%BA%E6%A1%86.png" alt="stash弹出框"></p>
+<p>点击createStash后，创建一个当前的stash，可以点击刚刚的StashChanges下面的UnstashChanges查看当前的stash列表：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8BstashInAs.png" alt="查看stashInAs"></p>
+<p>或者在命令行输入<code>git stash list</code> 查看当前的stash栈：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8Bstash.png" alt="查看stash"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stashlist%E7%BB%93%E6%9E%9C.png" alt="结果"></p>
+<p>好啦，当前的工作全部都暂存起来了！要把刚刚Leader放到master的代码都合并过来啦！我选择的当然是rebase啦。在这之前必须得把服务器的master代码pull到本地是不是，先切换到master，然后还是选择编译器的git，在刚刚stash界面下面有个<code>pull</code>。点击pull弹出一个界面，选择master分支：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/pull%E4%BB%A3%E7%A0%81.png" alt="pull"></p>
+<p>点击pull就能拉下代码啦，如果有冲突也能借助编译器的compare进行合并啦。</p>
+<p>pull完代码后，要reabse啦：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebaseInAs.png" alt="rebase"></p>
+<p>发现出现了一个冲突：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E5%86%B2%E7%AA%81.png" alt="冲突"></p>
+<p>和前面的merge一样，选择在这里解决冲突：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81.png" alt="解决冲突"><br>这个时候master的代码就过来啦，然后再把之前修改的代码拿出来继续工作：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/popStash.png" alt="pop"></p>
+<p>pop完后可以继续快乐的工作啦：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/pop%E5%AE%8C%E5%90%8E.png" alt="pop完毕"></p>
+<p>在这里说明一下<code>红色</code>的文件表示没有add，<code>绿色</code>文件表示add过了但是没有commit，<code>蓝色</code>文件表示修改过，和远端的分支代码不一样，绿色和蓝色的文件执行stash会被暂存，而红色的不会。</p>
+<h2 id="拓展">拓展</h2><p>如果对Git原理有兴趣的同学，可以自己再去深入研究一下Git，很多东西虽然平时用不到，但是又很有深度。大家按兴趣就好啦</p>
+<h1 id="总结">总结</h1><p>一边写博客，一边翻阅资料，自己也又温习一遍，接下来打算继续深入下去，下一篇将会讲几个指令的原理，以及git对象之类的。最近比较忙，需要用点心去学习，也会把自己遇到的场景尽量告诉大家，让大家能接触到更多的实际场景，努力把这个系列写的更干货一些！</p>
+<p>其实AndroidStudio能覆盖大多数的使用场景了，下一篇将会说一些revert、reset，当发生错误提交时，怎么回滚代码。</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+            <a href="/tags/版本控制/" rel="tag">#版本控制</a>
+          
+        </div>
       
 
       
@@ -370,7 +425,7 @@ Automatic merge failed; fix conflicts and then commit the result.</code><br><img
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2016/07/15/gitbranch/"
-     data-title="从什么都不懂开始(二)—Git分支"
+     data-title="从什么都不懂开始(二)—实践带你懂"
      data-content=""
      data-url="http://yoursite.com/2016/07/15/gitbranch/">
   <div class="ds-share-inline">
@@ -401,7 +456,7 @@ Automatic merge failed; fix conflicts and then commit the result.</code><br><img
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/07/15/gitbranch/"
-           data-title="从什么都不懂开始(二)—Git分支" data-url="http://yoursite.com/2016/07/15/gitbranch/">
+           data-title="从什么都不懂开始(二)—实践带你懂" data-url="http://yoursite.com/2016/07/15/gitbranch/">
       </div>
     
   </div>
@@ -452,7 +507,7 @@ Automatic merge failed; fix conflicts and then commit the result.</code><br><img
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
