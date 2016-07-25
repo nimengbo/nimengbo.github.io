@@ -53,31 +53,38 @@
 
 
 
-<meta name="description" content="背景接上篇，在理解什么是git后，总需要动手操作一下，还是那句话~针对Git很熟练的大牛们可以点击返回或者关闭啦~
-在看这篇文章之前你得准备好什么？1、注册好的你Gihub账号2、在setting里的SSH里有你电脑的SSHKey了。3、准备好你自己需要放在git的文件夹如果不会以上1、2两点的同学，请自行Google或者Baidu。
-将你的Project初始化成GitProject以下将以And">
+<meta name="description" content="看到这篇标题是不是有种很叼的感觉！？在Git的工作流程中，不仅能往前走，当然也可以后退。不仅能提交文件，当然也能删除或者修改了。而且你想回到哪个提交节点就回到哪个提交节点，是不是觉得自己体内的洪荒之力快抑制不住了？
+别急，容我短话长说，一一道来。
+在这真正讲这些也需要普及一个概念：工作区和暂存区
+工作区和暂存区如果有同学对这些概念感觉很懵逼，也没什么关系，不影响你的使用，只要扫一眼接下来的两个标题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从什么都不懂开始(二)——创建Project提交到Github需要做什么">
-<meta property="og:url" content="http://yoursite.com/2016/07/11/createYourRepository/index.html">
+<meta property="og:title" content="从什么都不懂开始(四)——Git掌握时空之力">
+<meta property="og:url" content="http://yoursite.com/2016/07/22/gitrevert/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:description" content="背景接上篇，在理解什么是git后，总需要动手操作一下，还是那句话~针对Git很熟练的大牛们可以点击返回或者关闭啦~
-在看这篇文章之前你得准备好什么？1、注册好的你Gihub账号2、在setting里的SSH里有你电脑的SSHKey了。3、准备好你自己需要放在git的文件夹如果不会以上1、2两点的同学，请自行Google或者Baidu。
-将你的Project初始化成GitProject以下将以And">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-0%402x.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-1%402x.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-2%402x.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-4%402x.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-3%402x.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-5%402x.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-6%402x.png">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/6E6BB6AD-6DED-408D-B94A-2DD0E4C1A0E4.png">
+<meta property="og:description" content="看到这篇标题是不是有种很叼的感觉！？在Git的工作流程中，不仅能往前走，当然也可以后退。不仅能提交文件，当然也能删除或者修改了。而且你想回到哪个提交节点就回到哪个提交节点，是不是觉得自己体内的洪荒之力快抑制不住了？
+别急，容我短话长说，一一道来。
+在这真正讲这些也需要普及一个概念：工作区和暂存区
+工作区和暂存区如果有同学对这些概念感觉很懵逼，也没什么关系，不影响你的使用，只要扫一眼接下来的两个标题">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/reset-commit.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/reset-commit-first.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/reset.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/diff.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/log-after-reset.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/git-revert.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/revert-merge.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/commit-revert.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%A2%9E%E7%9A%84.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/checkout-filename.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg">
-<meta property="og:updated_time" content="2016-07-21T03:44:24.000Z">
+<meta property="og:updated_time" content="2016-07-25T16:01:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从什么都不懂开始(二)——创建Project提交到Github需要做什么">
-<meta name="twitter:description" content="背景接上篇，在理解什么是git后，总需要动手操作一下，还是那句话~针对Git很熟练的大牛们可以点击返回或者关闭啦~
-在看这篇文章之前你得准备好什么？1、注册好的你Gihub账号2、在setting里的SSH里有你电脑的SSHKey了。3、准备好你自己需要放在git的文件夹如果不会以上1、2两点的同学，请自行Google或者Baidu。
-将你的Project初始化成GitProject以下将以And">
+<meta name="twitter:title" content="从什么都不懂开始(四)——Git掌握时空之力">
+<meta name="twitter:description" content="看到这篇标题是不是有种很叼的感觉！？在Git的工作流程中，不仅能往前走，当然也可以后退。不仅能提交文件，当然也能删除或者修改了。而且你想回到哪个提交节点就回到哪个提交节点，是不是觉得自己体内的洪荒之力快抑制不住了？
+别急，容我短话长说，一一道来。
+在这真正讲这些也需要普及一个概念：工作区和暂存区
+工作区和暂存区如果有同学对这些概念感觉很懵逼，也没什么关系，不影响你的使用，只要扫一眼接下来的两个标题">
 
 
 
@@ -89,7 +96,7 @@
   };
 </script>
 
-  <title> 从什么都不懂开始(二)——创建Project提交到Github需要做什么 | Abner_泥阿布 </title>
+  <title> 从什么都不懂开始(四)——Git掌握时空之力 | Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -229,7 +236,7 @@
             
             
               
-                从什么都不懂开始(二)——创建Project提交到Github需要做什么
+                从什么都不懂开始(四)——Git掌握时空之力
               
             
           </h1>
@@ -238,8 +245,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-07-11T22:06:03+08:00" content="2016-07-11">
-              2016-07-11
+            <time itemprop="dateCreated" datetime="2016-07-22T16:12:51+08:00" content="2016-07-22">
+              2016-07-22
             </time>
           </span>
 
@@ -248,8 +255,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
+                  <a href="/categories/实践/" itemprop="url" rel="index">
+                    <span itemprop="name">实践</span>
                   </a>
                 </span>
 
@@ -264,8 +271,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/11/createYourRepository/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/11/createYourRepository/" itemprop="commentsCount"></span>
+                <a href="/2016/07/22/gitrevert/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/22/gitrevert/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -284,19 +291,55 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="背景">背景</h1><p>接上篇，在理解什么是git后，总需要动手操作一下，还是那句话~针对Git很熟练的大牛们可以点击返回或者关闭啦~</p>
-<h2 id="在看这篇文章之前你得准备好什么？">在看这篇文章之前你得准备好什么？</h2><p>1、注册好的你Gihub账号<br>2、在setting里的SSH里有你电脑的SSHKey了。<br>3、准备好你自己需要放在git的文件夹<br>如果不会以上1、2两点的同学，请自行Google或者Baidu。</p>
-<h2 id="将你的Project初始化成GitProject">将你的Project初始化成GitProject</h2><p>以下将以AndroidProject为例子</p>
-<p>新建一个AndroidProject后的文件夹内容是这样的：</p>
-<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-0%402x.png" alt="AndroidProject"><br>不要在意.gitignore一会儿会讲到<br>在命令行执行如下命令：</p>
-<p><code>git init</code></p>
-<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-1%402x.png" alt="gitinit"></p>
-<p>看到提示初始化了一个空的Git repository，再来看下我们刚刚的文件夹：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-2%402x.png" alt="ini后的文件内容"></p>
-<p>发现多了一个.git文件夹，至于里面的内容大家可以看一<br>下<br><a href="http://gitready.com/advanced/2009/03/23/whats-inside-your-git-directory.html" target="_blank" rel="external">http://gitready.com/advanced/2009/03/23/whats-inside-your-git-directory.html</a><br>这篇文章很棒！</p>
-<h2 id="讲你的Project提交到Github">讲你的Project提交到Github</h2><p>1、在Github新建一个repository<br>2、打开编译器，编辑最外面的.gitignore,如果没有就新建一个这样的文件，添加一些需要忽略的文件，比如.iml,/.idea之类的，AndroidStudio有提供.gitignore插件,这是编译器生成的.gitignore<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-4%402x.png" alt=".gitignore"><br>3、在命令行执行<br><code>git add .</code> 这个命令是为了让你把所有的项目add到本地的缓存区<br>在执行add之前打开编译器可以看到<img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-3%402x.png" alt="add之前">所有的文件都是红色的，看到灰色的了吗，这个是.gitingore起到了作用。<br>执行完add后<img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-5%402x.png" alt="执行完add后">所有文件都变成了绿色<br>4、接下来执行<code>git commit -m &quot;commit my project&quot;</code><br>这句话是什么意思呢，就是把当前add过的文件提交到本地仓库，如何查看刚才add过的文件呢，在执行commit之前执行<code>git status</code><br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-6%402x.png" alt="git status"><br>这个<code>git status</code> 就是查看当前状态下的git文件<br>那么到这里为止，我们就把所有文件提交到了本地仓库(这个概念会在下节解释)。<br>5、现在再看看编译器里的所有文件，是不是都变白了呢？<br>别忘啦，把本地仓库和远程的仓库关联起来。执行<code>git remote add origin yourUrl</code>，这个yourUrl就是你的远程仓库，刚刚新建号的，我的是：git remote add origin git@github.com:nimengbo/GitDemo.git，那么我就执行<code>git remote add origin git@github.com:nimengbo/GitDemo.git</code><br>6、最后再执行<code>git push -u origin master</code><br>就能在远程仓库看到你自己的代码啦。</p>
-<h2 id="使用编译器提交代码">使用编译器提交代码</h2><p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/6E6BB6AD-6DED-408D-B94A-2DD0E4C1A0E4.png" alt="使用编译器提交代码"><br>这上面的几个点就是我们刚刚执行到的add、commit、push了</p>
-<h1 id="总结">总结</h1><p>这一篇讲怎么在Github上新建仓库，以及把本地的代码push上去。那么现在对整个流程有一个大概的认知了。下一篇将比较偏理论，会讲一些本地工作区，以及几个经常用到的命令都是做什么的。</p>
-<p>最近大帅的开了个QQ实践群（568863373），欢迎大家一起讨论，也可以关注我们的公众号：<code>魔都三帅</code></p>
+        <span itemprop="articleBody"><p>看到这篇标题是不是有种很叼的感觉！？在Git的工作流程中，不仅能往前走，当然也可以后退。不仅能提交<br>文件，当然也能删除或者修改了。而且你想回到哪个提交节点就回到哪个提交节点，<br>是不是觉得自己体内的洪荒之力快抑制不住了？</p>
+<p>别急，容我短话长说，一一道来。</p>
+<p>在这真正讲这些也需要普及一个概念：工作区和暂存区</p>
+<h1 id="工作区和暂存区">工作区和暂存区</h1><p>如果有同学对这些概念感觉很懵逼，也没什么关系，不影响你的使用，只要扫一眼接下来的两个标题，<br>就不会影响理解这篇的内容了。</p>
+<p>另外如果有同学想深入理解这个概念的原理，可以自行去Google搜一下。</p>
+<h2 id="工作区">工作区</h2><p>比如你正在写代码，那么你当前的编译器界面的那些代码都属于工作区里的。</p>
+<h2 id="暂存区">暂存区</h2><p>当你在你的git工程里创建了一个新文件，并且执行了<code>git add [File Name]</code>，<br>那么这个新的文件就都被add进了暂存区。在已经提交过的代码里做修改，这些也都是在暂存区的，<br>当你执行commit的时候，就是把暂存区的代码一次性提交到本地版本库上。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA.png" alt="暂存区和工作区"></p>
+<h1 id="技能树">技能树</h1><h2 id="reset">reset</h2><p>reset这个词从翻译上来说叫做重置，我觉得用回档这个词比较好理解，每次commit都会有个log记录，相当于游戏中的<strong>存档</strong>啦，然后你可以使用reset，回档到某个记录。</p>
+<h3 id="几个常用的方式">几个常用的方式</h3><h4 id="git_reset_[HEAD]_[FileName]">git reset [HEAD] [FileName]</h4><p>我经常用到这个命令，因为我在提交时，总是不小心把某些写到一半的文件也顺手给提交上去了。<br>先不说效果是什么，给你们演示一下：</p>
+<p>先把之前修改的提交了：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/reset-commit.png" alt="先提交"></p>
+<p>修改一下工作区的代码，再执行<code>git diff</code> 查看当前修改了什么：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/reset-commit-first.png" alt="修改"></p>
+<p>然后执行<code>git log</code>查看我们当前的提交日志：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head.png" alt="提交日志"></p>
+<p>用<strong>红色标起来</strong>的就是<strong>[HEAD]</strong> ，看下面的”test for reset commit”，是我们刚才提交的，所以需要的下面那个HEAD。</p>
+<p>执行 <code>git reset ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba app/src/main/java/heh/MasterCodeTest.java</code>：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/reset.png" alt="执行reset"></p>
+<p>在执行<code>git diff</code>，看到这次的结果和之前第一次diff不同：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/diff.png" alt="diff"></p>
+<p>以上操作只是回档某个文件，所以log并不会变。</p>
+<p>我每次提交不小心带上了些不该提交的文件，就用这个命令撤销一些提交。</p>
+<h5 id="git_reset_[HEAD]">git reset [HEAD]</h5><p>如果执行的时候不带最后个[fileName]，那么所有文件都会回到那次提交的节点。</p>
+<p>如果直接执行 <code>git reset ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba</code><br>再执行<code>git log</code>，看到刚刚我们提交的”test for reset commit”已经没了：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/log-after-reset.png" alt="reset log"></p>
+<p>刚才所有的reset都只是修改了暂存区里的内容，并没有影响到我们工作区的代码。</p>
+<h4 id="git_reset_–hard">git reset –hard</h4><p>这个用法和刚才的类似，就是多了个–hard，意味着你工作区的代码也会回档，和暂存区保持一致，都回到了那个节点的commit时的状态。</p>
+<h2 id="revert">revert</h2><p>憋着急，先往下看，最后会解释的。</p>
+<p>执行 <code>git revert ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/git-revert.png" alt="revert"></p>
+<p>代码会出现冲突的现象，因为两次结果不一样：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/revert-merge.png" alt="merge"></p>
+<p>合并完代码，add再commit会出现如下提示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/commit-revert.png" alt="commit-revert"></p>
+<p>revert 和 reset 的功能是类似的，区别就是revert不会改变log，而reset会撤销log。<br>revert需要一个新的commit记录这次revert。如果没冲突，那么会自动commit；如果有冲突，则会需要解决冲突后手动commit</p>
+<p>一句话总结就是revert只是撤销某次commit，其他的commit和整个log记录不会受到影响，而reset会干掉某次commit之后的所有commit，包括log。</p>
+<h2 id="checkout">checkout</h2><p>在上一节的分支操作里也讲过这个命令，是切换分支用的，而在这里将会讲解用checkout命令起到撤回的作用。</p>
+<p><code>git checkout [fileName]</code><br>或者<br><code>git checkout -- [fileName]</code><br>在提交过的文件里随便新增一行，然后在命令行中输入<code>git status</code><br>会出现如下图所示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%A2%9E%E7%9A%84.png" alt="git status"></p>
+<p>说明当前修改还未进入暂存区，还是在工作区，这个时候执行<br><code>git checkout [你的文件绝对路径]</code>：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/checkout-filename.png" alt="checkout"></p>
+<p>为什么用绝对路径呢，就是避免你的文件名和branch名一样，结果就切换到分支上了。加上 <strong>–</strong> 后面的就一定是文件了</p>
+<h2 id="log">log</h2><p>这个命令在之前的例子总经常用到，就是看提交日志用的。<br>之前从同事那边学来一条黑科技命令：</p>
+<p><code>git log --oneline --decorate --graph --all</code></p>
+<p>用一下就知道效果了，不了解里面参数的执行<code>git log --help</code><br>查看文档。</p>
+<h2 id="rm">rm</h2><p>这个命令linux中也有，就是删除文件或者移动的意思。</p>
+<p>在git中也是这个意思。</p>
+<p>如果你在本地物理删除了一堆文件，但是没有执行<code>git rm</code>，那么其实这些文件还是在git系统里的，在git project中直接执行<code>git rm</code> 删除要你删的文件，提交之后就可以完成删除了。</p>
+<h1 id="总结">总结</h1><p>写到这里把git的回撤、查看的功能都写完了，大家应该也有一个比较系统的认知了，具体还是需要多在项目中应用。<br>希望大家能一起讨论，共同学习进步！</p>
+<p>欢迎加入QQ群：568863373，<br>以及关注我们的公众号：<code>魔都三帅</code></p>
 <p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
 </span>
       
@@ -317,17 +360,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/09/WhatIsTheGit/" rel="next" title="从什么都不懂开始(一)——什么是Git">
-                <i class="fa fa-chevron-left"></i> 从什么都不懂开始(一)——什么是Git
+              <a href="/2016/07/15/gitbranch/" rel="next" title="从什么都不懂开始(三)—实践带你飞之Branch操作">
+                <i class="fa fa-chevron-left"></i> 从什么都不懂开始(三)—实践带你飞之Branch操作
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/15/gitbranch/" rel="prev" title="从什么都不懂开始(三)—实践带你飞之Branch操作">
-                从什么都不懂开始(三)—实践带你飞之Branch操作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -347,10 +386,10 @@
     <a href="http://weibo.com/nimengbo/">我的新浪微博</p>
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/07/11/createYourRepository/"
-     data-title="从什么都不懂开始(二)——创建Project提交到Github需要做什么"
+        <div class="ds-share flat" data-thread-key="2016/07/22/gitrevert/"
+     data-title="从什么都不懂开始(四)——Git掌握时空之力"
      data-content=""
-     data-url="http://yoursite.com/2016/07/11/createYourRepository/">
+     data-url="http://yoursite.com/2016/07/22/gitrevert/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -378,8 +417,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/11/createYourRepository/"
-           data-title="从什么都不懂开始(二)——创建Project提交到Github需要做什么" data-url="http://yoursite.com/2016/07/11/createYourRepository/">
+      <div class="ds-thread" data-thread-key="2016/07/22/gitrevert/"
+           data-title="从什么都不懂开始(四)——Git掌握时空之力" data-url="http://yoursite.com/2016/07/22/gitrevert/">
       </div>
     
   </div>
@@ -514,7 +553,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在看这篇文章之前你得准备好什么？"><span class="nav-number">1.1.</span> <span class="nav-text">在看这篇文章之前你得准备好什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将你的Project初始化成GitProject"><span class="nav-number">1.2.</span> <span class="nav-text">将你的Project初始化成GitProject</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#讲你的Project提交到Github"><span class="nav-number">1.3.</span> <span class="nav-text">讲你的Project提交到Github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用编译器提交代码"><span class="nav-number">1.4.</span> <span class="nav-text">使用编译器提交代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工作区和暂存区"><span class="nav-number">1.</span> <span class="nav-text">工作区和暂存区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工作区"><span class="nav-number">1.1.</span> <span class="nav-text">工作区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂存区"><span class="nav-number">1.2.</span> <span class="nav-text">暂存区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技能树"><span class="nav-number">2.</span> <span class="nav-text">技能树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reset"><span class="nav-number">2.1.</span> <span class="nav-text">reset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个常用的方式"><span class="nav-number">2.1.1.</span> <span class="nav-text">几个常用的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git_reset_[HEAD]_[FileName]"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">git reset [HEAD] [FileName]</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#git_reset_[HEAD]"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">git reset [HEAD]</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git_reset_–hard"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">git reset –hard</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#revert"><span class="nav-number">2.2.</span> <span class="nav-text">revert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkout"><span class="nav-number">2.3.</span> <span class="nav-text">checkout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-number">2.4.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm"><span class="nav-number">2.5.</span> <span class="nav-text">rm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
