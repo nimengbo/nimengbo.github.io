@@ -65,7 +65,7 @@
 别急，容我短话长说，一一道来。
 在这真正讲这些也需要普及一个概念：工作区和暂存区
 工作区和暂存区如果有同学对这些概念感觉很懵逼，也没什么关系，不影响你的使用，只要扫一眼接下来的两个标题">
-<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA%E5%89%AF%E6%9C%AC.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/reset-commit.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/reset-commit-first.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head.png">
@@ -78,7 +78,7 @@
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%A2%9E%E7%9A%84.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/checkout-filename.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg">
-<meta property="og:updated_time" content="2016-07-26T03:43:16.000Z">
+<meta property="og:updated_time" content="2016-07-26T05:16:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从什么都不懂开始(四)——Git掌握时空之力">
 <meta name="twitter:description" content="看到这篇标题是不是有种很叼的感觉！？在Git的工作流程中，不仅能往前走，当然也可以后退。不仅能提交文件，当然也能删除或者修改了。而且你想回到哪个提交节点就回到哪个提交节点，是不是觉得自己体内的洪荒之力快抑制不住了？
@@ -297,8 +297,10 @@
 <h1 id="工作区和暂存区">工作区和暂存区</h1><p>如果有同学对这些概念感觉很懵逼，也没什么关系，不影响你的使用，只要扫一眼接下来的两个标题，<br>就不会影响理解这篇的内容了。</p>
 <p>另外如果有同学想深入理解这个概念的原理，可以自行去Google搜一下。</p>
 <h2 id="工作区">工作区</h2><p>比如你正在写代码，那么你当前的编译器界面的那些代码都属于工作区里的。</p>
-<h2 id="暂存区">暂存区</h2><p>当你在你的git工程里创建了一个新文件，并且执行了<code>git add [File Name]</code>，<br>那么这个新的文件就都被add进了暂存区。在已经提交过的代码里做修改，这些也都是在暂存区的，<br>当你执行commit的时候，就是把暂存区的代码一次性提交到本地版本库上。</p>
-<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA.png" alt="暂存区和工作区"></p>
+<h2 id="暂存区">暂存区</h2><p>当你在你的git工程里创建了一个新文件，并且执行了<code>git add [File Name]</code>，<br>那么这个新的文件就都被add进了暂存区。</p>
+<p>在已经提交过的代码里做修改，还不在暂存区，执行<code>git status</code>，会发现这些修改过的文件提示需要add，add后会进入暂存区。</p>
+<p>当你执行commit的时候，就是把暂存区的代码一次性提交到本地版本库上。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA%E5%89%AF%E6%9C%AC.png" alt="暂存区和工作区"></p>
 <h1 id="技能树">技能树</h1><h2 id="reset">reset</h2><p>reset这个词从翻译上来说叫做重置，我觉得用回档这个词比较好理解，每次commit都会有个log记录，相当于游戏中的<strong>存档</strong>啦，然后你可以使用reset，回档到某个记录。</p>
 <h3 id="几个常用的方式">几个常用的方式</h3><h4 id="git_reset_[HEAD]_[FileName]">git reset [HEAD] [FileName]</h4><p>我经常用到这个命令，因为我在提交时，总是不小心把某些写到一半的文件也顺手给提交上去了。<br>先不说效果是什么，给你们演示一下：</p>
 <p>先把之前修改的提交了：</p>
@@ -315,8 +317,10 @@
 <p>我每次提交不小心带上了些不该提交的文件，就用这个命令撤销一些提交。</p>
 <h5 id="git_reset_[HEAD]">git reset [HEAD]</h5><p>如果执行的时候不带最后个[fileName]，那么所有文件都会回到那次提交的节点。</p>
 <p>如果直接执行 <code>git reset ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba</code><br>再执行<code>git log</code>，看到刚刚我们提交的”test for reset commit”已经没了：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/log-after-reset.png" alt="reset log"></p>
-<p>刚才所有的reset都只是修改了暂存区里的内容，并没有影响到我们工作区的代码。</p>
-<h4 id="git_reset_–hard">git reset –hard</h4><p>这个用法和刚才的类似，就是多了个–hard，意味着你工作区的代码也会回档，和暂存区保持一致，都回到了那个节点的commit时的状态。</p>
+<p>刚才所有的reset都只是把head指向了指定commit仅此而已，可以执行<code>git status</code>，发现还是需要add的，工作区和暂存区都没变化。</p>
+<p>默认的都是不写模式 <strong>– mixed</strong> 模式</p>
+<h5 id="git_reset_–hard">git reset –hard</h5><p>这个用法和刚才的类似，就是多了个–hard，意味着你工作区的代码也会回档，和暂存区保持一致，都回到了那个节点的commit时的状态。</p>
+<h5 id="git_reset_–soft">git reset –soft</h5><p>–soft，意味着工作区不会收到影响，暂存区回到了那个节点的commit时的状态。</p>
 <h2 id="revert">revert</h2><p>憋着急，先往下看，最后会解释的。</p>
 <p>执行 <code>git revert ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba</code></p>
 <p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/git-revert.png" alt="revert"></p>
@@ -555,7 +559,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工作区和暂存区"><span class="nav-number">1.</span> <span class="nav-text">工作区和暂存区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工作区"><span class="nav-number">1.1.</span> <span class="nav-text">工作区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂存区"><span class="nav-number">1.2.</span> <span class="nav-text">暂存区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技能树"><span class="nav-number">2.</span> <span class="nav-text">技能树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reset"><span class="nav-number">2.1.</span> <span class="nav-text">reset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个常用的方式"><span class="nav-number">2.1.1.</span> <span class="nav-text">几个常用的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git_reset_[HEAD]_[FileName]"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">git reset [HEAD] [FileName]</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#git_reset_[HEAD]"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">git reset [HEAD]</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git_reset_–hard"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">git reset –hard</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#revert"><span class="nav-number">2.2.</span> <span class="nav-text">revert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkout"><span class="nav-number">2.3.</span> <span class="nav-text">checkout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git_checkout_[fileName]"><span class="nav-number">2.3.1.</span> <span class="nav-text">git checkout [fileName]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git_checkout_[commit]_[fileName]"><span class="nav-number">2.3.2.</span> <span class="nav-text">git checkout [commit] [fileName]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git_checkout_-"><span class="nav-number">2.3.3.</span> <span class="nav-text">git checkout .</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-number">2.4.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm"><span class="nav-number">2.5.</span> <span class="nav-text">rm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工作区和暂存区"><span class="nav-number">1.</span> <span class="nav-text">工作区和暂存区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工作区"><span class="nav-number">1.1.</span> <span class="nav-text">工作区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂存区"><span class="nav-number">1.2.</span> <span class="nav-text">暂存区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技能树"><span class="nav-number">2.</span> <span class="nav-text">技能树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reset"><span class="nav-number">2.1.</span> <span class="nav-text">reset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个常用的方式"><span class="nav-number">2.1.1.</span> <span class="nav-text">几个常用的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git_reset_[HEAD]_[FileName]"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">git reset [HEAD] [FileName]</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#git_reset_[HEAD]"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">git reset [HEAD]</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git_reset_–hard"><span class="nav-number">2.1.1.1.2.</span> <span class="nav-text">git reset –hard</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git_reset_–soft"><span class="nav-number">2.1.1.1.3.</span> <span class="nav-text">git reset –soft</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#revert"><span class="nav-number">2.2.</span> <span class="nav-text">revert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkout"><span class="nav-number">2.3.</span> <span class="nav-text">checkout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git_checkout_[fileName]"><span class="nav-number">2.3.1.</span> <span class="nav-text">git checkout [fileName]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git_checkout_[commit]_[fileName]"><span class="nav-number">2.3.2.</span> <span class="nav-text">git checkout [commit] [fileName]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git_checkout_-"><span class="nav-number">2.3.3.</span> <span class="nav-text">git checkout .</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-number">2.4.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm"><span class="nav-number">2.5.</span> <span class="nav-text">rm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
