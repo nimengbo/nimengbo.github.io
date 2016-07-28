@@ -78,7 +78,7 @@
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%A2%9E%E7%9A%84.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/checkout-filename.png">
 <meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg">
-<meta property="og:updated_time" content="2016-07-27T07:43:58.000Z">
+<meta property="og:updated_time" content="2016-07-28T02:51:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从什么都不懂开始(四)——Git掌握时空之力">
 <meta name="twitter:description" content="看到这篇标题是不是有种很叼的感觉！？在Git的工作流程中，不仅能往前走，当然也可以后退。不仅能提交文件，当然也能删除或者修改了。而且你想回到哪个提交节点就回到哪个提交节点，是不是觉得自己体内的洪荒之力快抑制不住了？
@@ -317,7 +317,7 @@
 <p>我每次提交不小心带上了些不该提交的文件，就用这个命令撤销一些提交。</p>
 <h5 id="git_reset_[HEAD]">git reset [HEAD]</h5><p>如果执行的时候不带最后个[fileName]，那么所有文件都会回到那次提交的节点。</p>
 <p>如果直接执行 <code>git reset ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba</code><br>再执行<code>git log</code>，看到刚刚我们提交的”test for reset commit”已经没了：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/log-after-reset.png" alt="reset log"></p>
-<p>刚才所有的reset都只是把head指向了指定commit仅此而已，可以执行<code>git status</code>，发现还是需要add的，工作区和暂存区都没变化。</p>
+<p>刚才所有的reset都只是把head指向了当前branch的指定commit仅此而已，可以执行<code>git status</code>，发现还是需要add的，工作区和暂存区都没变化。</p>
 <p>默认的都是不写模式 <strong>– mixed</strong> 模式</p>
 <h5 id="git_reset_–hard">git reset –hard</h5><p>这个用法和刚才的类似，就是多了个–hard，意味着你工作区的代码也会回档，和暂存区保持一致，都回到了那个节点的commit时的状态。</p>
 <h5 id="git_reset_–soft">git reset –soft</h5><p>–soft，意味着工作区不会收到影响，暂存区回到了那个节点的commit时的状态。</p>
