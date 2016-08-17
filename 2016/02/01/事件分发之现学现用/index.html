@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -21,20 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
   
-    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Android,TouchEvent," />
@@ -46,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -73,27 +104,29 @@ Item的有效滑动区域只有空">
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/02/01/事件分发之现学现用/"/>
 
   <title> 事件分发之现学现用 | Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -101,7 +134,16 @@ Item的有效滑动区域只有空">
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -130,13 +172,13 @@ Item的有效滑动区域只有空">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -146,7 +188,7 @@ Item的有效滑动区域只有空">
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -156,7 +198,7 @@ Item的有效滑动区域只有空">
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -166,7 +208,7 @@ Item的有效滑动区域只有空">
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -176,14 +218,13 @@ Item的有效滑动区域只有空">
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
-              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
             公益404
           </a>
         </li>
       
 
-      
       
     </ul>
   
@@ -196,8 +237,9 @@ Item的有效滑动区域只有空">
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
@@ -228,7 +270,10 @@ Item的有效滑动区域只有空">
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-02-01T16:46:13+08:00" content="2016-02-01">
               2016-02-01
             </time>
@@ -236,7 +281,11 @@ Item的有效滑动区域只有空">
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/学习经验/" itemprop="url" rel="index">
@@ -264,18 +313,22 @@ Item的有效滑动区域只有空">
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h1 id="简介">简介</h1><p>在公司做的第一个需求就是给购物车列表加上侧滑删除(真想吐槽这交互)，我说可以引入代码家的库，然后他们说项目里有一个了。打开一看，居然是鲍老师的<a href="https://github.com/baoyongzhang/SwipeMenuListView" target="_blank" rel="external">SwipeMenuListView</a>(已经不维护了)，而且引入后就一直没更新，满足不了现在的需求，又有业务冲突，正好那段时间看了开发艺术与探索中的事件分发章节，发现只需要在现有的基础上做一些拦截事件就能满足业务了。</p>
+        <h1 id="简介">简介</h1><p>在公司做的第一个需求就是给购物车列表加上侧滑删除(真想吐槽这交互)，我说可以引入代码家的库，然后他们说项目里有一个了。打开一看，居然是鲍老师的<a href="https://github.com/baoyongzhang/SwipeMenuListView" target="_blank" rel="external">SwipeMenuListView</a>(已经不维护了)，而且引入后就一直没更新，满足不了现在的需求，又有业务冲突，正好那段时间看了开发艺术与探索中的事件分发章节，发现只需要在现有的基础上做一些拦截事件就能满足业务了。</p>
 <h1 id="问题与需求">问题与需求</h1><ol>
 <li>Item的有效滑动区域只有空白区域，也就是说如果item上有别的控件，那么就不能滑动</li>
 <li>如果列表有header，滑动区域会出错</li>
@@ -289,7 +342,21 @@ Item的有效滑动区域只有空">
 <p>就是在移动距离超过一个常量值，就可以判断在移动，并拦截。1的问题也得到了解决。</p>
 <h3 id="这里return_true后，会由onTouchEvent的MotionEvent-ACTION_MOVE执行">这里return true后，会由onTouchEvent的MotionEvent.ACTION_MOVE执行</h3><p>2的问题，只需要在onTouchEvent的move事件里减去header就好了。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (ev.getAction() != MotionEvent.ACTION_DOWN &amp;&amp; mTouchView == <span class="keyword">null</span>)</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(ev);</span><br><span class="line">     <span class="keyword">int</span> action = ev.getAction();</span><br><span class="line">     <span class="keyword">switch</span> (action) &#123;</span><br><span class="line">        ......</span><br><span class="line">         <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</span><br><span class="line">             <span class="comment">//有些可能有header,要减去header再判断</span></span><br><span class="line">             mTouchPosition = pointToPosition((<span class="keyword">int</span>) ev.getX(), (<span class="keyword">int</span>) ev.getY()) - getHeaderViewsCount();</span><br><span class="line">             <span class="comment">//如果滑动了一下没完全展现，就收回去，这时候mTouchView已经赋值，再滑动另外一个不可以swip的view</span></span><br><span class="line">             <span class="comment">//会导致mTouchView swip 。 所以要用位置判断是否滑动的是一个view</span></span><br><span class="line">             <span class="keyword">if</span> (!mTouchView.getSwipEnable() || mTouchPosition != mTouchView.getPosition()) &#123;</span><br><span class="line">                 <span class="keyword">break</span>;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">float</span> dy = Math.abs((ev.getY() - mDownY));</span><br><span class="line">             <span class="keyword">float</span> dx = Math.abs((ev.getX() - mDownX));</span><br><span class="line">             <span class="keyword">if</span> (mTouchState == TOUCH_STATE_X) &#123;</span><br><span class="line">                 <span class="keyword">if</span> (mTouchView != <span class="keyword">null</span>) &#123;</span><br><span class="line">                     mTouchView.onSwipe(ev);</span><br><span class="line">                 &#125;</span><br><span class="line">                 getSelector().setState(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>&#125;);</span><br><span class="line">                 ev.setAction(MotionEvent.ACTION_CANCEL);</span><br><span class="line">                 <span class="keyword">super</span>.onTouchEvent(ev);</span><br><span class="line">                 <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mTouchState == TOUCH_STATE_NONE) &#123;</span><br><span class="line">                 <span class="keyword">if</span> (Math.abs(dy) &gt; MAX_Y) &#123;</span><br><span class="line">                     mTouchState = TOUCH_STATE_Y;</span><br><span class="line">                 &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dx &gt; MAX_X) &#123;</span><br><span class="line">                     mTouchState = TOUCH_STATE_X;</span><br><span class="line">                     <span class="keyword">if</span> (mOnSwipeListener != <span class="keyword">null</span>) &#123;</span><br><span class="line">                         mOnSwipeListener.onSwipeStart(mTouchPosition);</span><br><span class="line">                     &#125;</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         .......</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(ev);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="其实只要理解了事件流的传递过程，那么需要在什么地方做什么事就很清晰，再就是耐心的打log，尝试，就能成功了！">其实只要理解了事件流的传递过程，那么需要在什么地方做什么事就很清晰，再就是耐心的打log，尝试，就能成功了！</h3></span>
+<h3 id="其实只要理解了事件流的传递过程，那么需要在什么地方做什么事就很清晰，再就是耐心的打log，尝试，就能成功了！">其实只要理解了事件流的传递过程，那么需要在什么地方做什么事就很清晰，再就是耐心的打log，尝试，就能成功了！</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -361,12 +428,11 @@ Item的有效滑动区域只有空">
   </div>
 
 
-        </div>
+          </div>
+          
 
-        
 
-
-        
+          
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/02/01/事件分发之现学现用/"
@@ -376,10 +442,9 @@ Item的有效滑动区域只有空">
   </div>
 
 
-      </div>
-
-      
+        </div>
         
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -407,10 +472,12 @@ Item的有效滑动区域只有空">
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="Abner_泥阿布" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Abner_泥阿布" />
           <p class="site-author-name" itemprop="name">Abner_泥阿布</p>
+          <p class="site-description motion-element" itemprop="description"></p>
         </div>
-        <p class="site-description motion-element" itemprop="description"></p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -419,19 +486,23 @@ Item的有效滑动区域只有空">
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -441,26 +512,29 @@ Item的有效滑动区域只有空">
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/nimengbo" target="_blank">
+                <a href="https://github.com/nimengbo" target="_blank" title="github">
                   
-                    <i class="fa fa-globe"></i> github
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  github
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/nimengbo" target="_blank">
+                <a href="http://weibo.com/nimengbo" target="_blank" title="weibo">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank">
+                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank" title="zhihu">
                   
-                    <i class="fa fa-globe"></i> zhihu
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  zhihu
                 </a>
               </span>
             
@@ -470,36 +544,39 @@ Item的有效滑动区域只有空">
         
         
 
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">以下大神</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://yifeiyuan.me" target="_blank">程序亦非猿</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.zhaiyifan.cn" target="_blank">MarkZhai(魔都三帅之大帅)</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.easydone.cn" target="_blank">Ailurus</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://itangqi.me/" target="_blank">Qi Tang</a>
-              </span>
-            
-          
-        </div>
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              以下大神
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yifeiyuan.me" title="程序亦非猿" target="_blank">程序亦非猿</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn" title="MarkZhai(魔都三帅之大帅)" target="_blank">MarkZhai(魔都三帅之大帅)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.easydone.cn" title="Ailurus" target="_blank">Ailurus</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itangqi.me/" title="Qi Tang" target="_blank">Qi Tang</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
       
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
             
               
@@ -508,9 +585,6 @@ Item的有效滑动区域只有空">
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题与需求"><span class="nav-number">2.</span> <span class="nav-text">问题与需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题1、3的解决思路："><span class="nav-number">3.1.</span> <span class="nav-text">问题1、3的解决思路：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#这里return_true后，会由onTouchEvent的MotionEvent-ACTION_MOVE执行"><span class="nav-number">3.1.1.</span> <span class="nav-text">这里return true后，会由onTouchEvent的MotionEvent.ACTION_MOVE执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其实只要理解了事件流的传递过程，那么需要在什么地方做什么事就很清晰，再就是耐心的打log，尝试，就能成功了！"><span class="nav-number">3.1.2.</span> <span class="nav-text">其实只要理解了事件流的传递过程，那么需要在什么地方做什么事就很清晰，再就是耐心的打log，尝试，就能成功了！</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
-          </div>
         </section>
       
 
@@ -518,7 +592,8 @@ Item的有效滑动区域只有空">
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -528,44 +603,98 @@ Item的有效滑动区域只有空">
   &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Abner_泥阿布</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
-<span id="busuanzi_container_site_uv">
-  本站访客数<span id="busuanzi_value_site_uv"></span>人次
-</span>
 
+        
 
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
   
 
   
-    
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
 
   
     
@@ -583,197 +712,25 @@ Item的有效滑动区域只有空">
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
+
+  
     
-     
-
-
-    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
-        }
-      }
-    };
-  });
-</script>
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
 
   
   
 
   
+
+  
+
   
 
 </body>

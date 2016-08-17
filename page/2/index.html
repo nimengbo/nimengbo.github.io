@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -21,20 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
   
-    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -46,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -66,27 +97,29 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
 
   <title> Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -94,9 +127,18 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -125,13 +167,13 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -141,7 +183,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -151,7 +193,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -161,7 +203,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -171,14 +213,13 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
-              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
             公益404
           </a>
         </li>
       
 
-      
       
     </ul>
   
@@ -191,15 +232,10 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
@@ -232,7 +268,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-07-09T14:23:57+08:00" content="2016-07-09">
               2016-07-09
             </time>
@@ -240,7 +279,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/学习/" itemprop="url" rel="index">
@@ -268,30 +311,54 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            前言背景用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。一些运用git很熟练的大牛们可以点击返回或关闭啦~
-简介在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/09/WhatIsTheGit/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <h1 id="前言">前言</h1><h2 id="背景">背景</h2><p>用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。<br>一些运用git很熟练的大牛们可以点击返回或关闭啦~</p>
+<h2 id="简介">简介</h2><p>在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次修改，避免一些灾难性事件发生(比如电脑坏了、硬盘烧了)”。</p>
+<p>下面是一张开发的时候使用到的版本控制系统示意图:<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Team%20Organization%20Template.png" alt="版本控制示意图"></p>
+<h2 id="什么是Git">什么是Git</h2><p>如果你之前使用过SVN，那么Git和SVN是类似的，都是一种版本控制工具，Git拥有”本地仓库“，即使不联网，也能在本地做版本管理。可能Git的命令会很多，但是没关系，我们先慢慢学，掌握几种常用的，再深入学习一些高级技巧。</p>
+<h1 id="朝Git迈出第一步">朝Git迈出第一步</h1><h2 id="安装Git">安装Git</h2><h3 id="Linux">Linux</h3><p>基于 Fedora 的发行版 :</p>
+<p><code>$ sudo yum install git</code></p>
+<p>基于 Debian 的发行版 :</p>
+<p><code>$ sudo apt-get install git</code></p>
+<p>如果还有一些其他版本的Linux请具体参考 :</p>
+<p> <a href="http://git-scm.com/download/linu" target="_blank" rel="external">http://git-scm.com/download/linux</a></p>
+<h3 id="Mac">Mac</h3><p>在Mac上安装有两种方案：</p>
+<p>1、直接安装Xcode，装完打开Terminal如果没安装过<code>Command Line Tools</code> 会有相应的提示。</p>
+<p>2、在     <a href="http://git-scm.com/download/mac" target="_blank" rel="external">http://git-scm.com/download/mac</a> 下载最新版本即可</p>
+<h3 id="Windows">Windows</h3><p>在Windows上也有几种方法：</p>
+<p>1、打开       <a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a> 会直接下载。</p>
+<p>2、下载Github for Windows 地址为：<a href="http://windows.github.com" target="_blank" rel="external">http://windows.github.com</a></p>
+<h3 id="其他安装方法">其他安装方法</h3><p>从源码安装，源码地址在<a href="https://github.com/git/git/releases" target="_blank" rel="external"> https://github.com/git/git/releases</a>有兴趣的同学可以去了解一下</p>
+<h1 id="下节预告">下节预告</h1><p>安装完环境后，就要去尝试一下使用了，那么我们接下来会准备在Github平台去实践，如果没有注册Github的同学们赶紧注册一个，<br>因为我们是Android开发者，所以接下来的内容会使用Android平台做示范。</p>
+<p>最近大帅的开了个QQ实践群（568863373），欢迎大家一起讨论，也可以关注我们的公众号：<code>魔都三帅</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -340,7 +407,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-06-15T14:26:04+08:00" content="2016-06-15">
               2016-06-15
             </time>
@@ -348,7 +418,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/工作经验/" itemprop="url" rel="index">
@@ -376,30 +450,61 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            背景大帅MarkZhai的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。
-关于本实践的说明本实践是
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/15/AndroidProjectFromZero/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <h1 id="背景">背景</h1><p><a href="http://blog.zhaiyifan.cn" target="_blank" rel="external">大帅MarkZhai</a>的从零系列火遍大江南北，奈何大帅最近要做爸爸了，忙得没有时间出demo，文章中一些细节部分没有上代码，一些粉丝肯定看的不知所措，所以做小弟的就替大哥为大家整理了个demo。接下来会结合大帅的理论为大家讲述一下如何实践，在本文的最后会附上Demo地址。</p>
+<h1 id="关于本实践的说明">关于本实践的说明</h1><p>本实践是为了方便，调用github的api，抓取了我们moduth组的repo</p>
+<h1 id="热身运动">热身运动</h1><p>先要补充一点知识的细节才能更加好跟上司机的车</p>
+<h2 id="整体结构">整体结构</h2><p>参考：<a href="http://blog.zhaiyifan.cn/2016/03/14/android-new-project-from-0-p1/" target="_blank" rel="external">从零开始的Android新项目1 - 架构搭建篇</a></p>
+<p>还是直接看IDEA比较直接吧，SDK中就是放一些library的地方。在实际项目中，我们确实做到了“避免为了模式而模式所导致的开发压力”，用了MVPVM，也不是所有的地方都有些P，只在复杂的地方用P层去做解耦。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160615-0.png" alt="项目结构"></p>
+<h2 id="Gradle篇">Gradle篇</h2><p>参考：<a href="http://blog.zhaiyifan.cn/2016/03/14/android-new-project-from-0-p2/" target="_blank" rel="external">从零开始的Android新项目2 - Gradle篇</a><br>因为Gradle依赖在这篇已经写的很详细，大家可以在demo中细看。</p>
+<h2 id="MVPVM">MVPVM</h2><p>Model：<br>在domain-&gt;model-&gt;repos-&gt;ReposEntity<br>这就是接口返回格式的Entity，用GsonFormat直接生成。</p>
+<p>View：<br>因为获取的是个列表，所以这里的view就是Activity、RecyclerView，通过Presenter和ViewModel通信。</p>
+<p>Presenter：<br>在app-&gt;presenter-&gt;ReposListPresenter<br>项目中的Presenter使用了泛型，关于这个可以看一下<br><a href="http://hannesdorfmann.com/android/mosby" target="_blank" rel="external">http://hannesdorfmann.com/android/mosby</a></p>
+<p>ViewModel：<br>在app-&gt;model&gt;ReposModel，用于view需要显示的一些properties,至于从Entity -&gt; ViewModel ，这里单独创建了一个类，用于映射：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160617-0.png" alt="Mapper"><br>这里用到了Dagger的一些东西，后面会介绍到。<br>ViewModel和View的显示数据交给了DataBinding，有条件的同学可以看看<a href="https://www.youtube.com/watch?v=DAmMN7m3wLU" target="_blank" rel="external">官方Databinding视频</a>，</p>
+<p>有些比较简单的业务不需要都创建Presenter，反而把简单的东西写复杂了。</p>
+<h1 id="项目实践">项目实践</h1><h2 id="Dagger">Dagger</h2><p>为什么要在项目实践的一开始讲Dagger呢，因为贯穿整个项目的就是Dagger了，如果Dagger不懂的话，那么你会发现接下来看起来就很难受，当然Dagger的门槛是有的，但是程序员就应该迎刃而上。</p>
+<p>简单的说一下：你可以把Dagger理解成，你不需要手动去调用构造函数，如果你在别的地方生成过一些构造函数需要的参数，那么你就直接使用@Inject就可以了。当然实际上依赖注入这个概念就是比较抽象的，如果大家实在是搞不懂Dagger，可以把项目中的Dagger去掉。这并不影响项目结构。</p>
+<h2 id="Repository层">Repository层</h2><p>大部分App都需要去服务器获取数据，关于网络这块，我们用的是Retrofit+Rxjava，至于如何使用网上文章很多，就不在这里一一赘述了，而Repository层就是为了隐藏数据是从网络取还是数据库取，只要你伸手要，那我就给你便是了，你不需要关心数据哪里来。在demo中只做了对网络的获取，domain中的Repository实际上是一个interface。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160617-1.png" alt="ReposRepository"><br>真正的实现在data层的repository，是一个单例：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2018.49.47.png" alt="ReposDataRepository"><br>因为是Github接口原因，没有在return的时候再加一层，其实是应该再加一层统一解析的处理：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Observable&lt;YourResponse&gt; <span class="title">getReposList</span><span class="params">(String user)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> RepositoryUtils.</span><br><span class="line">    extractData(mReposApi.login(user),</span><br><span class="line">    YourResponse.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>至于RepositoryUtils的代码：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2018.54.22.png" alt="RepositoryUtils"><br>为了能在解析的时候处理是否成功的字段，或者需要抛出自己的Exception。</p>
+<h2 id="Interactor">Interactor</h2><p>咦，这是啥？是不是之前看大帅的文章中没提到，哈哈哈哈，他太忙了，就漏掉了。在这里多了一层interactor，主要是Rxjava的subscriber订阅，subscribeOn以及observerOn需要分配线程，都在这一层统一封装了。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.10.49.png" alt="UseCase"><br>这里泛型传入的就是解析需要返回的类型，子类可以设置参数调用<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.12.56.png" alt="GetRepo"><br>这个interactor是由Presenter去调用的不需要关心repository的具体实现，只需要调用这个就可以了，达到了解耦的目的。</p>
+<h2 id="Presenter">Presenter</h2><p>控制和View交互，处理一些监听，具体的实现要看业务需求了。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Image%202016-06-17%20at%2019.59.45.png" alt="Presenter"></p>
+<p>initialize方法是被Activity、Fragment调用，用于获取数据。<br>这里的detachView当Activity或Fragment调用onDestory的时候 而被调用。getView.userList，则是在View层复写，用来通知view我拿到数据了，之类的操作。</p>
+<h2 id="ViewDataBinding">ViewDataBinding</h2><p>关于这个章节，我就先放一下，因为准备放在下一篇文章中细讲。<br>因为Databinding会有很多部分替代了Presenter。</p>
+<h2 id="Component">Component</h2><p>Component是Dagger中的组件，全局会有一个ApplicationComponent，在这里提供了全局的一些设置，以及所有Repository，至于这些是如何提供的，则写在了Module中。在这里举例一下ApplicationComponent<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/application_component.png" alt="ApplicationComponent"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/application_module.png" alt="ApplicationModule"></p>
+<p>然后会有一些业务的Component，全局都dependencies ApplicationComponent，在业务Component下，会声明哪些Activity或者Fragment去Inject，并在Module里写一些需要用到的东西，比如UseCase等。</p>
+<h1 id="结语">结语</h1><p>其实概念性的东西太多，所以可能不是很好理解，需要同学们动手去试一试，用过了才知道好不好，而且每个人的理念和观点也不同，总会有争议，所以还是得理解思想，而不是照搬，希望大家能通过本文可以更好的理解这个结构。</p>
+<p>讲了这么多东西，肯定会有些同学一脸懵逼的，这不怪你们，是我写的不太好=。=！所以附上Demo地址：<a href="https://github.com/moduth/PetLoverAndroid" target="_blank" rel="external">Demo</a></p>
+<p>最近大帅的开了个QQ实践群（568863373），欢迎大家一起讨论，也可以关注我们的公众号：<code>魔都三帅</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -448,7 +553,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-05-10T09:57:18+08:00" content="2016-05-10">
               2016-05-10
             </time>
@@ -456,7 +564,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/学习经验/" itemprop="url" rel="index">
@@ -484,30 +596,54 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            背景博主毕业于一所三流本科院校计算机专业，在一份实习工作中，因公司需要，从Java后端投身于Android开发中去。可能会有很多人和博主一样，甚至有更好的条件，所以把自己的经历分享出来，既能看看自己的过去，也可以给一些茫然的同学带来点灵感。
-怎么踏出第一步所谓初生牛犊不怕虎，当时在零基础的情况下，被
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/10/AndroidLearningSummarize/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <h1 id="背景">背景</h1><p>博主毕业于一所三流本科院校计算机专业，在一份实习工作中，因公司需要，从Java后端投身于Android开发中去。可能会有很多人和博主一样，甚至有更好的条件，所以把自己的经历分享出来，既能看看自己的过去，也可以给一些茫然的同学带来点灵感。</p>
+<h1 id="怎么踏出第一步">怎么踏出第一步</h1><p>所谓初生牛犊不怕虎，当时在零基础的情况下，被leader(iOS)指派要写一个相机模块，并且能带一些图片处理之类的(博主一年后又写了这种类似功能，都没能写的很好)，对未知的东西完全不懂，所以也没有畏惧之心，一边查资料，一边写代码(最后做出来的结果就不说了，想想就羞耻感爆棚)。</p>
+<p>也是从那个时候，养成了独立思考，学习的习惯，在14年前期，Github上还没有那么多关于Android的东西，国内资料对于相机模块的介绍也很少，所以博主大部分资料查阅都来自于Google，至于怎么翻墙就不在这里叙述了。<br>总结出来的就是实践出真知，干了再说！</p>
+<h1 id="寻找解决办法的途径">寻找解决办法的途径</h1><p>在我刚进入Android界的时候，感觉啥都不会，然后手头又有任务，已经让我独立开发一个App了，让我先调研一下需要用到的技术，这个时候只能寻找一些资源和途径，其实官方文档是最好的学习方法，奈何英语不太行，在没有任何基础的情况下直接阅读文档会经常理解错误。所以在那个时候寻找一些国内的论坛，比如apkbus，eoeandroid社区，对于初学者的我，这些论坛对我起到了不小的帮助，至少教会了我怎么写好一个Listview，在当时也流传着一句话”会ListView，Android就入门了”。现在想想挺扯淡的。</p>
+<p>以下是一些比较有用的途径：</p>
+<ol>
+<li><a href="http://developer.android.com/" target="_blank" rel="external">Android Developers官方文档</a></li>
+<li>Google</li>
+<li>StackoverFlow</li>
+<li>Youtube</li>
+<li>Github开源项目</li>
+</ol>
+<h1 id="动力从何而来">动力从何而来</h1><p>我一直觉得，只有对这行业有兴趣，才能有热情去钻研，才会坚持下来，在这个行业千万不能熬，因为技术日新月异，每天都会有一些新的东西在冲击着老东西，所以要有钻研的精神，跟上时代的脚步，而这一切的驱动力就是兴趣。这也会影响到你会不会去独立学习，利用业余时间去学习更多的东西，在我们那儿叫做暗推(不懂的同学可以百度一下哈)，渐渐地你会发现和别人的差距就体现在你比他们付出的更多汗水。</p>
+<p><code>就怕比你厉害的人比你还要努力</code></p>
+<h1 id="关于怎么学习">关于怎么学习</h1><p>关于如何学习，可以参照大帅阿翟的<a href="http://blog.zhaiyifan.cn/2016/04/28/about-learning/" target="_blank" rel="external">计算机从业者的技术成长学习之路</a>某些同学可能会一开始买很多的书，博主还是劝告一些同学，读万卷书，不如行万里路。最好的读书方式就是边看边coding。基础很重要！基础很重要！基础很重要！重要的事情说三次！数据结构+算法=编程。虽然算法在Android上用的不多，基本的一些还是要知道的，数据结构是相当重要的！对城宝具:《Java编程思想》、《Android开发艺术与探索》。</p>
+<h1 id="瓶颈或茫然时">瓶颈或茫然时</h1><p>一个人总是很容易遇到瓶颈，或者会有一段时间处于茫然状态，知心哥哥(弟弟)告诉你们，这个时候应该多出去面基！参与一下当地的开发者社区，听听别人的感受或者分享，认识一些基友，扩展自己的社交圈。不要总想跳槽！不要总想跳槽！不要总想跳槽！因为今年行情不是很好，好坑也不多，且行且珍惜！</p>
+<h1 id="程序员最缺乏却又最重要的一点:情商">程序员最缺乏却又最重要的一点:情商</h1><p>咱做开发的，总是被产品、设计、PM、QA指手画脚，久而久之总会有一些怨气，会和别人吵架之类的。一辈子做技术，薪资瓶颈太容易遇到，这个时候能升职加薪的资本就是情商了，说的难听点就是心机手段了，不要总是把情绪表现出来，关于这些在知乎上也有很多讨论，在这里也不细说了，总之就是，做人留一线，日后好相见！这点我也做的不是很好。</p>
+<h1 id="关于在技能上的发展">关于在技能上的发展</h1><p>很多人学习Android总是执着于酷炫的动画，或者一些绚丽的自定义View，个人觉得不如进入深度学习，总是浮在写控件或者动画，目的只是为了炫技，并不是真正的刚需，理解原理才能更好的解决问题，编程的初衷不就是为了解决各种各样的问题不是吗？广的接触一些比如hybrid、后端开发等，会带来一些灵感和解决方案，深入学习也是比较重要的比如read the fucking source code，不然你说的大家都懂还怎么吹比！！！！！一定一定要戒骄戒躁，还是脚踏实地的好。</p>
+<h1 id="结语">结语</h1><p>送给大家也是自己的一句话：<code>先是确定目标，然后坚持到底，这是成功的唯一方法。</code></p>
+<p>原文发布于：<a href="http://abner-nimengbo.cn/2016/05/10/AndroidLearningSummarize/" target="_blank" rel="external">http://abner-nimengbo.cn/2016/05/10/AndroidLearningSummarize/</a></p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -556,7 +692,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-02-01T16:46:13+08:00" content="2016-02-01">
               2016-02-01
             </time>
@@ -564,7 +703,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/学习经验/" itemprop="url" rel="index">
@@ -592,29 +735,48 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            简介在公司做的第一个需求就是给购物车列表加上侧滑删除(真想吐槽这交互)，我说可以引入代码家的库，然后他们说项目里有一个了。打开一看，居然是鲍老师的SwipeMenuListView(已经不维护了)，而且引入后就一直没更新，满足不了现在的需求，又有业务冲突，正好那段时间看了开发艺术与探索中的事件分发章
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/01/事件分发之现学现用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <h1 id="简介">简介</h1><p>在公司做的第一个需求就是给购物车列表加上侧滑删除(真想吐槽这交互)，我说可以引入代码家的库，然后他们说项目里有一个了。打开一看，居然是鲍老师的<a href="https://github.com/baoyongzhang/SwipeMenuListView" target="_blank" rel="external">SwipeMenuListView</a>(已经不维护了)，而且引入后就一直没更新，满足不了现在的需求，又有业务冲突，正好那段时间看了开发艺术与探索中的事件分发章节，发现只需要在现有的基础上做一些拦截事件就能满足业务了。</p>
+<h1 id="问题与需求">问题与需求</h1><ol>
+<li>Item的有效滑动区域只有空白区域，也就是说如果item上有别的控件，那么就不能滑动</li>
+<li>如果列表有header，滑动区域会出错</li>
+<li>列表里的滑动删除，只有一个能打开</li>
+</ol>
+<h1 id="解决方法">解决方法</h1><h2 id="问题1、3的解决思路：">问题1、3的解决思路：</h2><p>1：引起的原因是在down时，down事件被子view获取了。那么解决方案就出来了，在父布局直接判断是否是在横向移动，并且拦截就可以了。<br>3：在每次down的时候判断一下当前是否有open状态<br>在onInterceptTouchEvent中处理判断是否需要拦截</p>
+<p>onInterceptTouchEvent  的down事件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> action = ev.getAction();</span><br><span class="line">        <span class="keyword">switch</span> (action) &#123;</span><br><span class="line">              <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</span><br><span class="line">              mDownX = ev.getX();</span><br><span class="line">              mDownY = ev.getY();</span><br><span class="line">              <span class="keyword">boolean</span> handled = <span class="keyword">super</span>.onInterceptTouchEvent(ev);</span><br><span class="line">              mTouchState = TOUCH_STATE_NONE;</span><br><span class="line">              mTouchPosition = pointToPosition((<span class="keyword">int</span>) ev.getX(), (<span class="keyword">int</span>) ev.getY());</span><br><span class="line">              View view = getChildAt(mTouchPosition - getFirstVisiblePosition());</span><br><span class="line"></span><br><span class="line">              <span class="comment">//只在空的时候赋值 以免每次触摸都赋值，会有多个open状态</span></span><br><span class="line">              <span class="keyword">if</span> (view <span class="keyword">instanceof</span> SwipeMenuLayout) &#123;</span><br><span class="line">                  <span class="comment">//如果有打开了 就拦截.</span></span><br><span class="line">                  <span class="keyword">if</span> (mTouchView != <span class="keyword">null</span> &amp;&amp; mTouchView.isOpen() &amp;&amp; !inRangeOfView(mTouchView.getMenuView(), ev)) &#123;</span><br><span class="line">                      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">                  mTouchView = (SwipeMenuLayout) view;</span><br><span class="line">                  mTouchView.setSwipeDirection(mDirection);</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="comment">//如果摸在另外个view</span></span><br><span class="line">              <span class="keyword">if</span> (mTouchView != <span class="keyword">null</span> &amp;&amp; mTouchView.isOpen() &amp;&amp; view != mTouchView) &#123;</span><br><span class="line">                  handled = <span class="keyword">true</span>;</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              <span class="keyword">if</span> (mTouchView != <span class="keyword">null</span>) &#123;</span><br><span class="line">                  mTouchView.onSwipe(ev);</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">return</span> handled;</span><br><span class="line"></span><br><span class="line">              ......</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在down的时候判断之前是否有一个swiplayout打开的，如果有，就拦截操作。从而解决了问题3。</p>
+<p><strong>这里return true后，会由onTouchEvent的MotionEvent.ACTION_DOWN执行，事件流的传递过程就不在这里赘述了。</strong></p>
+<p>onInterceptTouchEvent  的move事件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> action = ev.getAction();</span><br><span class="line">        <span class="keyword">switch</span> (action) &#123;</span><br><span class="line">        .......</span><br><span class="line">        <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</span><br><span class="line">        <span class="keyword">float</span> dy = Math.abs((ev.getY() - mDownY));</span><br><span class="line">        <span class="keyword">float</span> dx = Math.abs((ev.getX() - mDownX));</span><br><span class="line">        <span class="keyword">if</span> (Math.abs(dy) &gt; MAX_Y || Math.abs(dx) &gt; MAX_X) &#123;</span><br><span class="line">            <span class="comment">//每次拦截的down都把触摸状态设置成了TOUCH_STATE_NONE 只有返回true才会走onTouchEvent 所以写在这里就够了</span></span><br><span class="line">            <span class="keyword">if</span> (mTouchState == TOUCH_STATE_NONE) &#123;</span><br><span class="line">                <span class="keyword">if</span> (Math.abs(dy) &gt; MAX_Y) &#123;</span><br><span class="line">                    mTouchState = TOUCH_STATE_Y;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dx &gt; MAX_X) &#123;</span><br><span class="line">                    mTouchState = TOUCH_STATE_X;</span><br><span class="line">                    <span class="keyword">if</span> (mOnSwipeListener != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        mOnSwipeListener.onSwipeStart(mTouchPosition);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>就是在移动距离超过一个常量值，就可以判断在移动，并拦截。1的问题也得到了解决。</p>
+<h3 id="这里return_true后，会由onTouchEvent的MotionEvent-ACTION_MOVE执行">这里return true后，会由onTouchEvent的MotionEvent.ACTION_MOVE执行</h3><p>2的问题，只需要在onTouchEvent的move事件里减去header就好了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (ev.getAction() != MotionEvent.ACTION_DOWN &amp;&amp; mTouchView == <span class="keyword">null</span>)</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(ev);</span><br><span class="line">     <span class="keyword">int</span> action = ev.getAction();</span><br><span class="line">     <span class="keyword">switch</span> (action) &#123;</span><br><span class="line">        ......</span><br><span class="line">         <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</span><br><span class="line">             <span class="comment">//有些可能有header,要减去header再判断</span></span><br><span class="line">             mTouchPosition = pointToPosition((<span class="keyword">int</span>) ev.getX(), (<span class="keyword">int</span>) ev.getY()) - getHeaderViewsCount();</span><br><span class="line">             <span class="comment">//如果滑动了一下没完全展现，就收回去，这时候mTouchView已经赋值，再滑动另外一个不可以swip的view</span></span><br><span class="line">             <span class="comment">//会导致mTouchView swip 。 所以要用位置判断是否滑动的是一个view</span></span><br><span class="line">             <span class="keyword">if</span> (!mTouchView.getSwipEnable() || mTouchPosition != mTouchView.getPosition()) &#123;</span><br><span class="line">                 <span class="keyword">break</span>;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">float</span> dy = Math.abs((ev.getY() - mDownY));</span><br><span class="line">             <span class="keyword">float</span> dx = Math.abs((ev.getX() - mDownX));</span><br><span class="line">             <span class="keyword">if</span> (mTouchState == TOUCH_STATE_X) &#123;</span><br><span class="line">                 <span class="keyword">if</span> (mTouchView != <span class="keyword">null</span>) &#123;</span><br><span class="line">                     mTouchView.onSwipe(ev);</span><br><span class="line">                 &#125;</span><br><span class="line">                 getSelector().setState(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>&#125;);</span><br><span class="line">                 ev.setAction(MotionEvent.ACTION_CANCEL);</span><br><span class="line">                 <span class="keyword">super</span>.onTouchEvent(ev);</span><br><span class="line">                 <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mTouchState == TOUCH_STATE_NONE) &#123;</span><br><span class="line">                 <span class="keyword">if</span> (Math.abs(dy) &gt; MAX_Y) &#123;</span><br><span class="line">                     mTouchState = TOUCH_STATE_Y;</span><br><span class="line">                 &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dx &gt; MAX_X) &#123;</span><br><span class="line">                     mTouchState = TOUCH_STATE_X;</span><br><span class="line">                     <span class="keyword">if</span> (mOnSwipeListener != <span class="keyword">null</span>) &#123;</span><br><span class="line">                         mOnSwipeListener.onSwipeStart(mTouchPosition);</span><br><span class="line">                     &#125;</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         .......</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(ev);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="其实只要理解了事件流的传递过程，那么需要在什么地方做什么事就很清晰，再就是耐心的打log，尝试，就能成功了！">其实只要理解了事件流的传递过程，那么需要在什么地方做什么事就很清晰，再就是耐心的打log，尝试，就能成功了！</h3>
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -663,7 +825,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-11-17T23:34:53+08:00" content="2015-11-17">
               2015-11-17
             </time>
@@ -671,7 +836,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/随笔/" itemprop="url" rel="index">
@@ -699,32 +868,46 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            想想自己从2014年6月份毕业，到现在已经快一年半了。
-从填志愿开始就一直很向往计算机行业，现在也投身到这个行业中去了。
-说来也奇怪，我从没自己用过Android机，竟然会跑去做Android开发，哈哈哈，也真是命运使然。
-以前一直觉得后台好难，好深。随着工作中学习，学习后代入工作，发现其实Andr
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/17/异乡-2015年/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <p>想想自己从2014年6月份毕业，到现在已经快一年半了。</p>
+<p>从填志愿开始就一直很向往计算机行业，现在也投身到这个行业中去了。</p>
+<p>说来也奇怪，我从没自己用过Android机，竟然会跑去做Android开发，哈哈哈，也真是命运使然。</p>
+<p>以前一直觉得后台好难，好深。随着工作中学习，学习后代入工作，发现其实Android也好难好深，真应了那句，360行，行行出状元的话。</p>
+<p>从当初一点都不懂Android开始，硬着头皮开发，真是不知道当时是怎么熬过来的，也养成了独立的习惯。</p>
+<p>一直觉得自己挺不错的，总会有一段时间自我感觉良好，然而当遇到更厉害的团队和大神时，也总是会信心受挫，这其实也是发现自身不足的缺点。</p>
+<p>特别是今年，开始积极开源，也让自己有机会认识到了好多大神，能够向他们学习。</p>
+<p>能一直在这条路走下去，其实挺开心的。</p>
+<p>而去年还在杭州，今年已经转战到上海了。<br>魔都，繁华的大都市，却节奏相当快，也比较浮躁，这个处处充满着金钱的土地。</p>
+<p>昂贵的房价，落户难，还有某些桀骜不驯的上海人，对这个城市已经没有了最初刚来时的好感，可能期待的太多，结果却令人失望了吧。</p>
+<p>想想杭州虽然空气差了些，但是压力也小了好多，互联网氛围也不比上海差，如果定居的话，还是想选择在杭州吧，毕竟在上海买房，在杭州可以买2套了。</p>
+<p>路还很长，尽可能的提升自己，在将来才有更多的选择，加油！</p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -742,7 +925,6 @@
 
 
     
-
   </section>
 
   
@@ -752,17 +934,15 @@
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -781,10 +961,12 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="Abner_泥阿布" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Abner_泥阿布" />
           <p class="site-author-name" itemprop="name">Abner_泥阿布</p>
+          <p class="site-description motion-element" itemprop="description"></p>
         </div>
-        <p class="site-description motion-element" itemprop="description"></p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -793,19 +975,23 @@
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -815,26 +1001,29 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/nimengbo" target="_blank">
+                <a href="https://github.com/nimengbo" target="_blank" title="github">
                   
-                    <i class="fa fa-globe"></i> github
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  github
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/nimengbo" target="_blank">
+                <a href="http://weibo.com/nimengbo" target="_blank" title="weibo">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank">
+                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank" title="zhihu">
                   
-                    <i class="fa fa-globe"></i> zhihu
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  zhihu
                 </a>
               </span>
             
@@ -844,28 +1033,34 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">以下大神</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://yifeiyuan.me" target="_blank">程序亦非猿</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.zhaiyifan.cn" target="_blank">MarkZhai(魔都三帅之大帅)</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.easydone.cn" target="_blank">Ailurus</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://itangqi.me/" target="_blank">Qi Tang</a>
-              </span>
-            
-          
-        </div>
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              以下大神
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yifeiyuan.me" title="程序亦非猿" target="_blank">程序亦非猿</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn" title="MarkZhai(魔都三帅之大帅)" target="_blank">MarkZhai(魔都三帅之大帅)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.easydone.cn" title="Ailurus" target="_blank">Ailurus</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itangqi.me/" title="Qi Tang" target="_blank">Qi Tang</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -875,7 +1070,8 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -885,44 +1081,94 @@
   &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Abner_泥阿布</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
-<span id="busuanzi_container_site_uv">
-  本站访客数<span id="busuanzi_value_site_uv"></span>人次
-</span>
 
+        
 
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
   
 
   
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
 
   
     
@@ -940,36 +1186,25 @@
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
+
+  
     
-     
-
-
-    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
 
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
   
   
 
   
+
+  
+
   
 
 </body>

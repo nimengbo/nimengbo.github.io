@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -21,20 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
   
-    <link href='//fonts.lug.ustc.edu.cn/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -46,7 +77,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -66,27 +97,29 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/"/>
 
   <title> Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -94,9 +127,18 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -125,13 +167,13 @@
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -141,7 +183,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -151,7 +193,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -161,7 +203,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -171,14 +213,13 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
-              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
             公益404
           </a>
         </li>
       
 
-      
       
     </ul>
   
@@ -191,15 +232,10 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
-
-    
-
-    
-    
-
     
       
 
@@ -223,7 +259,7 @@
               
                 
                 <a class="post-title-link" href="/2016/08/13/AndroidMultipeThreadProgram/" itemprop="url">
-                  Android并发编程实践
+                  Android并发编程实践(上)
                 </a>
               
             
@@ -232,7 +268,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-08-13T13:40:47+08:00" content="2016-08-13">
               2016-08-13
             </time>
@@ -240,7 +279,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/实践/" itemprop="url" rel="index">
@@ -268,31 +311,66 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解Android中的并发场景和实践。
-并发什么是并发并发的好处并发的风险线程单线程多线程线程安全线程池队列并发InAndroid感谢
-《Java并发
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/13/AndroidMultipeThreadProgram/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <p>Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于<strong>Java中的多线程模型</strong>。<br>所以本篇也会先讲一些Java中的多线程理念，再讲解Android中的并发<strong>场景和实践</strong>。</p>
+<h1 id="并发">并发</h1><h2 id="什么是并发">什么是并发</h2><p>举个很简单的栗子，当你一边在<strong>撸撸撸</strong>，一边在看<strong>小视频</strong>，同时在做两件事，这就是并发。</p>
+<p>咳，年轻人节制啊。</p>
+<h2 id="并发的好处">并发的好处</h2><h3 id="提高资源利用率">提高资源利用率</h3><p>当一个任务并没有完全占用系统资源，就可以利用并发来提高资源利用率，同时也能更快地完成任务。</p>
+<p>当你的右手在干些什么的时候，左手是不是在没事做呢？那就也用起来呗。<br>(某次聚会，一名骑马的汉子说自己左右互搏(lu)特厉害）。</p>
+<h3 id="在程序任务上更加精简">在程序任务上更加精简</h3><p>就拿上一个栗子来说，左手做什么，右手做什么，任务明确分配好，又能同时进行，既提高了效率，逻辑又清晰。</p>
+<h3 id="更好的响应程序">更好的响应程序</h3><p>这个拿Android客户端举个栗子，上传图片时，当前界面还是正常运转没有卡死，图片也正常上传，既保证了界面被响应，又保证图片可以上传。</p>
+<h2 id="并发的风险">并发的风险</h2><h3 id="并发的代价">并发的代价</h3><ul>
+<li>需要占用更多的资源。</li>
+<li>设计好一个并发程序并不容易。</li>
+<li>并发的资源交互问题复杂。</li>
+</ul>
+<h3 id="并发的隐患">并发的隐患</h3><ul>
+<li>滥用资源导致系统不稳定</li>
+<li>结果与预期不符</li>
+<li>出现BUG难以排查</li>
+</ul>
+<h1 id="线程篇">线程篇</h1><h2 id="进程是什么">进程是什么</h2><p>就拿Android中的App来说，一般来说一个app就是一个进程，（除了特殊的手段开启了多个进程，这里不深入这个话题，就是一个一对多的关系）。</p>
+<h2 id="线程是什么">线程是什么</h2><p>进程只是一个程序、任务的统称，但是却不能执行任务，真正执行任务的是线程，所以线程是由进程创建的，一个进程可以创建多个线程。</p>
+<p>线程可以调度资源等等，在这里只需要了解大致的概念就好，如果要深入可以学习一下<strong>操作系统</strong>。</p>
+<h2 id="进程与线程的关系">进程与线程的关系</h2><p>人脑就相当于是CPU，想做一件事的时候，这个任务就是一个进程了，需要运用手脚等器官去完成这个任务，而手脚器官就可以理解成一个个线程，去做了不同的事，从而完成任务。</p>
+<h2 id="单线程">单线程</h2><p>还是用Android举栗子，当你在手机上操作的时候，这个被称之为UI线程（之后会详解）。而一个最基本的app，不需要复杂的功能时，就只有一个UI线程和我们交互，那么这个app就是个单线程的。一般的程序面向用户的线程就是UI线程，也称之为主线程，单线程程序，其实就是只有一个主线程的程序。</p>
+<h2 id="多线程">多线程</h2><p>多个进程可以算是并发，但是我们所说的并发场景，大部分是在一个进程中的，而并发就是由线程完成的，多个线程同时执行任务，就称之为并发。</p>
+<p>以下为多线程工作示意图：</p>
+<p><img src="../images/多线程.png" alt="多线程"></p>
+<h3 id="线程安全">线程安全</h3><h2 id="线程池">线程池</h2><h2 id="队列">队列</h2><h1 id="并发InAndroid">并发InAndroid</h1><h1 id="感谢">感谢</h1><blockquote>
+<p>《Java并发编程实践》<br>《Thinking Java》</p>
+</blockquote>
+<hr>
+<p>欢迎加入QQ群：568863373。</p>
+<p>欢迎关注我们的公众号：<code>魔都三帅</code>，欢迎大家来投稿~</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -341,7 +419,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-07-29T16:12:06+08:00" content="2016-07-29">
               2016-07-29
             </time>
@@ -349,7 +430,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/实践/" itemprop="url" rel="index">
@@ -377,31 +462,55 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            前面四篇已经讲述了如何开始使用Git以及Git的命令操作。作者作为一名作死小能手，在Git上也曾花样作死过，本节将介绍一些作死Tips
-作死篇大小写问题创建文件的时候，手贱写了小写的首字母，然后rename了文件后，发现git status里还是原来的名字！
-因为git是大小写不敏感的，如果想要大小
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/29/gitcarefulness/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <p>前面四篇已经讲述了如何开始使用Git以及Git的命令操作。<br>作者作为一名作死小能手，在Git上也曾花样作死过，本节将介绍一些作死Tips</p>
+<h1 id="作死篇">作死篇</h1><h2 id="大小写问题">大小写问题</h2><p>创建文件的时候，手贱写了小写的首字母，然后rename了文件后，发现git status里还是原来的名字！</p>
+<p>因为git是大小写不敏感的，如果想要大小写敏感需要执行<code>git config core.ignorecase false</code></p>
+<h2 id="没有stash，直接checkout">没有stash，直接checkout</h2><p>在自己分支写了好多代码，既没有commit，也没有stash，就直接checkout了，一脸懵逼。</p>
+<h2 id="解决冲突">解决冲突</h2><p>在解决冲突时，手快留下了两行一样的代码，这个bug当时找了一天都不知道原因是什么，最后只好一行行对比代码。</p>
+<h2 id="push_-f_(悲痛脸)">push -f (悲痛脸)</h2><p>多么痛的领悟，同事曾经rebase错分支，在master上直接push -f，至今不知道这是什么情况。</p>
+<h2 id="rebase">rebase</h2><p>rebase前，手贱先push了，rebase完毕后 ，发现要push -f了，也是作啊。</p>
+<h2 id="fix_bug">fix bug</h2><p>改个bug，改吧改吧，改了好多文件，发现咦，分支没切。在屏幕前凌乱。</p>
+<h2 id="rm">rm</h2><p>手快rm的时候没有输入git rm ，直接rm -f。（哭笑不得脸）</p>
+<h2 id="ignore没配置">ignore没配置</h2><p>提交的时候肯定很爽，一堆build文件全进去了</p>
+<h2 id="reset">reset</h2><p>一言不合就git reset –hard，心疼自己写了那么久的代码。</p>
+<h1 id="工具篇">工具篇</h1><p>针对Git还是有很多挺好用的工具的<br>1、SourceTree<br>2、ohmyzsh(重点推荐)</p>
+<h2 id="想为ohmyzsh多写几行字">想为ohmyzsh多写几行字</h2><p>有了ohmyzsh，你就能在作死的路上越走越远了。</p>
+<p>比如git commit -a -m “message”，在omyzsh下，直接用gcam “message” 就搞定了。</p>
+<p>比如git status ，输入gst就出来了，谁用谁知道，装逼利器，效率杠杠的。</p>
+<p>之前我的文章里，我的命令行界面和普通的不一样，就是因为装了ohmyzsh。<br>官方地址:<br><a href="http://ohmyz.sh/" target="_blank" rel="external">http://ohmyz.sh/</a></p>
+<h1 id="总结">总结</h1><p>Git系列到这里暂告一个段落，大部分的使用场景都能覆盖到了，有兴趣的同学可以自己看官方文档继续深入学习。</p>
+<p>欢迎加入QQ群：568863373。</p>
+<hr>
+<p>欢迎关注我们的公众号：<code>魔都三帅</code>，欢迎大家来投稿~</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -450,7 +559,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-07-22T16:12:51+08:00" content="2016-07-22">
               2016-07-22
             </time>
@@ -458,7 +570,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/实践/" itemprop="url" rel="index">
@@ -486,32 +602,92 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            看到这篇标题是不是有种很叼的感觉！？在Git的工作流程中，不仅能往前走，当然也可以后退。不仅能提交文件，当然也能删除或者修改了。而且你想回到哪个提交节点就回到哪个提交节点，是不是觉得自己体内的洪荒之力快抑制不住了？
-别急，容我短话长说，一一道来。
-在这真正讲这些也需要普及一个概念：工作区和暂存区
-工
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/22/gitrevert/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <p>看到这篇标题是不是有种很叼的感觉！？在Git的工作流程中，不仅能往前走，当然也可以后退。不仅能提交<br>文件，当然也能删除或者修改了。而且你想回到哪个提交节点就回到哪个提交节点，<br>是不是觉得自己体内的洪荒之力快抑制不住了？</p>
+<p>别急，容我短话长说，一一道来。</p>
+<p>在这真正讲这些也需要普及一个概念：工作区和暂存区</p>
+<h1 id="工作区和暂存区">工作区和暂存区</h1><p>如果有同学对这些概念感觉很懵逼，也没什么关系，不影响你的使用，只要扫一眼接下来的两个标题，<br>就不会影响理解这篇的内容了。</p>
+<p>另外如果有同学想深入理解这个概念的原理，可以自行去Google搜一下。</p>
+<h2 id="工作区">工作区</h2><p>比如你正在写代码，那么你当前的编译器界面的那些代码都属于工作区里的。</p>
+<h2 id="暂存区">暂存区</h2><p>当你在你的git工程里创建了一个新文件，并且执行了<code>git add [File Name]</code>，<br>那么这个新的文件就都被add进了暂存区。</p>
+<p>在已经提交过的代码里做修改，还不在暂存区，执行<code>git status</code>，会发现这些修改过的文件提示需要add，add后会进入暂存区。</p>
+<p>当你执行commit的时候，就是把暂存区的代码一次性提交到本地版本库上。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA%E5%89%AF%E6%9C%AC.png" alt="暂存区和工作区"></p>
+<h1 id="技能树">技能树</h1><h2 id="reset">reset</h2><p>reset这个词从翻译上来说叫做重置，我觉得用回档这个词比较好理解，每次commit都会有个log记录，相当于游戏中的<strong>存档</strong>啦，然后你可以使用reset，回档到某个记录。</p>
+<h3 id="几个常用的方式">几个常用的方式</h3><h4 id="git_reset_[HEAD]_[FileName]">git reset [HEAD] [FileName]</h4><p>我经常用到这个命令，因为我在提交时，总是不小心把某些写到一半的文件也顺手给提交上去了。<br>先不说效果是什么，给你们演示一下：</p>
+<p>先把之前修改的提交了：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/reset-commit.png" alt="先提交"></p>
+<p>修改一下工作区的代码，再执行<code>git diff</code> 查看当前修改了什么：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/reset-commit-first.png" alt="修改"></p>
+<p>然后执行<code>git log</code>查看我们当前的提交日志：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head.png" alt="提交日志"></p>
+<p>用<strong>红色标起来</strong>的就是<strong>[HEAD]</strong> ，看下面的”test for reset commit”，是我们刚才提交的，所以需要的下面那个HEAD。</p>
+<p>执行 <code>git reset ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba app/src/main/java/heh/MasterCodeTest.java</code>：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/reset.png" alt="执行reset"></p>
+<p>在执行<code>git diff</code>，看到这次的结果和之前第一次diff不同：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/diff.png" alt="diff"></p>
+<p>以上操作只是回档某个文件，所以log并不会变。</p>
+<p>我每次提交不小心带上了些不该提交的文件，就用这个命令撤销一些提交。</p>
+<h5 id="git_reset_[HEAD]">git reset [HEAD]</h5><p>如果执行的时候不带最后个[fileName]，那么所有文件都会回到那次提交的节点。</p>
+<p>如果直接执行 <code>git reset ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba</code><br>再执行<code>git log</code>，看到刚刚我们提交的”test for reset commit”已经没了：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/log-after-reset.png" alt="reset log"></p>
+<p>刚才所有的reset都只是把head指向了当前branch的指定commit仅此而已，可以执行<code>git status</code>，发现还是需要把修改add到暂存区。</p>
+<p>默认的都是不写模式 <strong>– mixed</strong> 模式</p>
+<h5 id="git_reset_–hard">git reset –hard</h5><p>这个用法和刚才的类似，就是多了个–hard，意味着你工作区的代码也会回档，和暂存区保持一致，都回到了那个节点的commit时的状态。</p>
+<h5 id="git_reset_–soft">git reset –soft</h5><p>–soft，意味着工作区不会收到影响，并且修改的文件也进入了暂存区，执行git status 发现没有东西需要add到暂存区。</p>
+<h2 id="revert">revert</h2><p>憋着急，先往下看，最后会解释的。</p>
+<p>执行 <code>git revert ebd535064bd1b2a2739b40c3a9356ce4c0fd6cba</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/git-revert.png" alt="revert"></p>
+<p>代码会出现冲突的现象，因为两次结果不一样：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/revert-merge.png" alt="merge"></p>
+<p>合并完代码，add再commit会出现如下提示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/commit-revert.png" alt="commit-revert"></p>
+<p>revert 和 reset 的功能是类似的，区别就是revert不会改变log，而reset会撤销log。<br>revert需要一个新的commit记录这次revert。如果没冲突，那么会自动commit；如果有冲突，则会需要解决冲突后手动commit</p>
+<p>一句话总结就是revert只是撤销某次commit，其他的commit和整个log记录不会受到影响，而reset会干掉某次commit之后的所有commit，包括log。</p>
+<h2 id="checkout">checkout</h2><p>在上一节的分支操作里也讲过这个命令，是切换分支用的，而在这里将会讲解用checkout命令起到撤回的作用。</p>
+<h3 id="git_checkout_[fileName]">git checkout [fileName]</h3><p>或者<br><code>git checkout -- [fileName]</code><br>在提交过的文件里随便新增一行，然后在命令行中输入<code>git status</code><br>会出现如下图所示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%A2%9E%E7%9A%84.png" alt="git status"></p>
+<p>说明当前修改还未进入暂存区，还是在工作区，这个时候执行<br><code>git checkout [你的文件绝对路径]</code>：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/checkout-filename.png" alt="checkout"></p>
+<p>为什么用绝对路径呢，就是避免你的文件名和branch名一样，结果就切换到分支上了。加上 <strong>–</strong> 后面的就一定是文件了</p>
+<h3 id="git_checkout_[commit]_[fileName]">git checkout [commit] [fileName]</h3><p>该命令就是将某个文件的暂存区和工作区都回撤到某个commit节点上。</p>
+<h3 id="git_checkout_-">git checkout .</h3><p>注意到 checkout 后面有个”.”，就是代表所有文件的意思把所有文件都撤回刚才在工作区上的改动。</p>
+<h2 id="log">log</h2><p>这个命令在之前的例子总经常用到，就是看提交日志用的。<br>之前从同事那边学来一条黑科技命令：</p>
+<p><code>git log --oneline --decorate --graph --all</code></p>
+<p>用一下就知道效果了，不了解里面参数的执行<code>git log --help</code><br>查看文档。</p>
+<h2 id="rm">rm</h2><p>这个命令linux中也有，就是删除文件或者移动的意思。</p>
+<p>在git中也是这个意思。</p>
+<p>如果你在本地物理删除了一堆文件，但是没有执行<code>git rm</code>，那么其实这些文件还是在git系统里的，在git project中直接执行<code>git rm</code> 删除要你删的文件，提交之后就可以完成删除了。</p>
+<h1 id="总结">总结</h1><p>写到这里把git的回撤、查看的功能都写完了，大家应该也有一个比较系统的认知了，具体还是需要多在项目中应用。<br>希望大家能一起讨论，共同学习进步！</p>
+<p>欢迎加入QQ群：568863373。</p>
+<hr>
+<p>欢迎关注我们的公众号：<code>魔都三帅</code>，欢迎大家来投稿~</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -560,7 +736,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-07-15T00:02:42+08:00" content="2016-07-15">
               2016-07-15
             </time>
@@ -568,7 +747,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/实践/" itemprop="url" rel="index">
@@ -596,30 +779,108 @@
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~此文多图预警~用流量的童鞋注意哦。
-Repository介绍在版本管理中，R
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/15/gitbranch/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <p>本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~<br>此文多图预警~用流量的童鞋注意哦。</p>
+<h1 id="Repository介绍">Repository介绍</h1><p>在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。</p>
+<p>对于我们来说，在Repository中，我们看的见的显示信息就是代码，而其他的比如分支信息、Commit信息、Status这些状态则通过命令行去查看。</p>
+<h1 id="Branch介绍">Branch介绍</h1><p>当我们多个人合作开发的时候，为了方便管理代码，会每个组开一个Branch，而master称为主分支——主干，这些Branch则称为分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png" alt="BranchAndMaster"></p>
+<h2 id="查看当前分支">查看当前分支</h2><p>在命令行输入<code>git branch</code>就可以看到当前分支为master :<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF.png" alt="查看当前分支"></p>
+<p>输入<code>git branch -a</code> 可以查看本地和远程所有分支<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%92%8C%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF.png" alt="查看本地和远程所有分支"></p>
+<h2 id="切换分支">切换分支</h2><p>初始化Git后，当前默认在master分支，这个时候如果你想新建一个分支，可以执行 <code>git branch [branchName]</code> 后面的[branchName]是指你的分支名。这样就能把master当前的commit信息’拎’出来，成为了一个新的分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF.png" alt="新建分支"></p>
+<p>执行完branch命令后，你会发现你还是在原来的分支上，在master前有一个*号表示当前分支是master，这个时候执行以下  <code>git checkout [branchName]</code>。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E5%88%B0testBranch.png" alt="切换当前分支到testBranch"><br>其实呢，你可以执行<br><code>git checkout -b [branchName] [fromBranchName]</code> 生成新的Branch，后面这个[fromBranchName] 就是你想要从哪个分支生成新的分支，不写则是当前分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8E%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E6%A3%80%E5%87%BA%E6%96%B0%E5%88%86%E6%94%AF.png" alt="从当前分支检出新分支"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8Emaster%E5%88%86%E6%94%AF%E4%B8%8A%E6%A3%80%E5%87%BA%E5%88%86%E6%94%AF.png" alt="从master分支检出新分支"></p>
+<h2 id="HEAD信息">HEAD信息</h2><p>为什么要在这里讲HEAD呢，那HEAD又是什么呢，其实HEAD可以理解成一个指针，每次都是指向当前Branch的最后一次信息(可以是Commit或者Pull之类的)，通过移动HEAD来达到切换分支的作用。<br>如果当前分支在master，那么HEAD信息如下：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head_master.png" alt="HEAD_MASTER"></p>
+<p>真实测试效果：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%9C%A8master.png" alt="HEAD_IN_MASTER"><br>在checkout到BranchC的时候变成了如下图所示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head_branch.png" alt="HEAD_BRANCH"></p>
+<p>真实测试效果：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%88%87%E6%8D%A2%E5%88%B0branchC.png" alt="HEAD_IN_BRANCH"></p>
+<h2 id="合并分支">合并分支</h2><p>当你的项目上线后，发现有个bug，这个时候需要在master分支上<code>checkout -b</code> 一个新的分支用来修bug，那么这个bug分支上的代码，最后怎么给’整’到master上去呢。很简单先切回master分支，然后<code>git merge bugBranch</code> 就好了。</p>
+<h3 id="冲突">冲突</h3><p>当你merge的时候出现了</p>
+<p><code>$ git merge myBranch
+Auto-merging AndroidManifest.xml
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.</code><br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2bug%E5%88%86%E6%94%AF.png" alt="切换到bug分支"><br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81.png" alt="merge"></p>
+<p>这个时候会提示你有代码冲突，那么你需要执行<code>git status</code>，查看当前文件哪些需要解决冲突。解决完再提交就好了。笔者很喜欢用AndroidStudio自带的git进行合并等操作，可以直接在Compare视图上解决冲突，非常方便。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%8F%91%E7%8E%B0%E5%86%B2%E7%AA%81.png" alt="发现冲突"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81%E6%96%87%E4%BB%B6.png" alt="冲突文件"></p>
+<p>这个时候回发现 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> 到 <code>========</code> 是当前所在分支的内容，下面从 <code>=======</code> 到 <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; fixBug</code> 是合并过来的分支，解决完，再执行<code>git add .</code> 然后就可以提交啦。</p>
+<p>接下来为大家看一下编译器的merge：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9merge.png" alt="选择merge"></p>
+<p>选择分支：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AFmerge.png" alt="选择分支"></p>
+<p>冲突提示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/merge%E5%BC%B9%E5%87%BA%E6%A1%86.png" alt="冲突提示"></p>
+<p>冲突比较 ：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C.png" alt="合并操作"></p>
+<h3 id="rebase">rebase</h3><p>rebase和merge的功能其实是一样的，都是合并代码，只是对于修改信息的节点会发生变化，rebase和merge最大的区别就是在最后的代码树上，有兴趣的同学可以用SourceTree看看，或者直接在命令行输入gitk。</p>
+<p>当前工作状态，箭头表示上一次信息：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/branch.png" alt="当前状态"></p>
+<p>执行merge后：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/merge_%E6%96%B0.png" alt="merge"></p>
+<p>执行rebase后<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase.png" alt="rebase"></p>
+<p>之所以会有5-1，6-1就是和原来的commit是不同的，算是一次新的commit了。</p>
+<p>简而言之就是rebase的代码会比merge的干净许多。rebase会保留你合并的顺序，而merge则会按照你的修改时间排序。笔者有点强迫症，会使用rebase(搞基)，另外一些图方便的人喜欢merge(合体)。</p>
+<p>另外值得注意的是，在rebase前，千万别push，不然等rebase完毕后，因为tree发生了变化，会提示push reject，意味着你需要  <code>git push --f</code>才能提交了，这是有风险的！！！注意安全！！！</p>
+<p>比如branch要reabse onto master，那么会比较两个分支的最近的共同节点，再根据master提交的节点生成一系列不同的文件，最后在branch上针对每个提交将之前不同的文件去合并，并且生成<code>新的commit节点</code>，这时rebase完毕后branch的tree已经和rebase前的branch tree完全不一样了，所以在rebase前你push过后，rebase后再push会提示不是同一个tree而<code>reject(拒绝)</code>提交。</p>
+<p>下面是AndroidStudio上的rebase操作：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E9%80%89%E6%8B%A9.png" alt="rebase选择"></p>
+<p>想要从哪个分支rebase到当前分支，就选择哪个<code>Rebase on</code> ：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9rebase.png" alt="选择分支"></p>
+<h2 id="stash">stash</h2><p>当你想切换分支时，又不想提交当前代码，那就需要stash啦，简单的意思就是讲你当前的修改信息全部暂存起来，放进一个stack栈中，这个时候你就可以checkout到别的分支啦。下次再回来的时候<br><code>git stash pop</code>就好了。</p>
+<p>这个时候Leader转头对我说：XXX模块代码我提交了，你拉一下代码，我改了你可能要用到的东西。<br>这个时候我对着一屏幕的蓝色提示，心想：不能commit把，都没测试过。这个时候就用到<code>stash</code>这个神器了。</p>
+<p>没有提交文件，本地修改过的文件会显示蓝色：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E8%93%9D%E8%89%B2%E7%9A%84.png" alt="蓝色"></p>
+<p>项目里有几个文件都没有提交，只能选择项目根目录，右击，选择stash：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stash.png" alt="stash"></p>
+<p>会弹出一个stash的弹出框，会显示当前分支，填入message:<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stash%E5%BC%B9%E5%87%BA%E6%A1%86.png" alt="stash弹出框"></p>
+<p>点击createStash后，创建一个当前的stash，可以点击刚刚的StashChanges下面的UnstashChanges查看当前的stash列表：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8BstashInAs.png" alt="查看stashInAs"></p>
+<p>或者在命令行输入<code>git stash list</code> 查看当前的stash栈：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8Bstash.png" alt="查看stash"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stashlist%E7%BB%93%E6%9E%9C.png" alt="结果"></p>
+<p>好啦，当前的工作全部都暂存起来了！要把刚刚Leader放到master的代码都合并过来啦！我选择的当然是rebase啦。在这之前必须得把服务器的master代码pull到本地是不是，先切换到master，然后还是选择编译器的git，在刚刚stash界面下面有个<code>pull</code>。点击pull弹出一个界面，选择master分支：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/pull%E4%BB%A3%E7%A0%81.png" alt="pull"></p>
+<p>点击pull就能拉下代码啦，如果有冲突也能借助编译器的compare进行合并啦。</p>
+<p>pull完代码后，要reabse啦：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebaseInAs.png" alt="rebase"></p>
+<p>按照步骤来，1、点击当前分支，选择要rebase的目标分支，点击后选择<code>Rebase onto</code>就可以执行rebase啦，rebase过程中发现出现了一个冲突：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E5%86%B2%E7%AA%81.png" alt="冲突"></p>
+<p>和前面的merge一样，选择在这里解决冲突：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81.png" alt="解决冲突"><br>这个时候master的代码就过来啦，然后再把之前修改的代码拿出来继续工作：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/popStash.png" alt="pop"></p>
+<p>pop完后可以继续快乐的工作啦：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/pop%E5%AE%8C%E5%90%8E.png" alt="pop完毕"></p>
+<p>在这里说明一下<code>红色</code>的文件表示没有add，<code>绿色</code>文件表示add过了但是没有commit，<code>蓝色</code>文件表示修改过，和版本库分支不一样，绿色和蓝色的文件执行stash会被暂存，而红色的不会。</p>
+<h2 id="拓展">拓展</h2><p>如果对Git原理有兴趣的同学，可以自己再去深入研究一下Git，很多东西虽然平时用不到，但是又很有深度。大家按兴趣就好啦</p>
+<h1 id="总结">总结</h1><p>一边写博客，一边翻阅资料，自己也又温习一遍，接下来打算继续深入下去，下一篇将会讲几个指令的原理，以及git对象之类的。最近比较忙，需要用点心去学习，也会把自己遇到的场景尽量告诉大家，让大家能接触到更多的实际场景，努力把这个系列写的更干货一些！</p>
+<p>其实AndroidStudio能覆盖大多数的使用场景了，下一篇将会说一些revert、reset，当发生错误提交时，怎么回滚代码。</p>
+<p>最近大帅的开了个QQ实践群（568863373），欢迎大家一起讨论，也可以关注我们的公众号：<code>魔都三帅</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -668,7 +929,10 @@ Repository介绍在版本管理中，R
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-07-11T22:06:03+08:00" content="2016-07-11">
               2016-07-11
             </time>
@@ -676,7 +940,11 @@ Repository介绍在版本管理中，R
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/学习/" itemprop="url" rel="index">
@@ -704,30 +972,48 @@ Repository介绍在版本管理中，R
 
           
 
+          
+          
+
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            背景接上篇，在理解什么是git后，总需要动手操作一下，还是那句话~针对Git很熟练的大牛们可以点击返回或者关闭啦~
-在看这篇文章之前你得准备好什么？1、注册好的你Gihub账号2、在setting里的SSH里有你电脑的SSHKey了。3、准备好你自己需要放在git的文件夹如果不会以上1、2两点的同学
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/11/createYourRepository/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <h1 id="背景">背景</h1><p>接上篇，在理解什么是git后，总需要动手操作一下，还是那句话~针对Git很熟练的大牛们可以点击返回或者关闭啦~</p>
+<h2 id="在看这篇文章之前你得准备好什么？">在看这篇文章之前你得准备好什么？</h2><p>1、注册好的你Gihub账号<br>2、在setting里的SSH里有你电脑的SSHKey了。<br>3、准备好你自己需要放在git的文件夹<br>如果不会以上1、2两点的同学，请自行Google或者Baidu。</p>
+<h2 id="将你的Project初始化成GitProject">将你的Project初始化成GitProject</h2><p>以下将以AndroidProject为例子</p>
+<p>新建一个AndroidProject后的文件夹内容是这样的：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-0%402x.png" alt="AndroidProject"><br>不要在意.gitignore一会儿会讲到<br>在命令行执行如下命令：</p>
+<p><code>git init</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-1%402x.png" alt="gitinit"></p>
+<p>看到提示初始化了一个空的Git repository，再来看下我们刚刚的文件夹：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-2%402x.png" alt="ini后的文件内容"></p>
+<p>发现多了一个.git文件夹，至于里面的内容大家可以看一<br>下<br><a href="http://gitready.com/advanced/2009/03/23/whats-inside-your-git-directory.html" target="_blank" rel="external">http://gitready.com/advanced/2009/03/23/whats-inside-your-git-directory.html</a><br>这篇文章很棒！</p>
+<h2 id="讲你的Project提交到Github">讲你的Project提交到Github</h2><p>1、在Github新建一个repository<br>2、打开编译器，编辑最外面的.gitignore,如果没有就新建一个这样的文件，添加一些需要忽略的文件，比如.iml,/.idea之类的，AndroidStudio有提供.gitignore插件,这是编译器生成的.gitignore<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-4%402x.png" alt=".gitignore"><br>3、在命令行执行<br><code>git add .</code> 这个命令是为了让你把所有的项目add到本地的缓存区<br>在执行add之前打开编译器可以看到<img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-3%402x.png" alt="add之前">所有的文件都是红色的，看到灰色的了吗，这个是.gitingore起到了作用。<br>执行完add后<img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-5%402x.png" alt="执行完add后">所有文件都变成了绿色<br>4、接下来执行<code>git commit -m &quot;commit my project&quot;</code><br>这句话是什么意思呢，就是把当前add过的文件提交到本地仓库，如何查看刚才add过的文件呢，在执行commit之前执行<code>git status</code><br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/QQ20160711-6%402x.png" alt="git status"><br>这个<code>git status</code> 就是查看当前状态下的git文件<br>那么到这里为止，我们就把所有文件提交到了本地仓库(这个概念会在下节解释)。<br>5、现在再看看编译器里的所有文件，是不是都变白了呢？<br>别忘啦，把本地仓库和远程的仓库关联起来。执行<code>git remote add origin yourUrl</code>，这个yourUrl就是你的远程仓库，刚刚新建号的，我的是：git remote add origin git@github.com:nimengbo/GitDemo.git，那么我就执行<code>git remote add origin git@github.com:nimengbo/GitDemo.git</code><br>6、最后再执行<code>git push -u origin master</code><br>就能在远程仓库看到你自己的代码啦。</p>
+<h2 id="使用编译器提交代码">使用编译器提交代码</h2><p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/6E6BB6AD-6DED-408D-B94A-2DD0E4C1A0E4.png" alt="使用编译器提交代码"><br>这上面的几个点就是我们刚刚执行到的add、commit、push了</p>
+<h1 id="总结">总结</h1><p>这一篇讲怎么在Github上新建仓库，以及把本地的代码push上去。那么现在对整个流程有一个大概的认知了。下一篇将比较偏理论，会讲一些本地工作区，以及几个经常用到的命令都是做什么的。</p>
+<p>最近大帅的开了个QQ实践群（568863373），欢迎大家一起讨论，也可以关注我们的公众号：<code>魔都三帅</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+          
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -745,7 +1031,6 @@ Repository介绍在版本管理中，R
 
 
     
-
   </section>
 
   
@@ -755,17 +1040,15 @@ Repository介绍在版本管理中，R
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -784,10 +1067,12 @@ Repository介绍在版本管理中，R
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="Abner_泥阿布" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Abner_泥阿布" />
           <p class="site-author-name" itemprop="name">Abner_泥阿布</p>
+          <p class="site-description motion-element" itemprop="description"></p>
         </div>
-        <p class="site-description motion-element" itemprop="description"></p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -796,19 +1081,23 @@ Repository介绍在版本管理中，R
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">分类</span>
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -818,26 +1107,29 @@ Repository介绍在版本管理中，R
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/nimengbo" target="_blank">
+                <a href="https://github.com/nimengbo" target="_blank" title="github">
                   
-                    <i class="fa fa-globe"></i> github
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  github
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/nimengbo" target="_blank">
+                <a href="http://weibo.com/nimengbo" target="_blank" title="weibo">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank">
+                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank" title="zhihu">
                   
-                    <i class="fa fa-globe"></i> zhihu
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  zhihu
                 </a>
               </span>
             
@@ -847,28 +1139,34 @@ Repository介绍在版本管理中，R
         
         
 
-        <div class="links-of-author motion-element">
-          
-            <p class="site-author-name">以下大神</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://yifeiyuan.me" target="_blank">程序亦非猿</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://blog.zhaiyifan.cn" target="_blank">MarkZhai(魔都三帅之大帅)</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.easydone.cn" target="_blank">Ailurus</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://itangqi.me/" target="_blank">Qi Tang</a>
-              </span>
-            
-          
-        </div>
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              以下大神
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yifeiyuan.me" title="程序亦非猿" target="_blank">程序亦非猿</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn" title="MarkZhai(魔都三帅之大帅)" target="_blank">MarkZhai(魔都三帅之大帅)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.easydone.cn" title="Ailurus" target="_blank">Ailurus</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itangqi.me/" title="Qi Tang" target="_blank">Qi Tang</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -878,7 +1176,8 @@ Repository介绍在版本管理中，R
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -888,44 +1187,94 @@ Repository介绍在版本管理中，R
   &copy; 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Abner_泥阿布</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-<span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
-<span id="busuanzi_container_site_uv">
-  本站访客数<span id="busuanzi_value_site_uv"></span>人次
-</span>
 
+        
 
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
   
 
   
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
 
   
     
@@ -943,36 +1292,25 @@ Repository介绍在版本管理中，R
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
+
+  
     
-     
-
-
-    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
 
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
   
   
 
   
+
+  
+
   
 
 </body>
