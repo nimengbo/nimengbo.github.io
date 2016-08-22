@@ -84,26 +84,27 @@
 
 
 
-<meta name="description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解Android中的并发场景和实践。
+<meta name="description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解具体涉及的类，最后深入Android中的并发场景和实践。
 并发什么是并发举个很简单的栗子，当你一边在撸撸撸，一边在看小视频，同时在做两件事，这就是并发。
 咳，年轻人节制啊。
-并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发来提高资源利用率，同时">
+并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android并发编程实践(上)">
 <meta property="og:url" content="http://yoursite.com/2016/08/13/AndroidMultipeThreadProgram/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解Android中的并发场景和实践。
+<meta property="og:description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解具体涉及的类，最后深入Android中的并发场景和实践。
 并发什么是并发举个很简单的栗子，当你一边在撸撸撸，一边在看小视频，同时在做两件事，这就是并发。
 咳，年轻人节制啊。
-并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发来提高资源利用率，同时">
+并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发">
+<meta property="og:image" content="http://abner-nimengbo.cn/images/runnable.png">
 <meta property="og:image" content="http://abner-nimengbo.cn/images/多线程.png">
-<meta property="og:updated_time" content="2016-08-17T09:14:29.000Z">
+<meta property="og:updated_time" content="2016-08-22T03:56:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android并发编程实践(上)">
-<meta name="twitter:description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解Android中的并发场景和实践。
+<meta name="twitter:description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解具体涉及的类，最后深入Android中的并发场景和实践。
 并发什么是并发举个很简单的栗子，当你一边在撸撸撸，一边在看小视频，同时在做两件事，这就是并发。
 咳，年轻人节制啊。
-并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发来提高资源利用率，同时">
+并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发">
 
 
 
@@ -332,7 +333,7 @@
       
 
       
-        <p>Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于<strong>Java中的多线程模型</strong>。<br>所以本篇也会先讲一些Java中的多线程理念，再讲解Android中的并发<strong>场景和实践</strong>。</p>
+        <p>Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于<strong>Java中的多线程模型</strong>。<br>所以本篇也会先讲一些Java中的多线程理念，再讲解具体涉及的类，最后深入Android中的并发<strong>场景和实践</strong>。</p>
 <h1 id="并发">并发</h1><h2 id="什么是并发">什么是并发</h2><p>举个很简单的栗子，当你一边在<strong>撸撸撸</strong>，一边在看<strong>小视频</strong>，同时在做两件事，这就是并发。</p>
 <p>咳，年轻人节制啊。</p>
 <h2 id="并发的好处">并发的好处</h2><h3 id="提高资源利用率">提高资源利用率</h3><p>当一个任务并没有完全占用系统资源，就可以利用并发来提高资源利用率，同时也能更快地完成任务。</p>
@@ -352,13 +353,22 @@
 <h1 id="线程篇">线程篇</h1><h2 id="进程是什么">进程是什么</h2><p>就拿Android中的App来说，一般来说一个app就是一个进程，（除了特殊的手段开启了多个进程，这里不深入这个话题，就是一个一对多的关系）。</p>
 <h2 id="线程是什么">线程是什么</h2><p>进程只是一个程序、任务的统称，但是却不能执行任务，真正执行任务的是线程，所以线程是由进程创建的，一个进程可以创建多个线程。</p>
 <p>线程可以调度资源等等，在这里只需要了解大致的概念就好，如果要深入可以学习一下<strong>操作系统</strong>。</p>
+<p>在Java中，线程通常就是指<code>Thread</code>这个类，或者实现了<code>Runnable</code>的类，其实<code>Thread</code>这个类也是实现了<code>Runnable</code>接口的，可以看一下<code>Runnable</code>接口的代码：</p>
+<p><img src="http://abner-nimengbo.cn/images/runnable.png" alt="Runnable"></p>
 <h2 id="进程与线程的关系">进程与线程的关系</h2><p>人脑就相当于是CPU，想做一件事的时候，这个任务就是一个进程了，需要运用手脚等器官去完成这个任务，而手脚器官就可以理解成一个个线程，去做了不同的事，从而完成任务。</p>
 <h2 id="单线程">单线程</h2><p>还是用Android举栗子，当你在手机上操作的时候，这个被称之为UI线程（之后会详解）。而一个最基本的app，不需要复杂的功能时，就只有一个UI线程和我们交互，那么这个app就是个单线程的。一般的程序面向用户的线程就是UI线程，也称之为主线程，单线程程序，其实就是只有一个主线程的程序。</p>
 <h2 id="多线程">多线程</h2><p>多个进程可以算是并发，但是我们所说的并发场景，大部分是在一个进程中的，而并发就是由线程完成的，多个线程同时执行任务，就称之为并发。</p>
 <p>以下为多线程工作示意图：</p>
 <p><img src="http://abner-nimengbo.cn/images/多线程.png" alt="多线程"></p>
-<h3 id="线程安全">线程安全</h3><h2 id="线程池">线程池</h2><h2 id="队列">队列</h2><h1 id="并发InAndroid">并发InAndroid</h1><h1 id="感谢">感谢</h1><blockquote>
-<p>《Java并发编程实践》<br>《Thinking Java》</p>
+<h3 id="多线程并发过程中会遇到的问题">多线程并发过程中会遇到的问题</h3><h4 id="1-_资源共享">1. 资源共享</h4><p>A线程要写文件C，B线程也要写文件C，这个时候就好像你拿着两只笔同时往纸上写东西，写出来的是什么自己也不知道。</p>
+<p>这个时候我们需要一个类似于<strong>锁</strong>的东西，当C被A在写的时候，B不能写，B要等A写完了才能继续写。</p>
+<p>至于这个<strong>锁</strong>到底是什么会在后面继续讲到。</p>
+<h4 id="3-_死锁问题">3. 死锁问题</h4><p>老板问猿A：“不是说好的马上发布么，怎么还没发！”，猿A说：“设计B缺了个图没给。”，设计B说：“产品C有个功能点没想好。”，产品C说：“老板，邮箱你没看到吗？”。</p>
+<p>互相甩锅的场景是不是很常见？当线程进入循环等待的时候，就造成了死锁现象。</p>
+<h2 id="线程如何去用">线程如何去用</h2><h2 id="线程池">线程池</h2><p>频繁地创建和销毁线程会导致性能大幅度降低，这肯定不是你希望的。</p>
+<p>线程池的出现，就是为了解决这个问题，</p>
+<h2 id="队列">队列</h2><h1 id="并发InAndroid">并发InAndroid</h1><h1 id="感谢">感谢</h1><blockquote>
+<p>《Java并发编程实践》<br>《Thinking in Java》</p>
 </blockquote>
 
       
@@ -601,7 +611,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发"><span class="nav-number">1.</span> <span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是并发"><span class="nav-number">1.1.</span> <span class="nav-text">什么是并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的好处"><span class="nav-number">1.2.</span> <span class="nav-text">并发的好处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提高资源利用率"><span class="nav-number">1.2.1.</span> <span class="nav-text">提高资源利用率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在程序任务上更加精简"><span class="nav-number">1.2.2.</span> <span class="nav-text">在程序任务上更加精简</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更好的响应程序"><span class="nav-number">1.2.3.</span> <span class="nav-text">更好的响应程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的风险"><span class="nav-number">1.3.</span> <span class="nav-text">并发的风险</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的代价"><span class="nav-number">1.3.1.</span> <span class="nav-text">并发的代价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的隐患"><span class="nav-number">1.3.2.</span> <span class="nav-text">并发的隐患</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程篇"><span class="nav-number">2.</span> <span class="nav-text">线程篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程是什么"><span class="nav-number">2.1.</span> <span class="nav-text">进程是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程是什么"><span class="nav-number">2.2.</span> <span class="nav-text">线程是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的关系"><span class="nav-number">2.3.</span> <span class="nav-text">进程与线程的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程"><span class="nav-number">2.4.</span> <span class="nav-text">单线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.5.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全"><span class="nav-number">2.5.1.</span> <span class="nav-text">线程安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">2.6.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">2.7.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发InAndroid"><span class="nav-number">3.</span> <span class="nav-text">并发InAndroid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">4.</span> <span class="nav-text">感谢</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发"><span class="nav-number">1.</span> <span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是并发"><span class="nav-number">1.1.</span> <span class="nav-text">什么是并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的好处"><span class="nav-number">1.2.</span> <span class="nav-text">并发的好处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提高资源利用率"><span class="nav-number">1.2.1.</span> <span class="nav-text">提高资源利用率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在程序任务上更加精简"><span class="nav-number">1.2.2.</span> <span class="nav-text">在程序任务上更加精简</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更好的响应程序"><span class="nav-number">1.2.3.</span> <span class="nav-text">更好的响应程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的风险"><span class="nav-number">1.3.</span> <span class="nav-text">并发的风险</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的代价"><span class="nav-number">1.3.1.</span> <span class="nav-text">并发的代价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的隐患"><span class="nav-number">1.3.2.</span> <span class="nav-text">并发的隐患</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程篇"><span class="nav-number">2.</span> <span class="nav-text">线程篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程是什么"><span class="nav-number">2.1.</span> <span class="nav-text">进程是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程是什么"><span class="nav-number">2.2.</span> <span class="nav-text">线程是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的关系"><span class="nav-number">2.3.</span> <span class="nav-text">进程与线程的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程"><span class="nav-number">2.4.</span> <span class="nav-text">单线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.5.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程并发过程中会遇到的问题"><span class="nav-number">2.5.1.</span> <span class="nav-text">多线程并发过程中会遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_资源共享"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">1. 资源共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_死锁问题"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">3. 死锁问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程如何去用"><span class="nav-number">2.6.</span> <span class="nav-text">线程如何去用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">2.7.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">2.8.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发InAndroid"><span class="nav-number">3.</span> <span class="nav-text">并发InAndroid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">4.</span> <span class="nav-text">感谢</span></a></li></ol></div>
             
           </div>
         </section>
