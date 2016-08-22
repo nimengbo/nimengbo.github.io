@@ -101,7 +101,8 @@
 <meta property="og:image" content="http://abner-nimengbo.cn/images/Thread.png">
 <meta property="og:image" content="http://abner-nimengbo.cn/images/threadRun.png">
 <meta property="og:image" content="http://abner-nimengbo.cn/images/threadStart.png">
-<meta property="og:updated_time" content="2016-08-22T08:13:37.000Z">
+<meta property="og:image" content="http://abner-nimengbo.cn/images/concurrent.png">
+<meta property="og:updated_time" content="2016-08-22T09:35:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android并发编程实践(上)">
 <meta name="twitter:description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解具体涉及的类，最后深入Android中的并发场景和实践。
@@ -381,7 +382,8 @@
 <p>另外在Java1.5之后，还有Callable、Future和FutureTask，在这里就不详细介绍，大家可以自行在Google上搜相关文章</p>
 <h2 id="线程池">线程池</h2><p>频繁地创建和销毁线程会导致性能大幅度降低，这肯定不是你希望的。</p>
 <p>线程池的出现，就是为了解决这个问题。</p>
-<p>直接在代码中创建Thread、Runnable去start或者run容易出现不可预测的问题，在java1.5开始，引入了java.util.concurrent包，其中有个并发的框架：<code>Executor</code>，使用<code>ExecutorService</code>替代直接操作线程类，而<code>Executors</code>是用来创建线程池的，内部提供了很多静态方法去创建你想要的线程池，不需要你再手动去创建实现。</p>
+<p>直接在代码中创建Thread、Runnable去start或者run容易出现不可预测的问题，在java1.5开始，引入了java.util.concurrent包，其中有个并发的框架：<code>Executor</code>，使用<code>ExecutorService</code>替代直接操作线程类，而<code>Executors</code>是用来创建线程池的，内部提供了很多静态方法去创建你想要的线程池，不需要你再手动去创建实现。<br>看一下关于Executor中的类和接口的成员与关系：</p>
+<p><img src="http://abner-nimengbo.cn/images/concurrent.png" alt="concurrent"></p>
 <h2 id="队列">队列</h2><h1 id="并发InAndroid">并发InAndroid</h1><h1 id="感谢">感谢</h1><blockquote>
 <p>《Java并发编程实践》<br>《Thinking in Java》</p>
 </blockquote>
