@@ -89,7 +89,7 @@
 咳，年轻人节制啊。
 并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android并发编程实践(上)">
+<meta property="og:title" content="Java->Android并发编程(上)">
 <meta property="og:url" content="http://yoursite.com/2016/08/13/AndroidMultipeThreadProgram/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
 <meta property="og:description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解具体涉及的类，最后深入Android中的并发场景和实践。
@@ -102,9 +102,10 @@
 <meta property="og:image" content="http://abner-nimengbo.cn/images/threadRun.png">
 <meta property="og:image" content="http://abner-nimengbo.cn/images/threadStart.png">
 <meta property="og:image" content="http://abner-nimengbo.cn/images/concurrent.png">
-<meta property="og:updated_time" content="2016-08-22T09:35:05.000Z">
+<meta property="og:image" content="http://abner-nimengbo.cn/images/BlockingQueue.png">
+<meta property="og:updated_time" content="2016-08-23T10:06:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android并发编程实践(上)">
+<meta name="twitter:title" content="Java->Android并发编程(上)">
 <meta name="twitter:description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解具体涉及的类，最后深入Android中的并发场景和实践。
 并发什么是并发举个很简单的栗子，当你一边在撸撸撸，一边在看小视频，同时在做两件事，这就是并发。
 咳，年轻人节制啊。
@@ -131,7 +132,7 @@
 
   <link rel="canonical" href="http://yoursite.com/2016/08/13/AndroidMultipeThreadProgram/"/>
 
-  <title> Android并发编程实践(上) | Abner_泥阿布 </title>
+  <title> Java->Android并发编程(上) | Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +272,7 @@
             
             
               
-                Android并发编程实践(上)
+                Java->Android并发编程(上)
               
             
           </h1>
@@ -379,14 +380,55 @@
 <p>而调用<code>start()</code>方法得到的信息是：</p>
 <p><img src="http://abner-nimengbo.cn/images/threadStart.png" alt="ThreadStart"></p>
 <p>发现线程名不一样了，用start会开启一个新的线程，而run还是在当前线程执行。</p>
-<p>另外在Java1.5之后，还有Callable、Future和FutureTask，在这里就不详细介绍，大家可以自行在Google上搜相关文章</p>
+<p>另外在Java1.5之后，还有Callable、Future和FutureTask，在这里就不详细介绍，还有线程的wait、<br>yield、sleep等在下一章会一起详细介绍。</p>
 <h2 id="线程池">线程池</h2><p>频繁地创建和销毁线程会导致性能大幅度降低，这肯定不是你希望的。</p>
-<p>线程池的出现，就是为了解决这个问题。</p>
-<p>直接在代码中创建Thread、Runnable去start或者run容易出现不可预测的问题，在java1.5开始，引入了java.util.concurrent包，其中有个并发的框架：<code>Executor</code>，使用<code>ExecutorService</code>替代直接操作线程类，而<code>Executors</code>是用来创建线程池的，内部提供了很多静态方法去创建你想要的线程池，不需要你再手动去创建实现。<br>看一下关于Executor中的类和接口的成员与关系：</p>
+<p>线程池的出现，就是为了解决这个问题，根据java中提供不同的线程池机制，有效地提高资源利用率。</p>
+<p>直接在代码中创建Thread、Runnable去start或者run容易出现不可预测的问题，在java1.5开始，引入了java.util.concurrent包，其中有个并发的框架：<code>Executor</code>，使用<code>ExecutorService</code>替代直接操作线程类，而<code>Executors</code>是用来创建线程池的，内部提供了很多静态方法去创建你想要的线程池，不需要你再手动去创建实现。<br>看一下关于Executor中的类和接口的大致的成员与关系：</p>
 <p><img src="http://abner-nimengbo.cn/images/concurrent.png" alt="concurrent"></p>
-<h2 id="队列">队列</h2><h1 id="并发InAndroid">并发InAndroid</h1><h1 id="感谢">感谢</h1><blockquote>
+<p>关于这些类如何使用，以及有什么特性，下一章会作介绍。</p>
+<h2 id="队列">队列</h2><p>在java中提到队列肯定会想起<code>Queue</code>,而线程队列用的是<code>BlockingQueue</code>,这是个借口，在<code>concurrent</code>包中有好几个类实现了这个接口。</p>
+<p><img src="http://abner-nimengbo.cn/images/BlockingQueue.png" alt="BlockingQueue"></p>
+<p>介绍一下BlockingQueue常用的方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">会异常</th>
+<th style="text-align:center">返回是否成功</th>
+<th>会阻塞</th>
+<th style="text-align:center">设定等待时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">入队列</td>
+<td style="text-align:center">add(e)</td>
+<td style="text-align:center">offer(e)</td>
+<td>put(e)</td>
+<td style="text-align:center">offer(e, timeout, unit)</td>
+</tr>
+<tr>
+<td style="text-align:center">出队列</td>
+<td style="text-align:center">remove()</td>
+<td style="text-align:center">poll()</td>
+<td>take()</td>
+<td style="text-align:center">poll(time, unit)</td>
+</tr>
+<tr>
+<td style="text-align:center">查看值</td>
+<td style="text-align:center">element()</td>
+<td style="text-align:center">peek()</td>
+<td>none</td>
+<td style="text-align:center">none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="锁">锁</h2><p>在前面讲过死锁，死锁是由于使用不当引起的一种现象，而这里的锁是人工干预的，让并发按照你的意思走。</p>
+<p>在java中的锁有synchonrize、Lock。锁的出现主要是为了解决线程安全问题。</p>
+<h1 id="感谢">感谢</h1><blockquote>
 <p>《Java并发编程实践》<br>《Thinking in Java》</p>
 </blockquote>
+<h1 id="预告">预告</h1><p>本节中挖的坑，一些没有展开讲的东西，会在下一节中填上。</p>
 
       
     </div>
@@ -452,7 +494,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2016/08/13/AndroidMultipeThreadProgram/"
-     data-title="Android并发编程实践(上)"
+     data-title="Java->Android并发编程(上)"
      data-content=""
      data-url="http://yoursite.com/2016/08/13/AndroidMultipeThreadProgram/">
   <div class="ds-share-inline">
@@ -482,7 +524,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/08/13/AndroidMultipeThreadProgram/"
-           data-title="Android并发编程实践(上)" data-url="http://yoursite.com/2016/08/13/AndroidMultipeThreadProgram/">
+           data-title="Java->Android并发编程(上)" data-url="http://yoursite.com/2016/08/13/AndroidMultipeThreadProgram/">
       </div>
     
   </div>
@@ -628,7 +670,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发"><span class="nav-number">1.</span> <span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是并发"><span class="nav-number">1.1.</span> <span class="nav-text">什么是并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的好处"><span class="nav-number">1.2.</span> <span class="nav-text">并发的好处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提高资源利用率"><span class="nav-number">1.2.1.</span> <span class="nav-text">提高资源利用率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在程序任务上更加精简"><span class="nav-number">1.2.2.</span> <span class="nav-text">在程序任务上更加精简</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更好的响应程序"><span class="nav-number">1.2.3.</span> <span class="nav-text">更好的响应程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的风险"><span class="nav-number">1.3.</span> <span class="nav-text">并发的风险</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的代价"><span class="nav-number">1.3.1.</span> <span class="nav-text">并发的代价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的隐患"><span class="nav-number">1.3.2.</span> <span class="nav-text">并发的隐患</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程篇"><span class="nav-number">2.</span> <span class="nav-text">线程篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程是什么"><span class="nav-number">2.1.</span> <span class="nav-text">进程是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程是什么"><span class="nav-number">2.2.</span> <span class="nav-text">线程是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的关系"><span class="nav-number">2.3.</span> <span class="nav-text">进程与线程的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程"><span class="nav-number">2.4.</span> <span class="nav-text">单线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.5.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程并发过程中会遇到的问题"><span class="nav-number">2.5.1.</span> <span class="nav-text">多线程并发过程中会遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_资源共享"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">1. 资源共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_死锁问题"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">3. 死锁问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程如何去用"><span class="nav-number">2.6.</span> <span class="nav-text">线程如何去用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">2.7.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">2.8.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发InAndroid"><span class="nav-number">3.</span> <span class="nav-text">并发InAndroid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">4.</span> <span class="nav-text">感谢</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发"><span class="nav-number">1.</span> <span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是并发"><span class="nav-number">1.1.</span> <span class="nav-text">什么是并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的好处"><span class="nav-number">1.2.</span> <span class="nav-text">并发的好处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提高资源利用率"><span class="nav-number">1.2.1.</span> <span class="nav-text">提高资源利用率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在程序任务上更加精简"><span class="nav-number">1.2.2.</span> <span class="nav-text">在程序任务上更加精简</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更好的响应程序"><span class="nav-number">1.2.3.</span> <span class="nav-text">更好的响应程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的风险"><span class="nav-number">1.3.</span> <span class="nav-text">并发的风险</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的代价"><span class="nav-number">1.3.1.</span> <span class="nav-text">并发的代价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发的隐患"><span class="nav-number">1.3.2.</span> <span class="nav-text">并发的隐患</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程篇"><span class="nav-number">2.</span> <span class="nav-text">线程篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程是什么"><span class="nav-number">2.1.</span> <span class="nav-text">进程是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程是什么"><span class="nav-number">2.2.</span> <span class="nav-text">线程是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的关系"><span class="nav-number">2.3.</span> <span class="nav-text">进程与线程的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程"><span class="nav-number">2.4.</span> <span class="nav-text">单线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.5.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程并发过程中会遇到的问题"><span class="nav-number">2.5.1.</span> <span class="nav-text">多线程并发过程中会遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_资源共享"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">1. 资源共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_死锁问题"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">3. 死锁问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程如何去用"><span class="nav-number">2.6.</span> <span class="nav-text">线程如何去用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">2.7.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">2.8.</span> <span class="nav-text">队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁"><span class="nav-number">2.9.</span> <span class="nav-text">锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">3.</span> <span class="nav-text">感谢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预告"><span class="nav-number">4.</span> <span class="nav-text">预告</span></a></li></ol></div>
             
           </div>
         </section>
