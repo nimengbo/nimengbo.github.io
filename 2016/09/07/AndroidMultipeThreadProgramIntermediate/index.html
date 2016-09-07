@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android,Thread," />
 
 
 
@@ -58,15 +58,34 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Abner_泥阿布">
-<meta property="og:url" content="http://yoursite.com/archives/2015/11/index.html">
+<meta name="description" content="最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。
+上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
+Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
+Java中的锁Java中经常用到的锁有:
+
+synchronized
+Lock">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java->Android并发编程筑基篇">
+<meta property="og:url" content="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:description">
+<meta property="og:description" content="最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。
+上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
+Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
+Java中的锁Java中经常用到的锁有:
+
+synchronized
+Lock">
+<meta property="og:updated_time" content="2016-09-07T09:27:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Abner_泥阿布">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Java->Android并发编程筑基篇">
+<meta name="twitter:description" content="最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。
+上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
+Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
+Java中的锁Java中经常用到的锁有:
+
+synchronized
+Lock">
 
 
 
@@ -87,9 +106,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2015/11/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/"/>
 
-  <title> 归档 | Abner_泥阿布 </title>
+  <title> Java->Android并发编程筑基篇 | Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -110,7 +129,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -208,103 +227,186 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 12 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2015">2015</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/11/17/异乡-2015年/" itemprop="url">
-              
-                <span itemprop="name">异乡-2015年</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-11-17T23:34:53+08:00"
-              content="2015-11-17" >
-          11-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/11/17/Android-学习IPC之个人总结/" itemprop="url">
-              
-                <span itemprop="name">Android 学习IPC之个人总结</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-11-17T16:15:29+08:00"
-              content="2015-11-17" >
-          11-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java->Android并发编程筑基篇
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T16:44:43+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/实践/" itemprop="url" rel="index">
+                    <span itemprop="name">实践</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/07/AndroidMultipeThreadProgramIntermediate/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/AndroidMultipeThreadProgramIntermediate/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。</p>
+<p>上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。</p>
+<h1 id="Java的线程状态">Java的线程状态</h1><p>想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：</p>
+<h1 id="Java中的锁">Java中的锁</h1><p>Java中经常用到的锁有:</p>
+<ul>
+<li>synchronized</li>
+<li>Lock</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Abner_泥阿布 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我们的公众号！<br>或者欢迎加入QQ群：568863373。</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/Thread/" rel="tag">#Thread</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/13/AndroidMultipeThreadProgram/" rel="next" title="Java->Android并发编程引气入门篇">
+                <i class="fa fa-chevron-left"></i> Java->Android并发编程引气入门篇
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div><p align="center"><img src="http://abner-nimengbo.cn/images/donation.png" style="margin-bottom:3px;" width="174px" height="154px" /></p></div>
+    <br/>
+    <p>如果你觉得这篇文章对你有帮助，请点击下面的分享链接，你还可以选择扫描二维码进行打赏!</p>
+    <a href="https://github.com/nimengbo">我的Github</p>
+    <a href="http://weibo.com/nimengbo/">我的新浪微博</p>
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/07/AndroidMultipeThreadProgramIntermediate/"
+     data-title="Java->Android并发编程筑基篇"
+     data-content=""
+     data-url="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
@@ -312,6 +414,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/07/AndroidMultipeThreadProgramIntermediate/"
+           data-title="Java->Android并发编程筑基篇" data-url="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -331,8 +441,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -438,6 +557,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java的线程状态"><span class="nav-number">1.</span> <span class="nav-text">Java的线程状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的锁"><span class="nav-number">2.</span> <span class="nav-text">Java中的锁</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -533,11 +663,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
