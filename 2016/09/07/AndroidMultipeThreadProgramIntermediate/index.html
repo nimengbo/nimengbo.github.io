@@ -62,10 +62,9 @@
 上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
 Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
 
-Java中的锁Java中经常用到的锁有:
-
-synchronized
-Lock">
+在线程的运行周期中会有状态与锁有关，所以先要讲解线程的状态，才能继续讲锁。
+sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给其他线程。
+类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java->Android并发编程筑基篇">
 <meta property="og:url" content="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/index.html">
@@ -74,22 +73,20 @@ Lock">
 上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
 Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
 
-Java中的锁Java中经常用到的锁有:
-
-synchronized
-Lock">
+在线程的运行周期中会有状态与锁有关，所以先要讲解线程的状态，才能继续讲锁。
+sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给其他线程。
+类">
 <meta property="og:image" content="http://abner-nimengbo.cn/images/threadStatus.png">
-<meta property="og:updated_time" content="2016-09-07T10:12:30.000Z">
+<meta property="og:updated_time" content="2016-09-08T09:57:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java->Android并发编程筑基篇">
 <meta name="twitter:description" content="最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。
 上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
 Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
 
-Java中的锁Java中经常用到的锁有:
-
-synchronized
-Lock">
+在线程的运行周期中会有状态与锁有关，所以先要讲解线程的状态，才能继续讲锁。
+sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给其他线程。
+类">
 
 
 
@@ -322,6 +319,18 @@ Lock">
 <p>上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。</p>
 <h1 id="Java的线程状态">Java的线程状态</h1><p>想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：</p>
 <p><img src="http://abner-nimengbo.cn/images/threadStatus.png" alt="线程生命周期"></p>
+<p>在线程的运行周期中会有状态与锁有关，所以先要讲解线程的状态，才能继续讲锁。</p>
+<h2 id="sleep">sleep</h2><p>sleep会让当前线程进入”睡眠”状态，把执行的机会让给其他线程。</p>
+<p><code>类似于迅雷下载，当前正在下载N部片子，可同时执行任务数为M(M&lt;N)，暂停当前任务后，正在等待的任务才有机会提前运行，否则只有当前任务结束后，才会开始。</code></p>
+<p>但是，sleep不会释放锁，如果有同步块、锁之类的，sleep后，别的线程仍然不能访问已经被锁住的数据。</p>
+<h2 id="wait、notify、notifyAll">wait、notify、notifyAll</h2><p>在使用wait和notify的时候需要用synchronized锁住对象，以此来保证线程安全。</p>
+<p>使用wait后，会暂时地将锁释放，使当前线程处于等待状态，从而使别的线程可以访问到资源，唤醒(notify)或者使用了wait(long)线程苏醒后就会重新占用锁，如果使用了interrupte去中断wait，就会抛出<strong>InterruptedException</strong>。</p>
+<p>需要注意的是，wait、notify、notifyAll，都是属于Object类中的方法，而不是属于Thread，这意味着使用对象的方法，会影响到访问此对象的线程的状态，所以前面提到需要用synchronized保证线程。</p>
+<h2 id="yield">yield</h2><blockquote>
+<p> Causes the calling Thread to yield execution time to another Thread that<br>is ready to run. The actual scheduling is implementation-dependent.</p>
+</blockquote>
+<p>这是官方的注释，调用Thread.yield()方法，只是让线程进入准备运行状态，把CPU资源让给别的线程提前运行。</p>
+<h2 id="join">join</h2><p>Thread.join()<br>看字面意思像是合并，其实从效果上来看更像”插队”，b.join，那么a必须等b执行完才能继续往下执行。</p>
 <h1 id="Java中的锁">Java中的锁</h1><p>Java中经常用到的锁有:</p>
 <ul>
 <li>synchronized</li>
@@ -372,6 +381,10 @@ Lock">
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/10/componetization/" rel="prev" title="项目组件化之路">
+                项目组件化之路 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -467,7 +480,7 @@ Lock">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -568,7 +581,7 @@ Lock">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java的线程状态"><span class="nav-number">1.</span> <span class="nav-text">Java的线程状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的锁"><span class="nav-number">2.</span> <span class="nav-text">Java中的锁</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java的线程状态"><span class="nav-number">1.</span> <span class="nav-text">Java的线程状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep"><span class="nav-number">1.1.</span> <span class="nav-text">sleep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wait、notify、notifyAll"><span class="nav-number">1.2.</span> <span class="nav-text">wait、notify、notifyAll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yield"><span class="nav-number">1.3.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join"><span class="nav-number">1.4.</span> <span class="nav-text">join</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的锁"><span class="nav-number">2.</span> <span class="nav-text">Java中的锁</span></a></li></ol></div>
             
           </div>
         </section>
