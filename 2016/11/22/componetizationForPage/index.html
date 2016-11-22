@@ -58,13 +58,25 @@
 
 
 
+<meta name="description" content="当项目做了组件化之后，每个module都是可以独立作为application，那么怎么跳转到别的module页面呢？是否需要关心别人的页面叫什么呢？是否需要因为别人的页面改动而影响呢？
+答案是NO。
+那么我接下来要说的方案是deeplink，也就是Android提供的scheme跳转。
+为什么要选择deeplinkhttp://example.com/deepLink/{id}/{name}比如这">
 <meta property="og:type" content="article">
 <meta property="og:title" content="组件化之页面跳转设计">
 <meta property="og:url" content="http://yoursite.com/2016/11/22/componetizationForPage/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:updated_time" content="2016-11-22T05:31:25.000Z">
+<meta property="og:description" content="当项目做了组件化之后，每个module都是可以独立作为application，那么怎么跳转到别的module页面呢？是否需要关心别人的页面叫什么呢？是否需要因为别人的页面改动而影响呢？
+答案是NO。
+那么我接下来要说的方案是deeplink，也就是Android提供的scheme跳转。
+为什么要选择deeplinkhttp://example.com/deepLink/{id}/{name}比如这">
+<meta property="og:updated_time" content="2016-11-22T07:47:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="组件化之页面跳转设计">
+<meta name="twitter:description" content="当项目做了组件化之后，每个module都是可以独立作为application，那么怎么跳转到别的module页面呢？是否需要关心别人的页面叫什么呢？是否需要因为别人的页面改动而影响呢？
+答案是NO。
+那么我接下来要说的方案是deeplink，也就是Android提供的scheme跳转。
+为什么要选择deeplinkhttp://example.com/deepLink/{id}/{name}比如这">
 
 
 
@@ -293,7 +305,16 @@
       
 
       
-        
+        <p>当项目做了组件化之后，每个module都是可以独立作为application，那么怎么跳转到别的module页面呢？是否需要关心别人的页面叫什么呢？是否需要因为别人的页面改动而影响呢？</p>
+<p>答案是NO。</p>
+<p>那么我接下来要说的方案是deeplink，也就是Android提供的scheme跳转。</p>
+<h2 id="为什么要选择deeplink">为什么要选择deeplink</h2><p><code>http://example.com/deepLink/{id}/{name}</code>比如这种形式根据两边定好的协议，能直接跳转、获取参数，而不需要关心对方的页面，就算页面改了类名、包名，只要scheme配置没改，那么都不需要担心。<br>做到了解耦的特性。解耦也是组件化的最关键的一步。</p>
+<h2 id="用什么方式去实现deeplink">用什么方式去实现deeplink</h2><h3 id="自己维护一个navigator">自己维护一个navigator</h3><p>全局维护一个navigator，每次有需要跳转的页面，就register进去。</p>
+<h3 id="使用注解方式">使用注解方式</h3><p>使用<strong>annotation</strong>，在每个界面上方注册deeplink的参数和规范。</p>
+<p>使用apt，生成每个module(根据module包名)自己的分发deeplink的类。</p>
+<p>airbnb的deeplinkDispatch就做的很好  <a href="https://github.com/airbnb/DeepLinkDispatch" target="_blank" rel="external">deeplinkDispatch</a></p>
+<p>。。突然没心情写源码解析了。以后有空再补上。</p>
+
       
     </div>
 
@@ -534,7 +555,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要选择deeplink"><span class="nav-number">1.</span> <span class="nav-text">为什么要选择deeplink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用什么方式去实现deeplink"><span class="nav-number">2.</span> <span class="nav-text">用什么方式去实现deeplink</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自己维护一个navigator"><span class="nav-number">2.1.</span> <span class="nav-text">自己维护一个navigator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用注解方式"><span class="nav-number">2.2.</span> <span class="nav-text">使用注解方式</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
