@@ -42,7 +42,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,Thread," />
+  <meta name="keywords" content="Android,ReactNative," />
 
 
 
@@ -58,36 +58,22 @@
 
 
 
-<meta name="description" content="最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。
-上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
-Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
-
-在线程的运行周期中会有状态与锁有关，所以先要讲解线程的状态，才能继续讲锁。
-sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给其他线程。
-类">
+<meta name="description" content="背景PM 提了一个需求：我们要做一个 app，有 xxx 功能，暂时先支持这么多，用 rn 现有的框架，目前先用 ipad 运行，android 平台有硬件的锅。但是我们三天后要上线。
+我： ？？？？ wut ？
+开始进入写垃圾代码模式。 怎么快怎么来，就几个简单的页面，不需要跨页面组件沟通，要什么 redux，state 就能搞定。封装？不存在的，能写完就不错了。 三天后，项目如期上线，经过一段">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java->Android并发编程筑基篇">
-<meta property="og:url" content="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/index.html">
+<meta property="og:title" content="react-native for android 重构与优化">
+<meta property="og:url" content="http://yoursite.com/2019/09/21/react-native-for-android-重构与优化/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
-<meta property="og:description" content="最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。
-上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
-Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
-
-在线程的运行周期中会有状态与锁有关，所以先要讲解线程的状态，才能继续讲锁。
-sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给其他线程。
-类">
-<meta property="og:image" content="http://abner-nimengbo.cn/images/threadStatus.png">
-<meta property="og:updated_time" content="2016-09-08T09:57:03.000Z">
+<meta property="og:description" content="背景PM 提了一个需求：我们要做一个 app，有 xxx 功能，暂时先支持这么多，用 rn 现有的框架，目前先用 ipad 运行，android 平台有硬件的锅。但是我们三天后要上线。
+我： ？？？？ wut ？
+开始进入写垃圾代码模式。 怎么快怎么来，就几个简单的页面，不需要跨页面组件沟通，要什么 redux，state 就能搞定。封装？不存在的，能写完就不错了。 三天后，项目如期上线，经过一段">
+<meta property="og:updated_time" content="2019-09-21T12:10:45.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java->Android并发编程筑基篇">
-<meta name="twitter:description" content="最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。
-上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。
-Java的线程状态想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：
-
-在线程的运行周期中会有状态与锁有关，所以先要讲解线程的状态，才能继续讲锁。
-sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给其他线程。
-类">
-<meta name="twitter:image" content="http://abner-nimengbo.cn/images/threadStatus.png">
+<meta name="twitter:title" content="react-native for android 重构与优化">
+<meta name="twitter:description" content="背景PM 提了一个需求：我们要做一个 app，有 xxx 功能，暂时先支持这么多，用 rn 现有的框架，目前先用 ipad 运行，android 平台有硬件的锅。但是我们三天后要上线。
+我： ？？？？ wut ？
+开始进入写垃圾代码模式。 怎么快怎么来，就几个简单的页面，不需要跨页面组件沟通，要什么 redux，state 就能搞定。封装？不存在的，能写完就不错了。 三天后，项目如期上线，经过一段">
 
 
 
@@ -108,9 +94,9 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/09/21/react-native-for-android-重构与优化/"/>
 
-  <title> Java->Android并发编程筑基篇 | Abner_泥阿布 </title>
+  <title> react-native for android 重构与优化 | Abner_泥阿布 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +236,7 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
             
             
               
-                Java->Android并发编程筑基篇
+                react-native for android 重构与优化
               
             
           </h1>
@@ -262,38 +248,19 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-07T16:44:43+08:00" content="2016-09-07">
-              2016-09-07
+            <time itemprop="dateCreated" datetime="2019-09-21T19:52:34+08:00" content="2019-09-21">
+              2019-09-21
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/实践/" itemprop="url" rel="index">
-                    <span itemprop="name">实践</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/07/AndroidMultipeThreadProgramIntermediate/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/AndroidMultipeThreadProgramIntermediate/" itemprop="commentsCount"></span>
+                <a href="/2019/09/21/react-native-for-android-重构与优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/09/21/react-native-for-android-重构与优化/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -316,27 +283,18 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
       
 
       
-        <p>最近有点忙，又有其他的事情，所以一直没有开始写这篇，感觉很惭愧。</p>
-<p>上一章讲了太多的东西，其实每一个小细节都可以写成一长篇，这一章会尽量用精简的方式把坑填上。</p>
-<h1 id="Java的线程状态">Java的线程状态</h1><p>想要学好并发，还是得知道线程的生命周期，先看一下线程的生命周期：</p>
-<p><img src="http://abner-nimengbo.cn/images/threadStatus.png" alt="线程生命周期"></p>
-<p>在线程的运行周期中会有状态与锁有关，所以先要讲解线程的状态，才能继续讲锁。</p>
-<h2 id="sleep">sleep</h2><p>sleep会让当前线程进入”睡眠”状态，把执行的机会让给其他线程。</p>
-<p><code>类似于迅雷下载，当前正在下载N部片子，可同时执行任务数为M(M&lt;N)，暂停当前任务后，正在等待的任务才有机会提前运行，否则只有当前任务结束后，才会开始。</code></p>
-<p>但是，sleep不会释放锁，如果有同步块、锁之类的，sleep后，别的线程仍然不能访问已经被锁住的数据。</p>
-<h2 id="wait、notify、notifyAll">wait、notify、notifyAll</h2><p>在使用wait和notify的时候需要用synchronized锁住对象，以此来保证线程安全。</p>
-<p>使用wait后，会暂时地将锁释放，使当前线程处于等待状态，从而使别的线程可以访问到资源，唤醒(notify)或者使用了wait(long)线程苏醒后就会重新占用锁，如果使用了interrupte去中断wait，就会抛出<strong>InterruptedException</strong>。</p>
-<p>需要注意的是，wait、notify、notifyAll，都是属于Object类中的方法，而不是属于Thread，这意味着使用对象的方法，会影响到访问此对象的线程的状态，所以前面提到需要用synchronized保证线程。</p>
-<h2 id="yield">yield</h2><blockquote>
-<p> Causes the calling Thread to yield execution time to another Thread that<br>is ready to run. The actual scheduling is implementation-dependent.</p>
-</blockquote>
-<p>这是官方的注释，调用Thread.yield()方法，只是让线程进入准备运行状态，把CPU资源让给别的线程提前运行。</p>
-<h2 id="join">join</h2><p>Thread.join()<br>看字面意思像是合并，其实从效果上来看更像”插队”，b.join，那么a必须等b执行完才能继续往下执行。</p>
-<h1 id="Java中的锁">Java中的锁</h1><p>Java中经常用到的锁有:</p>
-<ul>
-<li>synchronized</li>
-<li>Lock</li>
-</ul>
+        <h2 id="背景">背景</h2><p>PM 提了一个需求：我们要做一个 app，有 xxx 功能，暂时先支持这么多，用 rn 现有的框架，目前先用 ipad 运行，android 平台有硬件的锅。但是我们三天后要上线。</p>
+<p>我： ？？？？ wut ？</p>
+<p>开始进入写垃圾代码模式。 怎么快怎么来，就几个简单的页面，不需要跨页面组件沟通，要什么 redux，state 就能搞定。封装？不存在的，能写完就不错了。 三天后，项目如期上线，经过一段时间的怼代码迭代，pm 突然有一天跑来说： xxx，我们现在需要支持 android 平台。</p>
+<p>我： ？？？？ wut ？</p>
+<p>经过一番适配，跑了一下，ui 大致没啥问题，业务也能跑通。但是 tmd 怎么这么卡呢？而且 ipad 一点都不卡，android 这么卡 ？？？</p>
+<h3 id="分析问题">分析问题</h3><p>app 在某个页面一直有个类似于轮询的机制，不停的请求数据，刷新页面，在 android 中，这个方式是 native 暴露方法，js 层直接调用，200ms 一次请求。由于前期的粗糙迭代，没有什么子组件一说，页面组件层级不超过3级，state 全部在父级维护，看了下大概200多行，自己都慌了，这不就意味着每 200 ms，所有组件都会重新重新进行 diff 比较，然后判断是否重新渲染吗，这么多组件，不卡才有鬼。</p>
+<h3 id="解决方案">解决方案</h3><p>按照页面模块拆分结构，把所有模块拆成独立的个体，不会相互影响，都用 shouldComponentUpdate 判断比较。</p>
+<h3 id="抽取一个模块做测试">抽取一个模块做测试</h3><p>先抽离那个 200ms 请求刷新页面的模块，抽成子组件后，state 在内部维护，里面刷新，父组件稳如泰山，这个方法可行。</p>
+<h3 id="native_方案">native 方案</h3><p>native 是与 plc 通信，串口交流，大部分地方为了线程安全，都加了锁。但是在 js 请求 native 方法的时候，还是在主线程获取的数据，所以会影响操作。</p>
+<p>将这部分方案，由类生产者与消费者模式改成观察者模式。</p>
+<p>native 的这部分代码都由 service 处理，并通过事件告诉 js ，在 js 的注册事件回调中获取数据并刷新界面</p>
+<h2 id="总结">总结</h2><p>乱怼一时爽，重构火葬场</p>
 
       
     </div>
@@ -366,7 +324,7 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
           
             <a href="/tags/Android/" rel="tag">#Android</a>
           
-            <a href="/tags/Thread/" rel="tag">#Thread</a>
+            <a href="/tags/ReactNative/" rel="tag">#ReactNative</a>
           
         </div>
       
@@ -375,17 +333,13 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/13/AndroidMultipeThreadProgram/" rel="next" title="Java->Android并发编程引气入门篇">
-                <i class="fa fa-chevron-left"></i> Java->Android并发编程引气入门篇
+              <a href="/2019/09/18/react-native-预加载优化/" rel="next" title="react-native 预加载优化">
+                <i class="fa fa-chevron-left"></i> react-native 预加载优化
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/10/componetization/" rel="prev" title="项目组件化之遇到的坑">
-                项目组件化之遇到的坑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -405,10 +359,10 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
     <a href="http://weibo.com/nimengbo/">我的新浪微博</p>
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/09/07/AndroidMultipeThreadProgramIntermediate/"
-     data-title="Java->Android并发编程筑基篇"
+        <div class="ds-share flat" data-thread-key="2019/09/21/react-native-for-android-重构与优化/"
+     data-title="react-native for android 重构与优化"
      data-content=""
-     data-url="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/">
+     data-url="http://yoursite.com/2019/09/21/react-native-for-android-重构与优化/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -435,8 +389,8 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/07/AndroidMultipeThreadProgramIntermediate/"
-           data-title="Java->Android并发编程筑基篇" data-url="http://yoursite.com/2016/09/07/AndroidMultipeThreadProgramIntermediate/">
+      <div class="ds-thread" data-thread-key="2019/09/21/react-native-for-android-重构与优化/"
+           data-title="react-native for android 重构与优化" data-url="http://yoursite.com/2019/09/21/react-native-for-android-重构与优化/">
       </div>
     
   </div>
@@ -586,7 +540,7 @@ sleepsleep会让当前线程进入”睡眠”状态，把执行的机会让给�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java的线程状态"><span class="nav-number">1.</span> <span class="nav-text">Java的线程状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep"><span class="nav-number">1.1.</span> <span class="nav-text">sleep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wait、notify、notifyAll"><span class="nav-number">1.2.</span> <span class="nav-text">wait、notify、notifyAll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yield"><span class="nav-number">1.3.</span> <span class="nav-text">yield</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join"><span class="nav-number">1.4.</span> <span class="nav-text">join</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的锁"><span class="nav-number">2.</span> <span class="nav-text">Java中的锁</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析问题"><span class="nav-number">1.1.</span> <span class="nav-text">分析问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽取一个模块做测试"><span class="nav-number">1.3.</span> <span class="nav-text">抽取一个模块做测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#native_方案"><span class="nav-number">1.4.</span> <span class="nav-text">native 方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
