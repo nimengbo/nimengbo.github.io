@@ -1,0 +1,729 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,组件化," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="在MDCC中冯森林老师的组件化思路，为我们这些没有那么多精力折腾黑科技开发者们打开了另一扇门。
+需要做的事情很简单，就是将业务解耦模块化，让这个模块在debug下作为application单独运行，而在release下就作为library。
+这篇其实只是写一下我碰到的问题，记录一下。
+组件化套壳思路在这要感谢一下低调的二帅 ( https://github.com/zzz40500 )，提供了合并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目组件化之遇到的坑">
+<meta property="og:url" content="http://yoursite.com/2016/10/10/componetization/index.html">
+<meta property="og:site_name" content="Abner_泥阿布">
+<meta property="og:description" content="在MDCC中冯森林老师的组件化思路，为我们这些没有那么多精力折腾黑科技开发者们打开了另一扇门。
+需要做的事情很简单，就是将业务解耦模块化，让这个模块在debug下作为application单独运行，而在release下就作为library。
+这篇其实只是写一下我碰到的问题，记录一下。
+组件化套壳思路在这要感谢一下低调的二帅 ( https://github.com/zzz40500 )，提供了合并">
+<meta property="og:image" content="http://abner-nimengbo.cn/images/manifest.png">
+<meta property="og:updated_time" content="2016-11-22T05:31:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="项目组件化之遇到的坑">
+<meta name="twitter:description" content="在MDCC中冯森林老师的组件化思路，为我们这些没有那么多精力折腾黑科技开发者们打开了另一扇门。
+需要做的事情很简单，就是将业务解耦模块化，让这个模块在debug下作为application单独运行，而在release下就作为library。
+这篇其实只是写一下我碰到的问题，记录一下。
+组件化套壳思路在这要感谢一下低调的二帅 ( https://github.com/zzz40500 )，提供了合并">
+<meta name="twitter:image" content="http://abner-nimengbo.cn/images/manifest.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/10/componetization/"/>
+
+  <title> 项目组件化之遇到的坑 | Abner_泥阿布 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Abner_泥阿布</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                项目组件化之遇到的坑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-10T15:35:31+08:00" content="2016-10-10">
+              2016-10-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/实践/" itemprop="url" rel="index">
+                    <span itemprop="name">实践</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/10/componetization/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/10/componetization/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在MDCC中冯森林老师的组件化思路，为我们这些没有那么多精力折腾黑科技开发者们打开了另一扇门。</p>
+<p>需要做的事情很简单，就是将业务解耦模块化，让这个模块在debug下作为application单独运行，而在release下就作为library。</p>
+<p>这篇其实只是写一下我碰到的问题，记录一下。</p>
+<h1 id="组件化套壳思路">组件化套壳思路</h1><p>在这要感谢一下低调的<strong>二帅</strong> ( <a href="https://github.com/zzz40500" target="_blank" rel="external">https://github.com/zzz40500</a> )，提供了合并manifest的思路。</p>
+<p>以及小梁提供的demo示例( <a href="https://github.com/liangzhitao/ComponentizationApp" target="_blank" rel="external">https://github.com/liangzhitao/ComponentizationApp</a> )</p>
+<p><img src="http://abner-nimengbo.cn/images/manifest.png" alt="manifest"></p>
+<p>和<strong>main</strong>同级下有一个<strong>debug</strong>和<strong>release</strong>目录，在用命令行<code>gradle assembleDebug</code> 就会把main中的manifest和debug中的manifest合并。</p>
+<p>当debug的时候就会使用debug的manifest中的activity作为入口启动，这样在开发的时候只需要在当前模块编译开发即可。</p>
+<p>release的时候module就是library了，而入口就是app。</p>
+<h1 id="组件化遇到的坑">组件化遇到的坑</h1><p>因为我们项目重度依赖apt以及一些编译中生成的库，像<strong>databinding</strong>、<strong>dagger</strong>、<strong>retrolambda</strong>。</p>
+<p>我们把dagger一些公用的component以及module都随着业务module一起抽离了出来。</p>
+<h2 id="填坑之databinding">填坑之databinding</h2><p>之后抽离databinding的时候遇到了蛋疼的问题，我们使用databinding直接get之前set进去的variable，结果这样会导致在databidning在library中编译出错，其中缘由可以另外移驾至 –&gt; <a href="http://blog.zhaiyifan.cn/2016/10/11/data-binding-in-library-module/" target="_blank" rel="external">http://blog.zhaiyifan.cn/2016/10/11/data-binding-in-library-module/</a></p>
+<h3 id="查错">查错</h3><p>databinding生成出错后，会连带dagger报错，这个时候报错又毫无头绪。<br>需要使用命令行，将编译的log输出到文件中，因为console输出log有行数限制的。<br><code>gradle assembleDebug --debug --info &gt; log.txt 2&gt;&amp;1</code></p>
+<h3 id="xml">xml</h3><p>在抽离module的时候用的AndroidStudio(大坑)的refactor，但是不支持对xml的修改，所以databinding涉及的xml中的依赖都要手动修改过来。</p>
+<h3 id="生成的BR">生成的BR</h3><p>有多个module都是使用了databinding，那么这个时候会有对于BR依赖的问题，你要自己区分你使用的是依赖module的BR还是当前module的BR</p>
+<p>databinding组件化总结：只要一处没修改好，所有编译都是红的，反正都是泪~</p>
+<h2 id="retrolambda">retrolambda</h2><p>db填完后，发现retrolambda提示生成class出错，但是它又不是apt的，根据错误提示找了许久，提示升级版本，之前是3.2.5，升级到3.3.0之后编译OK，然后在阿翟那边编译失败，又降了回来，现在又可以编译了，没有复现问题，推测是dagger依赖出现编译失败，导致了retrolambda生成失败。</p>
+<p>升级到3.3.0后提示的错反而是<strong>NoSuchMethodError</strong>，真是扯犊子。</p>
+<h2 id="dagger">dagger</h2><p>这位大哥，只要有一个地方错，满屏幕都是它报错，所有该生成的都没生成。而且错误提示还不友好，看错误日志的最上面，有没有提示什么。如果没有，那么就恭喜了，是不是什么地方写漏了回去慢慢看吧。</p>
+<h2 id="AndroidStudio">AndroidStudio</h2><p>升级到2.2后，在module中开发，经常会智能提示失败，然后莫名其妙标红，命令行编译又是通过的，反正我就是关闭再重启，其他东西点了都没什么用，都是大爷MD！。</p>
+<hr>
+<p>再次感谢冯森林老师提供的思路，让我也可以高大上的尝试一次组件化，虽然重构挺痛苦的，但是学习到的还是很多。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Abner_泥阿布 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我们的公众号！<br>或者欢迎加入QQ群：568863373。</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/组件化/" rel="tag">#组件化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/07/AndroidMultipeThreadProgramIntermediate/" rel="next" title="Java->Android并发编程筑基篇">
+                <i class="fa fa-chevron-left"></i> Java->Android并发编程筑基篇
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/22/AndroidToRN1/" rel="prev" title="Android入前端坑之初试ReactNative">
+                Android入前端坑之初试ReactNative <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div><p align="center"><img src="http://abner-nimengbo.cn/images/donation.png" style="margin-bottom:3px;" width="174px" height="154px" /></p></div>
+    <br/>
+    <p>如果你觉得这篇文章对你有帮助，请点击下面的分享链接，你还可以选择扫描二维码进行打赏!</p>
+    <a href="https://github.com/nimengbo">我的Github</p>
+    <a href="http://weibo.com/nimengbo/">我的新浪微博</p>
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/10/componetization/"
+     data-title="项目组件化之遇到的坑"
+     data-content=""
+     data-url="http://yoursite.com/2016/10/10/componetization/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/10/componetization/"
+           data-title="项目组件化之遇到的坑" data-url="http://yoursite.com/2016/10/10/componetization/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Abner_泥阿布" />
+          <p class="site-author-name" itemprop="name">Abner_泥阿布</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/nimengbo" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/nimengbo" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              以下大神
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yifeiyuan.me" title="程序亦非猿" target="_blank">程序亦非猿</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn" title="MarkZhai(魔都三帅之大帅)" target="_blank">MarkZhai(魔都三帅之大帅)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.easydone.cn" title="Ailurus" target="_blank">Ailurus</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itangqi.me/" title="Qi Tang" target="_blank">Qi Tang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://rarnu.com" title="何晓杰(爸爸)" target="_blank">何晓杰(爸爸)</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#组件化套壳思路"><span class="nav-number">1.</span> <span class="nav-text">组件化套壳思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件化遇到的坑"><span class="nav-number">2.</span> <span class="nav-text">组件化遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#填坑之databinding"><span class="nav-number">2.1.</span> <span class="nav-text">填坑之databinding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查错"><span class="nav-number">2.1.1.</span> <span class="nav-text">查错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xml"><span class="nav-number">2.1.2.</span> <span class="nav-text">xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成的BR"><span class="nav-number">2.1.3.</span> <span class="nav-text">生成的BR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#retrolambda"><span class="nav-number">2.2.</span> <span class="nav-text">retrolambda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dagger"><span class="nav-number">2.3.</span> <span class="nav-text">dagger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AndroidStudio"><span class="nav-number">2.4.</span> <span class="nav-text">AndroidStudio</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Abner_泥阿布</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"nimengbo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

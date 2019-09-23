@@ -1,0 +1,722 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Git,版本控制," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言背景用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。一些运用git很熟练的大牛们可以点击返回或关闭啦~
+简介在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从什么都不懂开始(一)——什么是Git">
+<meta property="og:url" content="http://yoursite.com/2016/07/09/WhatIsTheGit/index.html">
+<meta property="og:site_name" content="Abner_泥阿布">
+<meta property="og:description" content="前言背景用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。一些运用git很熟练的大牛们可以点击返回或关闭啦~
+简介在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/Team%20Organization%20Template.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg">
+<meta property="og:updated_time" content="2016-07-21T03:57:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从什么都不懂开始(一)——什么是Git">
+<meta name="twitter:description" content="前言背景用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。一些运用git很熟练的大牛们可以点击返回或关闭啦~
+简介在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次">
+<meta name="twitter:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/Team%20Organization%20Template.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/09/WhatIsTheGit/"/>
+
+  <title> 从什么都不懂开始(一)——什么是Git | Abner_泥阿布 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Abner_泥阿布</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                从什么都不懂开始(一)——什么是Git
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-09T14:23:57+08:00" content="2016-07-09">
+              2016-07-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/09/WhatIsTheGit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/09/WhatIsTheGit/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言">前言</h1><h2 id="背景">背景</h2><p>用了Git蛮久了，也没有怎么系统地学习过，大部分情况也是比较依赖编译器，所以想从头梳理一下Git基础，就想写一篇从没用过Git的人也能看懂，并能入门，再渐渐成长。<br>一些运用git很熟练的大牛们可以点击返回或关闭啦~</p>
+<h2 id="简介">简介</h2><p>在了解Git之前，你得先了解什么是版本控制系统，如果不知道什么是版本控制系统，你可以先简单的理解成“可以追踪每次文件修改的系统，如果你某次修改出错，想回退，那么可以回退到某次修改，避免一些灾难性事件发生(比如电脑坏了、硬盘烧了)”。</p>
+<p>下面是一张开发的时候使用到的版本控制系统示意图:<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/Team%20Organization%20Template.png" alt="版本控制示意图"></p>
+<h2 id="什么是Git">什么是Git</h2><p>如果你之前使用过SVN，那么Git和SVN是类似的，都是一种版本控制工具，Git拥有”本地仓库“，即使不联网，也能在本地做版本管理。可能Git的命令会很多，但是没关系，我们先慢慢学，掌握几种常用的，再深入学习一些高级技巧。</p>
+<h1 id="朝Git迈出第一步">朝Git迈出第一步</h1><h2 id="安装Git">安装Git</h2><h3 id="Linux">Linux</h3><p>基于 Fedora 的发行版 :</p>
+<p><code>$ sudo yum install git</code></p>
+<p>基于 Debian 的发行版 :</p>
+<p><code>$ sudo apt-get install git</code></p>
+<p>如果还有一些其他版本的Linux请具体参考 :</p>
+<p> <a href="http://git-scm.com/download/linu" target="_blank" rel="external">http://git-scm.com/download/linux</a></p>
+<h3 id="Mac">Mac</h3><p>在Mac上安装有两种方案：</p>
+<p>1、直接安装Xcode，装完打开Terminal如果没安装过<code>Command Line Tools</code> 会有相应的提示。</p>
+<p>2、在     <a href="http://git-scm.com/download/mac" target="_blank" rel="external">http://git-scm.com/download/mac</a> 下载最新版本即可</p>
+<h3 id="Windows">Windows</h3><p>在Windows上也有几种方法：</p>
+<p>1、打开       <a href="http://git-scm.com/download/win" target="_blank" rel="external">http://git-scm.com/download/win</a> 会直接下载。</p>
+<p>2、下载Github for Windows 地址为：<a href="http://windows.github.com" target="_blank" rel="external">http://windows.github.com</a></p>
+<h3 id="其他安装方法">其他安装方法</h3><p>从源码安装，源码地址在<a href="https://github.com/git/git/releases" target="_blank" rel="external"> https://github.com/git/git/releases</a>有兴趣的同学可以去了解一下</p>
+<h1 id="下节预告">下节预告</h1><p>安装完环境后，就要去尝试一下使用了，那么我们接下来会准备在Github平台去实践，如果没有注册Github的同学们赶紧注册一个，<br>因为我们是Android开发者，所以接下来的内容会使用Android平台做示范。</p>
+<p>最近大帅的开了个QQ实践群（568863373），欢迎大家一起讨论，也可以关注我们的公众号：<code>魔都三帅</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Abner_泥阿布 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我们的公众号！<br>或者欢迎加入QQ群：568863373。</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+            <a href="/tags/版本控制/" rel="tag">#版本控制</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/15/AndroidProjectFromZero/" rel="next" title="从零创建项目实践">
+                <i class="fa fa-chevron-left"></i> 从零创建项目实践
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/11/createYourRepository/" rel="prev" title="从什么都不懂开始(二)——创建Project提交到Github需要做什么">
+                从什么都不懂开始(二)——创建Project提交到Github需要做什么 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div><p align="center"><img src="http://abner-nimengbo.cn/images/donation.png" style="margin-bottom:3px;" width="174px" height="154px" /></p></div>
+    <br/>
+    <p>如果你觉得这篇文章对你有帮助，请点击下面的分享链接，你还可以选择扫描二维码进行打赏!</p>
+    <a href="https://github.com/nimengbo">我的Github</p>
+    <a href="http://weibo.com/nimengbo/">我的新浪微博</p>
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/07/09/WhatIsTheGit/"
+     data-title="从什么都不懂开始(一)——什么是Git"
+     data-content=""
+     data-url="http://yoursite.com/2016/07/09/WhatIsTheGit/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/09/WhatIsTheGit/"
+           data-title="从什么都不懂开始(一)——什么是Git" data-url="http://yoursite.com/2016/07/09/WhatIsTheGit/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Abner_泥阿布" />
+          <p class="site-author-name" itemprop="name">Abner_泥阿布</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/nimengbo" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/nimengbo" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              以下大神
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yifeiyuan.me" title="程序亦非猿" target="_blank">程序亦非猿</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn" title="MarkZhai(魔都三帅之大帅)" target="_blank">MarkZhai(魔都三帅之大帅)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.easydone.cn" title="Ailurus" target="_blank">Ailurus</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itangqi.me/" title="Qi Tang" target="_blank">Qi Tang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://rarnu.com" title="何晓杰(爸爸)" target="_blank">何晓杰(爸爸)</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Git"><span class="nav-number">1.3.</span> <span class="nav-text">什么是Git</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#朝Git迈出第一步"><span class="nav-number">2.</span> <span class="nav-text">朝Git迈出第一步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Git"><span class="nav-number">2.1.</span> <span class="nav-text">安装Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">2.1.1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac"><span class="nav-number">2.1.2.</span> <span class="nav-text">Mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">2.1.3.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他安装方法"><span class="nav-number">2.1.4.</span> <span class="nav-text">其他安装方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下节预告"><span class="nav-number">3.</span> <span class="nav-text">下节预告</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Abner_泥阿布</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"nimengbo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,811 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Git,版本控制," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~此文多图预警~用流量的童鞋注意哦。
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从什么都不懂开始(三)—实践带你飞之Branch操作">
+<meta property="og:url" content="http://yoursite.com/2016/07/15/gitbranch/index.html">
+<meta property="og:site_name" content="Abner_泥阿布">
+<meta property="og:description" content="本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~此文多图预警~用流量的童鞋注意哦。
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%92%8C%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E5%88%B0testBranch.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8E%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E6%A3%80%E5%87%BA%E6%96%B0%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8Emaster%E5%88%86%E6%94%AF%E4%B8%8A%E6%A3%80%E5%87%BA%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head_master.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%9C%A8master.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head_branch.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%88%87%E6%8D%A2%E5%88%B0branchC.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2bug%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%8F%91%E7%8E%B0%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9merge.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AFmerge.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/merge%E5%BC%B9%E5%87%BA%E6%A1%86.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/branch.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/merge_%E6%96%B0.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E9%80%89%E6%8B%A9.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9rebase.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E8%93%9D%E8%89%B2%E7%9A%84.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/stash.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/stash%E5%BC%B9%E5%87%BA%E6%A1%86.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8BstashInAs.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8Bstash.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/stashlist%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/pull%E4%BB%A3%E7%A0%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebaseInAs.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/popStash.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/pop%E5%AE%8C%E5%90%8E.png">
+<meta property="og:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg">
+<meta property="og:updated_time" content="2016-07-28T04:30:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从什么都不懂开始(三)—实践带你飞之Branch操作">
+<meta name="twitter:description" content="本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~此文多图预警~用流量的童鞋注意哦。
+Repository介绍在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project">
+<meta name="twitter:image" content="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/15/gitbranch/"/>
+
+  <title> 从什么都不懂开始(三)—实践带你飞之Branch操作 | Abner_泥阿布 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Abner_泥阿布</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                从什么都不懂开始(三)—实践带你飞之Branch操作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T00:02:42+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/实践/" itemprop="url" rel="index">
+                    <span itemprop="name">实践</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/gitbranch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/gitbranch/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇将介绍一下Git中经常需要操作到的东西，以及项目中运用到的场景，会稍微带一点基础知识，笔者觉得阮一峰老师的Git入门讲的非常到位了，我就不班门弄斧了，就讲一下项目中遇到的一些情况。若是Git大牛就可以点击返回或者关闭啦~<br>此文多图预警~用流量的童鞋注意哦。</p>
+<h1 id="Repository介绍">Repository介绍</h1><p>在版本管理中，Repository翻译成中文就是仓库的意思，每个提交到本地，或者push到远程服务器的Project，被Git以数据结构的形式保存，而这个数据结构被称之为Repository即仓库。</p>
+<p>对于我们来说，在Repository中，我们看的见的显示信息就是代码，而其他的比如分支信息、Commit信息、Status这些状态则通过命令行去查看。</p>
+<h1 id="Branch介绍">Branch介绍</h1><p>当我们多个人合作开发的时候，为了方便管理代码，会每个组开一个Branch，而master称为主分支——主干，这些Branch则称为分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%B8%BB%E5%B9%B2%E5%92%8C%E5%88%86%E6%94%AF.png" alt="BranchAndMaster"></p>
+<h2 id="查看当前分支">查看当前分支</h2><p>在命令行输入<code>git branch</code>就可以看到当前分支为master :<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF.png" alt="查看当前分支"></p>
+<p>输入<code>git branch -a</code> 可以查看本地和远程所有分支<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%92%8C%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF.png" alt="查看本地和远程所有分支"></p>
+<h2 id="切换分支">切换分支</h2><p>初始化Git后，当前默认在master分支，这个时候如果你想新建一个分支，可以执行 <code>git branch [branchName]</code> 后面的[branchName]是指你的分支名。这样就能把master当前的commit信息’拎’出来，成为了一个新的分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF.png" alt="新建分支"></p>
+<p>执行完branch命令后，你会发现你还是在原来的分支上，在master前有一个*号表示当前分支是master，这个时候执行以下  <code>git checkout [branchName]</code>。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E5%88%B0testBranch.png" alt="切换当前分支到testBranch"><br>其实呢，你可以执行<br><code>git checkout -b [branchName] [fromBranchName]</code> 生成新的Branch，后面这个[fromBranchName] 就是你想要从哪个分支生成新的分支，不写则是当前分支。</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8E%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E6%A3%80%E5%87%BA%E6%96%B0%E5%88%86%E6%94%AF.png" alt="从当前分支检出新分支"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E4%BB%8Emaster%E5%88%86%E6%94%AF%E4%B8%8A%E6%A3%80%E5%87%BA%E5%88%86%E6%94%AF.png" alt="从master分支检出新分支"></p>
+<h2 id="HEAD信息">HEAD信息</h2><p>为什么要在这里讲HEAD呢，那HEAD又是什么呢，其实HEAD可以理解成一个指针，每次都是指向当前Branch的最后一次信息(可以是Commit或者Pull之类的)，通过移动HEAD来达到切换分支的作用。<br>如果当前分支在master，那么HEAD信息如下：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head_master.png" alt="HEAD_MASTER"></p>
+<p>真实测试效果：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%9C%A8master.png" alt="HEAD_IN_MASTER"><br>在checkout到BranchC的时候变成了如下图所示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head_branch.png" alt="HEAD_BRANCH"></p>
+<p>真实测试效果：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/head%E5%88%87%E6%8D%A2%E5%88%B0branchC.png" alt="HEAD_IN_BRANCH"></p>
+<h2 id="合并分支">合并分支</h2><p>当你的项目上线后，发现有个bug，这个时候需要在master分支上<code>checkout -b</code> 一个新的分支用来修bug，那么这个bug分支上的代码，最后怎么给’整’到master上去呢。很简单先切回master分支，然后<code>git merge bugBranch</code> 就好了。</p>
+<h3 id="冲突">冲突</h3><p>当你merge的时候出现了</p>
+<p><code>$ git merge myBranch
+Auto-merging AndroidManifest.xml
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.</code><br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%88%87%E6%8D%A2bug%E5%88%86%E6%94%AF.png" alt="切换到bug分支"><br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81.png" alt="merge"></p>
+<p>这个时候会提示你有代码冲突，那么你需要执行<code>git status</code>，查看当前文件哪些需要解决冲突。解决完再提交就好了。笔者很喜欢用AndroidStudio自带的git进行合并等操作，可以直接在Compare视图上解决冲突，非常方便。<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%8F%91%E7%8E%B0%E5%86%B2%E7%AA%81.png" alt="发现冲突"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%86%B2%E7%AA%81%E6%96%87%E4%BB%B6.png" alt="冲突文件"></p>
+<p>这个时候回发现 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> 到 <code>========</code> 是当前所在分支的内容，下面从 <code>=======</code> 到 <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; fixBug</code> 是合并过来的分支，解决完，再执行<code>git add .</code> 然后就可以提交啦。</p>
+<p>接下来为大家看一下编译器的merge：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9merge.png" alt="选择merge"></p>
+<p>选择分支：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AFmerge.png" alt="选择分支"></p>
+<p>冲突提示：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/merge%E5%BC%B9%E5%87%BA%E6%A1%86.png" alt="冲突提示"></p>
+<p>冲突比较 ：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C.png" alt="合并操作"></p>
+<h3 id="rebase">rebase</h3><p>rebase和merge的功能其实是一样的，都是合并代码，只是对于修改信息的节点会发生变化，rebase和merge最大的区别就是在最后的代码树上，有兴趣的同学可以用SourceTree看看，或者直接在命令行输入gitk。</p>
+<p>当前工作状态，箭头表示上一次信息：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/branch.png" alt="当前状态"></p>
+<p>执行merge后：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/merge_%E6%96%B0.png" alt="merge"></p>
+<p>执行rebase后<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase.png" alt="rebase"></p>
+<p>之所以会有5-1，6-1就是和原来的commit是不同的，算是一次新的commit了。</p>
+<p>简而言之就是rebase的代码会比merge的干净许多。rebase会保留你合并的顺序，而merge则会按照你的修改时间排序。笔者有点强迫症，会使用rebase(搞基)，另外一些图方便的人喜欢merge(合体)。</p>
+<p>另外值得注意的是，在rebase前，千万别push，不然等rebase完毕后，因为tree发生了变化，会提示push reject，意味着你需要  <code>git push --f</code>才能提交了，这是有风险的！！！注意安全！！！</p>
+<p>比如branch要reabse onto master，那么会比较两个分支的最近的共同节点，再根据master提交的节点生成一系列不同的文件，最后在branch上针对每个提交将之前不同的文件去合并，并且生成<code>新的commit节点</code>，这时rebase完毕后branch的tree已经和rebase前的branch tree完全不一样了，所以在rebase前你push过后，rebase后再push会提示不是同一个tree而<code>reject(拒绝)</code>提交。</p>
+<p>下面是AndroidStudio上的rebase操作：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E9%80%89%E6%8B%A9.png" alt="rebase选择"></p>
+<p>想要从哪个分支rebase到当前分支，就选择哪个<code>Rebase on</code> ：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9rebase.png" alt="选择分支"></p>
+<h2 id="stash">stash</h2><p>当你想切换分支时，又不想提交当前代码，那就需要stash啦，简单的意思就是讲你当前的修改信息全部暂存起来，放进一个stack栈中，这个时候你就可以checkout到别的分支啦。下次再回来的时候<br><code>git stash pop</code>就好了。</p>
+<p>这个时候Leader转头对我说：XXX模块代码我提交了，你拉一下代码，我改了你可能要用到的东西。<br>这个时候我对着一屏幕的蓝色提示，心想：不能commit把，都没测试过。这个时候就用到<code>stash</code>这个神器了。</p>
+<p>没有提交文件，本地修改过的文件会显示蓝色：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E8%93%9D%E8%89%B2%E7%9A%84.png" alt="蓝色"></p>
+<p>项目里有几个文件都没有提交，只能选择项目根目录，右击，选择stash：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stash.png" alt="stash"></p>
+<p>会弹出一个stash的弹出框，会显示当前分支，填入message:<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stash%E5%BC%B9%E5%87%BA%E6%A1%86.png" alt="stash弹出框"></p>
+<p>点击createStash后，创建一个当前的stash，可以点击刚刚的StashChanges下面的UnstashChanges查看当前的stash列表：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8BstashInAs.png" alt="查看stashInAs"></p>
+<p>或者在命令行输入<code>git stash list</code> 查看当前的stash栈：<br><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E6%9F%A5%E7%9C%8Bstash.png" alt="查看stash"></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/stashlist%E7%BB%93%E6%9E%9C.png" alt="结果"></p>
+<p>好啦，当前的工作全部都暂存起来了！要把刚刚Leader放到master的代码都合并过来啦！我选择的当然是rebase啦。在这之前必须得把服务器的master代码pull到本地是不是，先切换到master，然后还是选择编译器的git，在刚刚stash界面下面有个<code>pull</code>。点击pull弹出一个界面，选择master分支：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/pull%E4%BB%A3%E7%A0%81.png" alt="pull"></p>
+<p>点击pull就能拉下代码啦，如果有冲突也能借助编译器的compare进行合并啦。</p>
+<p>pull完代码后，要reabse啦：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebaseInAs.png" alt="rebase"></p>
+<p>按照步骤来，1、点击当前分支，选择要rebase的目标分支，点击后选择<code>Rebase onto</code>就可以执行rebase啦，rebase过程中发现出现了一个冲突：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/rebase%E5%86%B2%E7%AA%81.png" alt="冲突"></p>
+<p>和前面的merge一样，选择在这里解决冲突：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81.png" alt="解决冲突"><br>这个时候master的代码就过来啦，然后再把之前修改的代码拿出来继续工作：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/popStash.png" alt="pop"></p>
+<p>pop完后可以继续快乐的工作啦：</p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/pop%E5%AE%8C%E5%90%8E.png" alt="pop完毕"></p>
+<p>在这里说明一下<code>红色</code>的文件表示没有add，<code>绿色</code>文件表示add过了但是没有commit，<code>蓝色</code>文件表示修改过，和版本库分支不一样，绿色和蓝色的文件执行stash会被暂存，而红色的不会。</p>
+<h2 id="拓展">拓展</h2><p>如果对Git原理有兴趣的同学，可以自己再去深入研究一下Git，很多东西虽然平时用不到，但是又很有深度。大家按兴趣就好啦</p>
+<h1 id="总结">总结</h1><p>一边写博客，一边翻阅资料，自己也又温习一遍，接下来打算继续深入下去，下一篇将会讲几个指令的原理，以及git对象之类的。最近比较忙，需要用点心去学习，也会把自己遇到的场景尽量告诉大家，让大家能接触到更多的实际场景，努力把这个系列写的更干货一些！</p>
+<p>其实AndroidStudio能覆盖大多数的使用场景了，下一篇将会说一些revert、reset，当发生错误提交时，怎么回滚代码。</p>
+<p>最近大帅的开了个QQ实践群（568863373），欢迎大家一起讨论，也可以关注我们的公众号：<code>魔都三帅</code></p>
+<p><img src="http://7xvy2g.com1.z0.glb.clouddn.com/qrcode_for_gh_2e738d2eb3b5_430.jpg" alt="公众号"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Abner_泥阿布 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我们的公众号！<br>或者欢迎加入QQ群：568863373。</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+            <a href="/tags/版本控制/" rel="tag">#版本控制</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/11/createYourRepository/" rel="next" title="从什么都不懂开始(二)——创建Project提交到Github需要做什么">
+                <i class="fa fa-chevron-left"></i> 从什么都不懂开始(二)——创建Project提交到Github需要做什么
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/22/gitrevert/" rel="prev" title="从什么都不懂开始(四)——Git掌握时空之力">
+                从什么都不懂开始(四)——Git掌握时空之力 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div><p align="center"><img src="http://abner-nimengbo.cn/images/donation.png" style="margin-bottom:3px;" width="174px" height="154px" /></p></div>
+    <br/>
+    <p>如果你觉得这篇文章对你有帮助，请点击下面的分享链接，你还可以选择扫描二维码进行打赏!</p>
+    <a href="https://github.com/nimengbo">我的Github</p>
+    <a href="http://weibo.com/nimengbo/">我的新浪微博</p>
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/07/15/gitbranch/"
+     data-title="从什么都不懂开始(三)—实践带你飞之Branch操作"
+     data-content=""
+     data-url="http://yoursite.com/2016/07/15/gitbranch/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/15/gitbranch/"
+           data-title="从什么都不懂开始(三)—实践带你飞之Branch操作" data-url="http://yoursite.com/2016/07/15/gitbranch/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Abner_泥阿布" />
+          <p class="site-author-name" itemprop="name">Abner_泥阿布</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/nimengbo" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/nimengbo" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/ni-meng-bo" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              以下大神
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://yifeiyuan.me" title="程序亦非猿" target="_blank">程序亦非猿</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn" title="MarkZhai(魔都三帅之大帅)" target="_blank">MarkZhai(魔都三帅之大帅)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.easydone.cn" title="Ailurus" target="_blank">Ailurus</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itangqi.me/" title="Qi Tang" target="_blank">Qi Tang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://rarnu.com" title="何晓杰(爸爸)" target="_blank">何晓杰(爸爸)</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository介绍"><span class="nav-number">1.</span> <span class="nav-text">Repository介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch介绍"><span class="nav-number">2.</span> <span class="nav-text">Branch介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看当前分支"><span class="nav-number">2.1.</span> <span class="nav-text">查看当前分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换分支"><span class="nav-number">2.2.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HEAD信息"><span class="nav-number">2.3.</span> <span class="nav-text">HEAD信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并分支"><span class="nav-number">2.4.</span> <span class="nav-text">合并分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突"><span class="nav-number">2.4.1.</span> <span class="nav-text">冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase"><span class="nav-number">2.4.2.</span> <span class="nav-text">rebase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stash"><span class="nav-number">2.5.</span> <span class="nav-text">stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">2.6.</span> <span class="nav-text">拓展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Abner_泥阿布</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"nimengbo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
