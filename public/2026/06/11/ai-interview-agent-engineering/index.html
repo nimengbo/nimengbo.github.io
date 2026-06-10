@@ -1,0 +1,178 @@
+<!doctype html>
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+  <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+  <meta name="keywords" content="AI Agent,模拟面试,RAG,LangChain,DeepSeek,FastAPI,React,Vite,Qdrant" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <meta name="description" content="这篇文章复盘一个模拟面试助手项目的开发逻辑：为什么它不是简单聊天机器人，为什么选择 React + Vite、FastAPI、LangChain、RAG、Qdrant 和 DeepSeek，以及如何把 AI 能力放进可控的业务闭环。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="从 0 到可跑通：一个模拟面试 AI Agent 项目的工程化思考">
+  <meta property="og:url" content="https://blog.abner-nimengbo.com/2026/06/11/ai-interview-agent-engineering/index.html">
+  <meta property="og:site_name" content="Abner_泥阿布">
+  <meta property="og:description" content="这篇文章复盘一个模拟面试助手项目的开发逻辑：为什么它不是简单聊天机器人，为什么选择 React + Vite、FastAPI、LangChain、RAG、Qdrant 和 DeepSeek，以及如何把 AI 能力放进可控的业务闭环。">
+  <meta property="og:updated_time" content="2026-06-10T16:14:14.000Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从 0 到可跑通：一个模拟面试 AI Agent 项目的工程化思考">
+  <meta name="twitter:description" content="这篇文章复盘一个模拟面试助手项目的开发逻辑：为什么它不是简单聊天机器人，为什么选择 React + Vite、FastAPI、LangChain、RAG、Qdrant 和 DeepSeek，以及如何把 AI 能力放进可控的业务闭环。">
+  <script type="text/javascript" id="hexo.configuration">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      scheme: 'Muse',
+      sidebar: {"position":"left","display":"post"},
+      fancybox: true,
+      motion: true,
+      duoshuo: { userId: undefined, author: '博主' }
+    };
+  </script>
+  <link rel="canonical" href="https://blog.abner-nimengbo.com/2026/06/11/ai-interview-agent-engineering/"/>
+  <title> 从 0 到可跑通：一个模拟面试 AI Agent 项目的工程化思考 | Abner_泥阿布 </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Abner_泥阿布</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+<div class="site-nav-toggle"><button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div>
+<nav class="site-nav"><ul id="menu" class="menu">
+  <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a></li>
+  <li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a></li>
+  <li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a></li>
+  <li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a></li>
+  <li class="menu-item menu-item-commonweal"><a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益404</a></li>
+</ul></nav>
+ </div>
+    </header>
+    <main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content">
+  <div id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">从 0 到可跑通：一个模拟面试 AI Agent 项目的工程化思考</h1>
+      <div class="post-meta">
+        <span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span><span class="post-meta-item-text">发表于</span>
+        <time itemprop="dateCreated" datetime="2026-06-11T00:14:14+08:00" content="2026-06-11">2026-06-11</time></span>
+        <span class="post-category" >&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span><span class="post-meta-item-text">分类于</span>
+          <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/实践/" itemprop="url" rel="index"><span itemprop="name">实践</span></a></span>
+        </span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+
+        <p>最近做了一个模拟面试助手，项目路径在 <code>/Users/abner/projects/study/agent-project</code>。它的目标不是再套一层聊天 UI，而是把「资料上传 - 知识检索 - 面试追问 - 回答评价 - 复盘报告」串成一个能真实使用的 AI 应用闭环。</p>
+        <p>这篇文章记录一下这个项目的开发逻辑、架构思路，以及每个技术选型背后的原因。它更像一次工程复盘：我关心的不是模型有多会说，而是一个 AI Native App 怎么被拆成可维护、可验证、可继续迭代的系统。</p>
+
+        <h2 id="先判断它不是简单聊天机器人">先判断：它不是简单聊天机器人</h2>
+        <p>很多 AI 应用最容易掉进的坑，是把所有事情都交给大模型。用户说一句，模型回一句，看起来能跑，但业务状态、上下文边界、错误恢复和结果质量都不可控。</p>
+        <p>模拟面试助手的核心不是「聊天」，而是「面试流程」。它至少有几个确定状态：上传资料、创建面试、开始提问、候选人回答、追问、评价、结束面试、生成报告。LLM 只能负责某个阶段里的内容生成，不能自由决定系统下一步该做什么。</p>
+        <p>所以我给项目定了一个原则：业务状态由后端控制，RAG 负责事实依据，LLM 负责表达和推理，LangChain 负责应用编排，但不持有业务状态。</p>
+
+        <h2 id="整体架构">整体架构</h2>
+        <p>项目采用前后端分离：</p>
+        <ul>
+          <li>前端：React 18 + Vite + TypeScript，承载面试作战台、模型配置、资料上传、对话和报告展示。</li>
+          <li>后端：FastAPI，提供配置、文档、面试、报告四类 API。</li>
+          <li>AI 编排：LangChain prompt/chain + DeepSeek OpenAI-compatible API。</li>
+          <li>知识库：文档解析、chunk 切分、embedding、向量存储和检索。</li>
+          <li>依赖服务：Qdrant 用于生产化向量检索，开发期提供 memory/hash fallback 保证项目先跑起来。</li>
+        </ul>
+        <p>这个拆法的好处是很直接：前端专注体验，后端专注流程和契约，RAG 专注事实上下文，模型服务专注生成能力。哪一层出问题，可以单独定位，不需要把所有问题都归因到 prompt。</p>
+
+        <h2 id="为什么前端选-react-vite-typescript">为什么前端选 React + Vite + TypeScript</h2>
+        <p>这个项目的前端不是营销页，而是一个工作台：左侧是实时面试对话，右侧是模型配置和资料上传，底部是复盘报告。它需要状态响应快、开发反馈快、组件边界清晰。</p>
+        <p>React 的优势在于生态成熟，状态和组件拆分足够直观；Vite 的优势是本地启动和热更新快，适合快速调试 AI 应用的交互细节；TypeScript 则保证前后端 API 字段不至于靠记忆对齐。项目里 <code>frontend/src/App.tsx</code> 已经把模型配置、资料上传、面试对话、报告生成这些状态集中串起来，先形成 MVP 闭环，再考虑继续拆页面和 store。</p>
+        <p>没有一上来引入复杂前端状态库，是因为第一阶段最大的风险不在前端状态，而在 AI 链路是否能真实跑通。过早引入复杂抽象，只会让 MVP 变慢。</p>
+
+        <h2 id="为什么后端选-fastapi">为什么后端选 FastAPI</h2>
+        <p>后端选 FastAPI，主要因为它适合 AI 应用的接口形态：异步调用模型、文件上传、Pydantic schema、自动生成 OpenAPI 文档、测试成本低。</p>
+        <p>项目入口 <code>backend/app/main.py</code> 很薄，只做 CORS、路由注册和 health check。真正的业务被拆到 <code>api</code>、<code>schemas</code>、<code>services</code> 里：配置接口负责保存模型配置，文档接口负责上传和检索，面试接口负责提问/追问/评价，报告接口负责最终复盘。</p>
+        <p>这个结构对面试项目也很友好：打开 <code>/docs</code> 就能展示 API 契约，测试里用 FastAPI TestClient 可以直接跑 smoke acceptance，不需要先搭一堆外部服务。</p>
+
+        <h2 id="为什么-deepseek-不是本地模型">为什么 DeepSeek，不本地部署模型</h2>
+        <p>第一版目标是验证产品闭环，不是做模型推理平台。DeepSeek 提供 OpenAI-compatible API，后端只需要封装 <code>/v1/chat/completions</code>，就能同时支持 <code>deepseek-chat</code> 和 <code>deepseek-reasoner</code>。</p>
+        <p>项目里的 <code>DeepSeekService</code> 做了三件事：从后端 runtime 读取模型配置；按普通问答或推理任务选择 chat/reasoner 模型；把模型错误转成后端可控的异常。API Key 从前端输入后保存到本地 runtime，不写进源码，也不返回明文给前端。</p>
+        <p>这样做牺牲了一点本地离线能力，但换来的是开发速度、推理质量和部署简单度。对求职 demo 项目来说，这个取舍是划算的。</p>
+
+        <h2 id="为什么用-langchain-但不让它控制业务状态">为什么用 LangChain，但不让它控制业务状态</h2>
+        <p>LangChain 在这里不是为了炫技，而是为了把 prompt、message、parser 和 chain 组织起来。项目里有四条核心链：QuestionChain、FollowupChain、AnswerReviewChain、ReportChain。</p>
+        <p>提问链负责根据岗位、难度、候选人资料和已问问题生成下一题；追问链更强调架构取舍、边界条件、数据指标和故障复盘；评价链输出总评、评分、亮点、问题和建议；报告链在面试结束后生成完整复盘。</p>
+        <p>但面试是否结束、当前 stage 是什么、document_id 怎么传、接口怎么报错，这些都由后端 API 控制。LangChain 只是编排一次生成，不决定业务流程。这一点很重要，因为 AI 应用一旦把状态机交给模型，后续就很难测试和复现。</p>
+
+        <h2 id="为什么-rag-是必要的">为什么 RAG 是必要的</h2>
+        <p>模拟面试如果只靠通用模型，很容易问得泛：讲讲架构、讲讲优化、讲讲项目难点。真正有价值的面试，应该围绕候选人的简历、JD 和项目材料追问。</p>
+        <p>所以项目做了 RAG：上传 PDF、DOCX 或文本后，后端解析内容、归一化文本、按 800 字左右切 chunk、保留 filename、content_type、chunk_index、字符范围等 metadata，再写入向量库。面试接口收到用户输入时，会根据 document_ids 和 query 拉取相关资料，拼进候选人资料上下文。</p>
+        <p>这里还做了两个工程兜底：embedding 可以用 fastembed，也可以 fallback 到 hashing embedding；向量库可以用 Qdrant，也可以 fallback 到内存存储。这样即使 Docker 或外部依赖没准备好，MVP 仍然能跑通文档上传和检索测试。</p>
+
+        <h2 id="为什么-qdrant-适合这个阶段">为什么 Qdrant 适合这个阶段</h2>
+        <p>Qdrant 的价值是简单、专注、开发体验好。这个项目并不需要一开始就上复杂检索平台，只需要可靠地写入 chunk、按向量相似度召回、按 document_id 做过滤。</p>
+        <p>Qdrant client 可以本地 path 模式，也可以连服务端 URL。对于个人项目和面试 demo 来说，这种轻量接入很舒服：开发期可以快速试，后面如果要部署，也能平滑迁到 Docker 或云服务。</p>
+
+        <h2 id="为什么是-app-本机跑-依赖-docker-跑">为什么是 App 本机跑，依赖 Docker 跑</h2>
+        <p>这个项目的开发策略是：React 和 FastAPI 本机跑，PostgreSQL、Redis、Qdrant、MinIO 这类依赖用 Docker 跑。</p>
+        <p>原因很朴素：前后端是高频改动部分，需要热更新、断点、日志和快速重启；依赖服务是低频变化部分，需要一致性和隔离。把前后端也塞进 Docker，开发初期会把反馈链路拉长，尤其是 AI 应用还要频繁调 prompt、调接口、看返回。</p>
+        <p>MVP 阶段甚至可以先不启 Redis 和 MinIO，先把主链路跑通。等业务闭环成立，再补异步任务、对象存储和生产部署。</p>
+
+        <h2 id="测试思路">测试思路</h2>
+        <p>AI 项目不能只靠人工点页面。这个项目的测试先覆盖几个稳定边界：health check 返回 ok；模型配置保存后只返回脱敏 key；文档上传后能检索到匹配 chunk；没有 API Key 时聊天和报告接口返回明确配置错误。</p>
+        <p>这些测试不证明模型回答一定好，但能证明工程底座是稳的。AI 输出质量可以通过样例集和人工评估继续迭代，接口契约、配置安全、RAG 检索这些基础能力必须先自动化守住。</p>
+
+        <h2 id="多-agent-开发思路">多 Agent 开发思路</h2>
+        <p>这个项目也很适合拆给多个 coding agent 并行做，但前提是边界要清楚。主控 agent 负责目录结构、API 契约、数据模型和集成验收；前端 agent 做页面和交互；后端 agent 做 API 和 schema；RAG agent 做解析、切分、向量库；AI agent 做 chain 和 prompt；测试 agent 做验收。</p>
+        <p>拆 agent 的关键不是“人多力量大”，而是减少文件冲突和上下文污染。每个 agent 只改自己的目录，最后由主控统一集成，这样才不会变成多个智能体同时改同一个 App.tsx 或 main.py。</p>
+
+        <h2 id="最终的工程判断">最终的工程判断</h2>
+        <p>这个模拟面试助手的核心经验是：AI Native App 不是把模型接进来就结束了，而是要把模型放进一个可控系统里。</p>
+        <p>React + Vite 解决快速交互，FastAPI 解决 API 契约和异步服务，LangChain 解决生成链路组织，DeepSeek 解决高质量模型能力，RAG + Qdrant 解决候选人资料依据，后端状态机解决流程可靠性。</p>
+        <p>第一版最重要的不是功能多，而是闭环完整：上传资料、创建面试、基于资料提问、回答后追问、结束后生成报告。只要这个闭环跑通，后面加语音、视频、多面试官、企业题库、训练计划，都只是沿着已有边界继续扩展。</p>
+
+    </div>
+    <div><div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center"><img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Abner_泥阿布 wechat" style="width: 200px; max-width: 100%;"/><div>欢迎您扫一扫上面的微信公众号，订阅我们的公众号！<br>或者欢迎加入QQ群：568863373。</div></div></div>
+    <footer class="post-footer">
+      <div class="post-tags"><a href="/tags/AI-Agent/" rel="tag">#AI Agent</a><a href="/tags/RAG/" rel="tag">#RAG</a><a href="/tags/FastAPI/" rel="tag">#FastAPI</a><a href="/tags/React/" rel="tag">#React</a></div>
+      <div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2019/09/21/react-native-for-android-重构与优化/" rel="next" title="react-native for android 重构与优化"><i class="fa fa-chevron-left"></i> react-native for android 重构与优化</a></div><div class="post-nav-prev post-nav-item"></div></div>
+    </footer>
+  </article>
+
+    <div><p align="center"><img src="https://blog.abner-nimengbo.com/images/donation.png" style="margin-bottom:3px;" width="174px" height="154px" /></p></div>
+    <br/>
+    <p>如果你觉得这篇文章对你有帮助，请点击下面的分享链接，你还可以选择扫描二维码进行打赏!</p>
+    <a href="https://github.com/nimengbo">我的Github</a>
+    <a href="http://weibo.com/nimengbo/">我的新浪微博</a>
+    <div class="post-spread">
+    </div>
+
+  </div>
+</div></div>
+<div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div>
+<aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Abner_泥阿布" /><p class="site-author-name" itemprop="name">Abner_泥阿布</p><p class="site-description motion-element" itemprop="description"></p></div></section></div></aside>
+</div></main>
+<footer id="footer" class="footer"><div class="footer-inner"><div class="copyright" > &copy;  2015 - <span itemprop="copyrightYear">2026</span><span class="with-love"><i class="fa fa-heart"></i></span><span class="author" itemprop="copyrightHolder">Abner_泥阿布</span></div></div></footer>
+<div class="back-to-top"><i class="fa fa-arrow-up"></i></div>
+</div>
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+<script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+<script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/schemes/muse.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+</body>
+</html>

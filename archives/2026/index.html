@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+  <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+  <meta name="keywords" content="AI Agent,模拟面试,RAG,LangChain,DeepSeek,FastAPI,React,Vite,Qdrant" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <meta name="description" content="这篇文章复盘一个模拟面试助手项目的开发逻辑：为什么它不是简单聊天机器人，为什么选择 React + Vite、FastAPI、LangChain、RAG、Qdrant 和 DeepSeek，以及如何把 AI 能力放进可控的业务闭环。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="从 0 到可跑通：一个模拟面试 AI Agent 项目的工程化思考">
+  <meta property="og:url" content="https://blog.abner-nimengbo.com/2026/06/11/ai-interview-agent-engineering/index.html">
+  <meta property="og:site_name" content="Abner_泥阿布">
+  <meta property="og:description" content="这篇文章复盘一个模拟面试助手项目的开发逻辑：为什么它不是简单聊天机器人，为什么选择 React + Vite、FastAPI、LangChain、RAG、Qdrant 和 DeepSeek，以及如何把 AI 能力放进可控的业务闭环。">
+  <meta property="og:updated_time" content="2026-06-10T16:14:14.000Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从 0 到可跑通：一个模拟面试 AI Agent 项目的工程化思考">
+  <meta name="twitter:description" content="这篇文章复盘一个模拟面试助手项目的开发逻辑：为什么它不是简单聊天机器人，为什么选择 React + Vite、FastAPI、LangChain、RAG、Qdrant 和 DeepSeek，以及如何把 AI 能力放进可控的业务闭环。">
+  <script type="text/javascript" id="hexo.configuration">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      scheme: 'Muse',
+      sidebar: {"position":"left","display":"post"},
+      fancybox: true,
+      motion: true,
+      duoshuo: { userId: undefined, author: '博主' }
+    };
+  </script>
+  <link rel="canonical" href="https://blog.abner-nimengbo.com/2026/06/11/ai-interview-agent-engineering/"/>
+  <title> 归档 | Abner_泥阿布 </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Abner_泥阿布</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+<div class="site-nav-toggle"><button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div>
+<nav class="site-nav"><ul id="menu" class="menu">
+  <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a></li>
+  <li class="menu-item menu-item-archives"><a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a></li>
+  <li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a></li>
+  <li class="menu-item menu-item-tags"><a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a></li>
+  <li class="menu-item menu-item-commonweal"><a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益404</a></li>
+</ul></nav>
+ </div>
+    </header>
+    <main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content">
+  <div id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">从 0 到可跑通：一个模拟面试 AI Agent 项目的工程化思考</h1>
+      <div class="post-meta">
+        <span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span><span class="post-meta-item-text">发表于</span>
+        <time itemprop="dateCreated" datetime="2026-06-11T00:14:14+08:00" content="2026-06-11">2026-06-11</time></span>
+        <span class="post-category" >&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span><span class="post-meta-item-text">分类于</span>
+          <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/实践/" itemprop="url" rel="index"><span itemprop="name">实践</span></a></span>
+        </span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+<section id="posts" class="posts-collapse"><span class="archive-move-on"></span><span class="archive-page-counter">目前共计 1 篇日志。</span>
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2026">2026</h2>
+        </div>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title">
+            <a class="post-title-link" href="/2026/06/11/ai-interview-agent-engineering/" itemprop="url">
+                <span itemprop="name">从 0 到可跑通：一个模拟面试 AI Agent 项目的工程化思考</span>
+            </a>
+      </h1>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2026-06-11T00:14:14+08:00" content="2026-06-11" >06-11</time>
+      </div>
+    </header>
+  </article>
+</section>
+    </div>
+    <div><div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center"><img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Abner_泥阿布 wechat" style="width: 200px; max-width: 100%;"/><div>欢迎您扫一扫上面的微信公众号，订阅我们的公众号！<br>或者欢迎加入QQ群：568863373。</div></div></div>
+    <footer class="post-footer">
+      <div class="post-tags"><a href="/tags/AI-Agent/" rel="tag">#AI Agent</a><a href="/tags/RAG/" rel="tag">#RAG</a><a href="/tags/FastAPI/" rel="tag">#FastAPI</a><a href="/tags/React/" rel="tag">#React</a></div>
+      <div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2019/09/21/react-native-for-android-重构与优化/" rel="next" title="react-native for android 重构与优化"><i class="fa fa-chevron-left"></i> react-native for android 重构与优化</a></div><div class="post-nav-prev post-nav-item"></div></div>
+    </footer>
+  </article>
+
+    <div><p align="center"><img src="https://blog.abner-nimengbo.com/images/donation.png" style="margin-bottom:3px;" width="174px" height="154px" /></p></div>
+    <br/>
+    <p>如果你觉得这篇文章对你有帮助，请点击下面的分享链接，你还可以选择扫描二维码进行打赏!</p>
+    <a href="https://github.com/nimengbo">我的Github</a>
+    <a href="http://weibo.com/nimengbo/">我的新浪微博</a>
+    <div class="post-spread">
+    </div>
+
+  </div>
+</div></div>
+<div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div>
+<aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Abner_泥阿布" /><p class="site-author-name" itemprop="name">Abner_泥阿布</p><p class="site-description motion-element" itemprop="description"></p></div></section></div></aside>
+</div></main>
+<footer id="footer" class="footer"><div class="footer-inner"><div class="copyright" > &copy;  2015 - <span itemprop="copyrightYear">2026</span><span class="with-love"><i class="fa fa-heart"></i></span><span class="author" itemprop="copyrightHolder">Abner_泥阿布</span></div></div></footer>
+<div class="back-to-top"><i class="fa fa-arrow-up"></i></div>
+</div>
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+<script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+<script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/schemes/muse.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+</body>
+</html>
