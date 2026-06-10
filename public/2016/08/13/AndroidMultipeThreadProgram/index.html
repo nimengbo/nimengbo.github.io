@@ -64,19 +64,19 @@
 并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java->Android并发编程引气入门篇">
-<meta property="og:url" content="https://abner-nimengbo.com/2016/08/13/AndroidMultipeThreadProgram/index.html">
+<meta property="og:url" content="https://blog.abner-nimengbo.com/2016/08/13/AndroidMultipeThreadProgram/index.html">
 <meta property="og:site_name" content="Abner_泥阿布">
 <meta property="og:description" content="Android的并发编程，即多线程开发，而Android的多线程开发模型也是源于Java中的多线程模型。所以本篇也会先讲一些Java中的多线程理念，再讲解具体涉及的类，最后深入Android中的并发场景和实践。
 并发什么是并发举个很简单的栗子，当你一边在撸撸撸，一边在看小视频，同时在做两件事，这就是并发。
 咳，年轻人节制啊。
 并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发">
-<meta property="og:image" content="https://abner-nimengbo.com/images/多线程.png">
-<meta property="og:image" content="https://abner-nimengbo.com/images/runnable.png">
-<meta property="og:image" content="https://abner-nimengbo.com/images/Thread.png">
-<meta property="og:image" content="https://abner-nimengbo.com/images/threadRun.png">
-<meta property="og:image" content="https://abner-nimengbo.com/images/threadStart.png">
-<meta property="og:image" content="https://abner-nimengbo.com/images/concurrent.png">
-<meta property="og:image" content="https://abner-nimengbo.com/images/BlockingQueue.png">
+<meta property="og:image" content="https://blog.abner-nimengbo.com/images/多线程.png">
+<meta property="og:image" content="https://blog.abner-nimengbo.com/images/runnable.png">
+<meta property="og:image" content="https://blog.abner-nimengbo.com/images/Thread.png">
+<meta property="og:image" content="https://blog.abner-nimengbo.com/images/threadRun.png">
+<meta property="og:image" content="https://blog.abner-nimengbo.com/images/threadStart.png">
+<meta property="og:image" content="https://blog.abner-nimengbo.com/images/concurrent.png">
+<meta property="og:image" content="https://blog.abner-nimengbo.com/images/BlockingQueue.png">
 <meta property="og:updated_time" content="2016-08-25T02:51:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java->Android并发编程引气入门篇">
@@ -84,7 +84,7 @@
 并发什么是并发举个很简单的栗子，当你一边在撸撸撸，一边在看小视频，同时在做两件事，这就是并发。
 咳，年轻人节制啊。
 并发的好处提高资源利用率当一个任务并没有完全占用系统资源，就可以利用并发">
-<meta name="twitter:image" content="https://abner-nimengbo.com/images/多线程.png">
+<meta name="twitter:image" content="https://blog.abner-nimengbo.com/images/多线程.png">
 
 
 
@@ -105,7 +105,7 @@
 
 
 
-  <link rel="canonical" href="https://abner-nimengbo.com/2016/08/13/AndroidMultipeThreadProgram/"/>
+  <link rel="canonical" href="https://blog.abner-nimengbo.com/2016/08/13/AndroidMultipeThreadProgram/"/>
 
   <title> Java->Android并发编程引气入门篇 | Abner_泥阿布 </title>
 </head>
@@ -337,7 +337,7 @@
 <h2 id="单线程">单线程</h2><p>还是用Android举栗子，当你在手机上操作的时候，这个被称之为UI线程（之后会详解）。而一个最基本的app，不需要复杂的功能时，就只有一个UI线程和我们交互，那么这个app就是个单线程的。一般的程序面向用户的线程就是UI线程，也称之为主线程，单线程程序，其实就是只有一个主线程的程序。</p>
 <h2 id="多线程">多线程</h2><p>多个进程可以算是并发，但是我们所说的并发场景，大部分是在一个进程中的，而并发就是由线程完成的，多个线程同时执行任务，就称之为并发。</p>
 <p>以下为多线程工作示意图：</p>
-<p><img src="https://abner-nimengbo.com/images/多线程.png" alt="多线程"></p>
+<p><img src="https://blog.abner-nimengbo.com/images/多线程.png" alt="多线程"></p>
 <h3 id="多线程并发过程中会遇到的问题">多线程并发过程中会遇到的问题</h3><h4 id="1-_资源共享">1. 资源共享</h4><p>A线程要写文件C，B线程也要写文件C，这个时候就好像你拿着两只笔同时往纸上写东西，写出来的是什么自己也不知道。</p>
 <p>这个时候我们需要一个类似于<strong>锁</strong>的东西，当C被A在写的时候，B不能写，B要等A写完了才能继续写。</p>
 <p>至于这个<strong>锁</strong>到底是什么会在后面继续讲到。</p>
@@ -356,16 +356,16 @@
 <p>举个例子：</p>
 <p>A在B那边割包皮，B把A割坏了，A占着B的床位，要B赔钱，B要A让出床位才给钱。双方僵持不下。</p>
 <h2 id="线程如何去用">线程如何去用</h2><p>在Java中，线程通常就是指<code>Thread</code>这个类，或者实现了<code>Runnable</code>的类，其实<code>Thread</code>这个类也是实现了<code>Runnable</code>接口的，可以看一下<code>Runnable</code>接口的代码：</p>
-<p><img src="https://abner-nimengbo.com/images/runnable.png" alt="Runnable"></p>
+<p><img src="https://blog.abner-nimengbo.com/images/runnable.png" alt="Runnable"></p>
 <p>里面就是一个run方法需要被实现。</p>
 <p>再看一下<code>Thread</code>类的声明：</p>
-<p><img src="https://abner-nimengbo.com/images/Thread.png" alt="Thread"></p>
+<p><img src="https://blog.abner-nimengbo.com/images/Thread.png" alt="Thread"></p>
 <p>确实是一个实现了<code>Runnable</code>的类。</p>
 <p>那么Thread类中拥有<code>start()</code>方法，和<code>run()</code>方法，下面用<code>run()</code>方法直接调用<br>得到信息：</p>
-<p><img src="https://abner-nimengbo.com/images/threadRun.png" alt="ThreadRun"></p>
+<p><img src="https://blog.abner-nimengbo.com/images/threadRun.png" alt="ThreadRun"></p>
 <p>发现其实和外面的线程是在同一个线程上。</p>
 <p>而调用<code>start()</code>方法得到的信息是：</p>
-<p><img src="https://abner-nimengbo.com/images/threadStart.png" alt="ThreadStart"></p>
+<p><img src="https://blog.abner-nimengbo.com/images/threadStart.png" alt="ThreadStart"></p>
 <p>发现线程名不一样了，用start会开启一个新的线程，而run还是在当前线程执行。</p>
 <p>另外在Java1.5之后，还有Callable、Future和FutureTask，在这里就不详细介绍，还有线程的wait、<br>yield、sleep等在下一章会一起详细介绍。</p>
 <h2 id="线程的优先级">线程的优先级</h2><p>在Java中，线程的优先级有1~10，而默认的是5。1最低，10最高。在Thread类中有三个常量：</p>
@@ -382,10 +382,10 @@
 <h2 id="线程池">线程池</h2><p>频繁地创建和销毁线程会导致性能大幅度降低，这肯定不是你希望的。</p>
 <p>线程池的出现，就是为了解决这个问题，根据java中提供不同的线程池机制，有效地提高资源利用率。</p>
 <p>直接在代码中创建Thread、Runnable去start或者run容易出现不可预测的问题，在java1.5开始，引入了java.util.concurrent包，其中有个并发的框架：<code>Executor</code>，使用<code>ExecutorService</code>替代直接操作线程类，而<code>Executors</code>是用来创建线程池的，内部提供了很多静态方法去创建你想要的线程池，不需要你再手动去创建实现。<br>看一下关于Executor中的类和接口的大致的成员与关系：</p>
-<p><img src="https://abner-nimengbo.com/images/concurrent.png" alt="concurrent"></p>
+<p><img src="https://blog.abner-nimengbo.com/images/concurrent.png" alt="concurrent"></p>
 <p>关于这些类如何使用，以及有什么特性，下一章会作介绍。</p>
 <h2 id="队列">队列</h2><p>在java中提到队列肯定会想起<code>Queue</code>,而线程队列用的是<code>BlockingQueue</code>,这是个接口，在<code>concurrent</code>包中有好几个类实现了这个接口。</p>
-<p><img src="https://abner-nimengbo.com/images/BlockingQueue.png" alt="BlockingQueue"></p>
+<p><img src="https://blog.abner-nimengbo.com/images/BlockingQueue.png" alt="BlockingQueue"></p>
 <p>介绍一下BlockingQueue常用的方法</p>
 <table>
 <thead>
@@ -493,7 +493,7 @@
 
 
 
-    <div><p align="center"><img src="https://abner-nimengbo.com/images/donation.png" style="margin-bottom:3px;" width="174px" height="154px" /></p></div>
+    <div><p align="center"><img src="https://blog.abner-nimengbo.com/images/donation.png" style="margin-bottom:3px;" width="174px" height="154px" /></p></div>
     <br/>
     <p>如果你觉得这篇文章对你有帮助，请点击下面的分享链接，你还可以选择扫描二维码进行打赏!</p>
     <a href="https://github.com/nimengbo">我的Github</p>
@@ -503,7 +503,7 @@
         <div class="ds-share flat" data-thread-key="2016/08/13/AndroidMultipeThreadProgram/"
      data-title="Java->Android并发编程引气入门篇"
      data-content=""
-     data-url="https://abner-nimengbo.com/2016/08/13/AndroidMultipeThreadProgram/">
+     data-url="https://blog.abner-nimengbo.com/2016/08/13/AndroidMultipeThreadProgram/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -531,7 +531,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/08/13/AndroidMultipeThreadProgram/"
-           data-title="Java->Android并发编程引气入门篇" data-url="https://abner-nimengbo.com/2016/08/13/AndroidMultipeThreadProgram/">
+           data-title="Java->Android并发编程引气入门篇" data-url="https://blog.abner-nimengbo.com/2016/08/13/AndroidMultipeThreadProgram/">
       </div>
     
   </div>

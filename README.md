@@ -1,6 +1,6 @@
-# abner-nimengbo.com
+# blog.abner-nimengbo.com
 
-Static GitHub Pages site for https://abner-nimengbo.com/.
+Static GitHub Pages site for https://blog.abner-nimengbo.com/.
 
 ## Local preview
 
