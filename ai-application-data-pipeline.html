@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI 应用数据处理流水线</title>
+  <style>
+    :root {
+      --ink: #18201d;
+      --muted: #627069;
+      --paper: #fbfaf4;
+      --panel: #ffffff;
+      --line: #d9ddd1;
+      --green: #2f7d55;
+      --blue: #386fa4;
+      --red: #b14b43;
+      --amber: #b7802d;
+      --graph: #6f5aa8;
+      --shadow: 0 18px 45px rgba(37, 48, 42, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(47, 125, 85, 0.05) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(47, 125, 85, 0.045) 1px, transparent 1px),
+        var(--paper);
+      background-size: 36px 36px;
+      font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 34px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      padding: 12px 0 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+
+    .mark::before {
+      content: "";
+      width: 15px;
+      height: 15px;
+      border: 3px solid var(--green);
+      box-shadow: 7px 7px 0 var(--amber);
+      transform: rotate(45deg);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+      gap: 30px;
+      align-items: end;
+      padding: 34px 0 42px;
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Songti SC", serif;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      max-width: 820px;
+    }
+
+    .lead {
+      margin: 26px 0 0;
+      max-width: 720px;
+      color: #39443f;
+      font-size: 19px;
+    }
+
+    .hero-note {
+      background: var(--ink);
+      color: #fffaf0;
+      padding: 22px;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-note strong {
+      display: block;
+      margin-bottom: 10px;
+      color: #f5d37d;
+      font-size: 18px;
+    }
+
+    .hero-note p { margin: 0; }
+
+    .quick-nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 24px 0 34px;
+    }
+
+    .quick-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 14px;
+    }
+
+    section { margin-top: 46px; }
+
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Songti SC", serif;
+      font-size: 31px;
+      letter-spacing: 0;
+    }
+
+    .caption {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(116px, 1fr));
+      gap: 10px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 148px;
+      padding: 15px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 8px 18px rgba(37, 48, 42, 0.06);
+    }
+
+    .stage::after {
+      content: "→";
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 900;
+      z-index: 1;
+    }
+
+    .stage:last-child::after { content: ""; }
+
+    .num {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .stage h3, .card h3, .node h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .stage p, .card p, .node p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .split-flow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .lane {
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.84);
+      overflow: hidden;
+    }
+
+    .lane-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      color: white;
+      font-weight: 850;
+    }
+
+    .lane.vector .lane-title { background: var(--blue); }
+    .lane.graph .lane-title { background: var(--graph); }
+
+    .lane-body {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .step-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      color: white;
+      font-size: 12px;
+      font-weight: 850;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .blue { background: var(--blue); }
+    .green { background: var(--green); }
+    .graphc { background: var(--graph); }
+    .amber { background: var(--amber); }
+    .red { background: var(--red); }
+
+    .step-row strong { display: block; margin-bottom: 2px; }
+    .step-row span { color: var(--muted); font-size: 14px; }
+    .step-row .tag { color: #fff; }
+    .step-row .tag.blue { background: #245f96; }
+    .step-row .tag.graphc { background: #5f459a; }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 8px 24px rgba(37, 48, 42, 0.07);
+    }
+
+    .card .kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .matrix th, .matrix td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .matrix th {
+      background: var(--ink);
+      color: white;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    .matrix tr:last-child td { border-bottom: 0; }
+    .matrix td:first-child { font-weight: 850; color: var(--ink); }
+
+    .route {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 16px;
+      margin-bottom: 14px;
+      align-items: stretch;
+    }
+
+    .route-label {
+      display: grid;
+      place-items: center;
+      min-height: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .route-body {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .mini {
+      min-height: 86px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      font-size: 13px;
+    }
+
+    .mini strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .graph-map {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .node {
+      min-height: 132px;
+      padding: 16px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      position: relative;
+    }
+
+    .node::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 2px;
+      right: -16px;
+      top: 50%;
+      background: var(--ink);
+    }
+
+    .node:last-child::after { display: none; }
+
+    .node h3 { color: var(--graph); }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 48px;
+    }
+
+    .quote {
+      padding: 24px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fffaf0;
+      font-family: Georgia, "Songti SC", serif;
+      font-size: 24px;
+      line-height: 1.45;
+    }
+
+    .quote span { color: #f5d37d; }
+
+    .learn-list {
+      display: grid;
+      gap: 8px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+
+    .learn-item {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: center;
+      min-height: 42px;
+    }
+
+    .learn-item b {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #eef3e9;
+      color: var(--green);
+    }
+
+    .footer {
+      margin-top: 44px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 920px) {
+      .hero, .split-flow, .grid-3, .summary { grid-template-columns: 1fr; }
+      .quick-nav { grid-template-columns: repeat(2, 1fr); }
+      .route { grid-template-columns: 1fr; }
+      .route-body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .graph-map { grid-template-columns: 1fr; }
+      .node::after { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .page { width: min(100% - 24px, 1180px); padding-top: 20px; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .quick-nav { grid-template-columns: 1fr; }
+      .pipeline { grid-template-columns: 1fr; overflow: visible; }
+      .stage::after { content: "↓"; right: 16px; top: auto; bottom: -20px; transform: none; }
+      .stage:last-child::after { content: ""; }
+      .step-row { grid-template-columns: 1fr; }
+      .route-body { grid-template-columns: 1fr; }
+      .matrix { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <div class="mark">AI Application Data Pipeline</div>
+      <div>RAG / Agent / DeepResearch / GraphRAG 工程视图</div>
+    </div>
+
+    <header class="hero">
+      <div>
+        <h1>AI 应用的数据处理流水线</h1>
+        <p class="lead">向量数据库、知识图谱、RAG、Agent、DeepResearch 不是同一层级的技术。把它们放进一条数据从“原始资料”流向“业务应用”的链路里，关系就会清楚很多。</p>
+      </div>
+      <aside class="hero-note">
+        <strong>一句话压缩</strong>
+        <p>向量数据库负责相似内容，图数据库负责关系结构，RAG 负责基于资料回答，Agent 负责多步骤执行，DeepResearch 负责主动研究并生成报告。</p>
+      </aside>
+    </header>
+
+    <nav class="quick-nav" aria-label="页面导航">
+      <a href="#pipeline">主流水线</a>
+      <a href="#graph">向量库与图谱</a>
+      <a href="#layers">工程分层</a>
+      <a href="#routes">落地路线</a>
+    </nav>
+
+    <section id="pipeline">
+      <div class="section-title">
+        <h2>一条主流水线</h2>
+        <span class="caption">从资料进入系统，到最终变成答案、报告和自动化任务</span>
+      </div>
+      <div class="pipeline">
+        <article class="stage"><span class="num">1</span><h3>原始资料</h3><p>PDF、Word、网页、飞书、Notion、业务数据、客服记录、音视频。</p></article>
+        <article class="stage"><span class="num">2</span><h3>采集 / 接入</h3><p>上传、API 同步、爬虫、Browser、Search API、数据库同步。</p></article>
+        <article class="stage"><span class="num">3</span><h3>清洗 / 切分</h3><p>去噪、去导航、段落切分、chunk 生成、元数据标注。</p></article>
+        <article class="stage"><span class="num">4</span><h3>Embedding</h3><p>把文本切片转成向量，便于语义相似检索。</p></article>
+        <article class="stage"><span class="num">5</span><h3>存储</h3><p>Postgres 存业务状态，Qdrant / pgvector 存向量，Neo4j 存关系。</p></article>
+        <article class="stage"><span class="num">6</span><h3>检索 / Rerank</h3><p>关键词 + 向量 + 图检索召回候选，再用 reranker 提升质量。</p></article>
+        <article class="stage"><span class="num">7</span><h3>LLM 生成</h3><p>拼接上下文，结构化输出，给引用，做事实校验和防幻觉。</p></article>
+        <article class="stage"><span class="num">8</span><h3>Agent / 应用</h3><p>规划、调工具、查库、浏览、写报告、触发业务动作。</p></article>
+      </div>
+    </section>
+
+    <section id="graph">
+      <div class="section-title">
+        <h2>加上知识图谱之后</h2>
+        <span class="caption">同一批资料会分成“文本切片”和“实体关系”两条线</span>
+      </div>
+      <div class="split-flow">
+        <article class="lane vector">
+          <div class="lane-title"><span>文本切片路线</span><span>Chunk → Vector</span></div>
+          <div class="lane-body">
+            <div class="step-row"><span class="tag blue">Chunk</span><div><strong>文档切片</strong><span>把长文档拆成可检索的段落，保留来源、时间、栏目、权限等元数据。</span></div></div>
+            <div class="step-row"><span class="tag blue">Embedding</span><div><strong>语义向量化</strong><span>使用 OpenAI、BGE、Jina、M3E 等模型，把文本变成向量。</span></div></div>
+            <div class="step-row"><span class="tag blue">Vector DB</span><div><strong>向量数据库</strong><span>Qdrant、Milvus、pgvector、Chroma，适合找“语义相似”的内容。</span></div></div>
+          </div>
+        </article>
+
+        <article class="lane graph">
+          <div class="lane-title"><span>实体关系路线</span><span>Entity → Graph</span></div>
+          <div class="lane-body">
+            <div class="step-row"><span class="tag graphc">Entity</span><div><strong>实体抽取</strong><span>识别用户、订单、商品、工单、问题类型、处理人、政策条款。</span></div></div>
+            <div class="step-row"><span class="tag graphc">Relation</span><div><strong>关系抽取</strong><span>识别“购买”“关联”“触发”“处理”“引用”“升级”“解决”等关系。</span></div></div>
+            <div class="step-row"><span class="tag graphc">Graph DB</span><div><strong>图数据库 / DeepGraph</strong><span>Neo4j、NebulaGraph、ArangoDB，适合实体关系、多跳推理和一致性分析。</span></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="layers">
+      <div class="section-title">
+        <h2>工程分层</h2>
+        <span class="caption">每一层解决一个清晰问题</span>
+      </div>
+      <table class="matrix">
+        <thead>
+          <tr><th>层级</th><th>解决的问题</th><th>典型技术</th><th>工程关注点</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>数据接入</td><td>资料从哪里来</td><td>上传、爬虫、API、数据库同步、OCR、ASR</td><td>来源可靠性、权限、增量更新、失败重试</td></tr>
+          <tr><td>数据处理</td><td>怎么变成 AI 能用的知识</td><td>清洗、切分、元数据、Embedding、NER、关系抽取</td><td>chunk 粒度、元数据质量、抽取准确率</td></tr>
+          <tr><td>存储</td><td>知识放在哪里</td><td>Postgres、Qdrant、Milvus、Neo4j、Elasticsearch、S3</td><td>组合选型、成本、查询性能、数据一致性</td></tr>
+          <tr><td>检索</td><td>怎么找到相关资料</td><td>关键词检索、向量检索、图检索、混合检索、rerank</td><td>召回率、精确率、Top K、上下文压缩</td></tr>
+          <tr><td>生成</td><td>怎么回答或输出结果</td><td>Prompt、Function Calling、Structured Output、Citation、Guardrails</td><td>防幻觉、引用来源、格式稳定、越权保护</td></tr>
+          <tr><td>编排</td><td>复杂任务怎么多步骤执行</td><td>Agent、LangGraph、LlamaIndex Workflow、CrewAI、AutoGen</td><td>状态机、工具调用、观察结果、错误恢复</td></tr>
+          <tr><td>应用</td><td>给用户什么能力</td><td>RAG 问答、DeepResearch、客服分析、自动报告、业务自动化</td><td>产品体验、结果可信度、业务闭环</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>关键概念怎么区分</h2>
+        <span class="caption">不要把工具、流程和产品形态混在一起</span>
+      </div>
+      <div class="grid-3">
+        <article class="card"><span class="kicker">Storage</span><h3>向量数据库</h3><p>存文档切片的 embedding，擅长找语义相似内容。它是存储层，不是完整问答系统。</p></article>
+        <article class="card"><span class="kicker">Relation</span><h3>知识图谱 / DeepGraph</h3><p>存实体和关系，擅长多跳关系、来源一致性、品牌和产品关联分析。</p></article>
+        <article class="card"><span class="kicker">Retrieval</span><h3>RAG</h3><p>基于已有资料回答问题，核心链路是检索、重排、上下文构造、LLM 生成。</p></article>
+        <article class="card"><span class="kicker">Orchestration</span><h3>Agent</h3><p>负责规划任务、选择工具、执行动作、观察结果，再继续决策。</p></article>
+        <article class="card"><span class="kicker">Research</span><h3>DeepResearch</h3><p>研究型 Agent 流程：拆问题、搜索、阅读、验证、补充搜索、生成报告。</p></article>
+        <article class="card"><span class="kicker">Product</span><h3>LLM 应用</h3><p>最终面向用户的产品形态，可以包装成知识库、分析平台、自动化助手或报告系统。</p></article>
+      </div>
+    </section>
+
+    <section id="routes">
+      <div class="section-title">
+        <h2>三种落地路线</h2>
+        <span class="caption">从小项目到业务分析平台，复杂度逐级增加</span>
+      </div>
+
+      <div class="route">
+        <div class="route-label green">企业知识库问答</div>
+        <div class="route-body">
+          <div class="mini"><strong>文档上传</strong>PDF / Word / 网页 / 飞书</div>
+          <div class="mini"><strong>解析切分</strong>chunk + metadata</div>
+          <div class="mini"><strong>向量入库</strong>Qdrant 或 pgvector</div>
+          <div class="mini"><strong>检索重排</strong>向量检索 + rerank</div>
+          <div class="mini"><strong>带引用回答</strong>LLM + citation</div>
+        </div>
+      </div>
+
+      <div class="route">
+        <div class="route-label amber">DeepResearch</div>
+        <div class="route-body">
+          <div class="mini"><strong>研究主题</strong>用户输入问题</div>
+          <div class="mini"><strong>拆解计划</strong>Agent 生成子问题</div>
+          <div class="mini"><strong>搜索阅读</strong>Tavily / Browser / Playwright</div>
+          <div class="mini"><strong>证据沉淀</strong>向量库 + 可选图谱</div>
+          <div class="mini"><strong>研究报告</strong>Markdown + 引用</div>
+        </div>
+      </div>
+
+      <div class="route">
+        <div class="route-label red">电商客服 / 售后分析</div>
+        <div class="route-body">
+          <div class="mini"><strong>数据接入</strong>订单 / 商品 / 客服记录</div>
+          <div class="mini"><strong>问题归类</strong>退款 / 物流 / 质量 / 发票</div>
+          <div class="mini"><strong>抽取要素</strong>用户 / 商品 / 工单 / 政策</div>
+          <div class="mini"><strong>聚类建图</strong>Qdrant + Neo4j</div>
+          <div class="mini"><strong>优化建议</strong>高频问题 / 流程堵点 / 知识缺口</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>电商售后场景的图谱模型</h2>
+        <span class="caption">适合用图数据库表达“用户、订单、商品、工单、问题、处理结果”的关系</span>
+      </div>
+      <div class="graph-map">
+        <article class="node"><h3>用户</h3><p>客户身份、会员等级、历史订单、历史咨询和售后偏好。</p></article>
+        <article class="node"><h3>订单</h3><p>购买记录、商品明细、支付状态、物流状态和退款进度。</p></article>
+        <article class="node"><h3>问题</h3><p>退换货、物流延迟、质量争议、发票开具、优惠券使用等类型。</p></article>
+        <article class="node"><h3>关系</h3><p>购买、咨询、投诉、引用政策、转人工、升级工单、已解决。</p></article>
+        <article class="node"><h3>结论</h3><p>发现高频售后问题、流程堵点、知识库缺口和可自动化处理的场景。</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>学习顺序</h2>
+        <span class="caption">从最贴近真实项目的能力开始</span>
+      </div>
+      <div class="summary">
+        <div class="quote">先把 <span>RAG</span> 做扎实，再往 Agent、DeepResearch、GraphRAG 走。这样知识不会散，工程路径也最贴近真实 AI 应用开发。</div>
+        <div class="learn-list">
+          <div class="learn-item"><b>1</b><span>RAG：文档解析、切分、检索、生成答案</span></div>
+          <div class="learn-item"><b>2</b><span>向量数据库：Qdrant / pgvector</span></div>
+          <div class="learn-item"><b>3</b><span>混合检索 + rerank：提升召回和排序质量</span></div>
+          <div class="learn-item"><b>4</b><span>Agent / LangGraph：多步骤任务编排</span></div>
+          <div class="learn-item"><b>5</b><span>DeepResearch：搜索、阅读、验证、报告</span></div>
+          <div class="learn-item"><b>6</b><span>GraphRAG / DeepGraph：实体关系和多跳推理</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">生成时间：2026-06-10 16:52 CST。文件用于本地学习浏览，打开 HTML 即可查看。</footer>
+  </main>
+</body>
+</html>
