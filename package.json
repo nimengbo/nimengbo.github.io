@@ -1,8 +1,8 @@
 {
-  "name": "nimengbo.github.io",
+  "name": "abner-nimengbo.com",
   "version": "1.0.0",
   "private": true,
-  "description": "Static GitHub Pages site for nimengbo.github.io",
+  "description": "Static GitHub Pages site for abner-nimengbo.com",
   "scripts": {
     "start": "python3 -m http.server 5173",
     "preview": "python3 -m http.server 5173",
